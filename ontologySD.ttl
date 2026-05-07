@@ -40,20 +40,6 @@ xsd:date rdf:type rdfs:Datatype .
 #    Object Properties
 #################################################################
 
-###  http://www.semanticweb.org/ek279783/ontologies/2025/8/ontologySD#Mitigates
-:Mitigates rdf:type owl:ObjectProperty ;
-           rdfs:subPropertyOf :De-IdentificationTechniques ;
-           rdfs:domain :DeIdentificationTechniques ;
-           rdfs:range :RiskAssessment .
-
-
-###  http://www.semanticweb.org/ek279783/ontologies/2025/8/ontologySD#Produces
-:Produces rdf:type owl:ObjectProperty ;
-          rdfs:subPropertyOf :ComplianceControl ;
-          rdfs:domain :ComplianceRequirements ;
-          rdfs:range :DatasetCharacteristicsAssessed .
-
-
 ###  http://www.semanticweb.org/ek279783/ontologies/2025/8/ontologySD/AppliedToAttribute
 :AppliedToAttribute rdf:type owl:ObjectProperty ;
                     rdfs:subPropertyOf :De-IdentificationTechniques .
@@ -186,14 +172,6 @@ xsd:date rdf:type rdfs:Datatype .
                     rdfs:subPropertyOf :PrivacyGuarantee .
 
 
-###  http://www.semanticweb.org/ek279783/ontologies/2025/8/ontologySD/HasConsequence
-:HasConsequence rdf:type owl:ObjectProperty ;
-                rdfs:subPropertyOf :Dataset ,
-                                   :Hazards ;
-                rdfs:domain :DataHazards ;
-                rdfs:range :Consequences .
-
-
 ###  http://www.semanticweb.org/ek279783/ontologies/2025/8/ontologySD/HasConsideration
 :HasConsideration rdf:type owl:ObjectProperty ;
                   rdfs:subPropertyOf :MedicalDevices .
@@ -222,9 +200,11 @@ xsd:date rdf:type rdfs:Datatype .
 
 ###  http://www.semanticweb.org/ek279783/ontologies/2025/8/ontologySD/HasHazardMode
 :HasHazardMode rdf:type owl:ObjectProperty ;
-               rdfs:subPropertyOf :Hazards ;
+               rdfs:subPropertyOf :Dataset ,
+                                  :Hazards ;
                rdfs:domain :DataHazards ;
-               rdfs:range :HazardModes .
+               rdfs:range :FailureModes ,
+                          :Hazards .
 
 
 ###  http://www.semanticweb.org/ek279783/ontologies/2025/8/ontologySD/HasImpactLevel
@@ -247,7 +227,7 @@ xsd:date rdf:type rdfs:Datatype .
 ###  http://www.semanticweb.org/ek279783/ontologies/2025/8/ontologySD/HasMitigation
 :HasMitigation rdf:type owl:ObjectProperty ;
                rdfs:subPropertyOf :Hazards ;
-               rdfs:domain :HazardModes ;
+               rdfs:domain :FailureModes ;
                rdfs:range :MitigationStrategies .
 
 
@@ -268,17 +248,17 @@ xsd:date rdf:type rdfs:Datatype .
             rdfs:range :Outcomes .
 
 
-###  http://www.semanticweb.org/ek279783/ontologies/2025/8/ontologySD/HasPotentialCause
-:HasPotentialCause rdf:type owl:ObjectProperty ;
-                   rdfs:subPropertyOf :Hazards ;
-                   rdfs:domain :DataHazards ;
-                   rdfs:range :PotentialCauses .
-
-
 ###  http://www.semanticweb.org/ek279783/ontologies/2025/8/ontologySD/HasPurpose
 :HasPurpose rdf:type owl:ObjectProperty ;
             rdfs:subPropertyOf :Dataset ;
             rdfs:domain :Dataset .
+
+
+###  http://www.semanticweb.org/ek279783/ontologies/2025/8/ontologySD/HasRisk
+:HasRisk rdf:type owl:ObjectProperty ;
+         rdfs:subPropertyOf :Hazards ;
+         rdfs:domain :DataHazards ;
+         rdfs:range :PotentialRisks .
 
 
 ###  http://www.semanticweb.org/ek279783/ontologies/2025/8/ontologySD/HasRiskCategory
@@ -382,6 +362,13 @@ xsd:date rdf:type rdfs:Datatype .
                 rdfs:subPropertyOf owl:topObjectProperty .
 
 
+###  http://www.semanticweb.org/ek279783/ontologies/2025/8/ontologySD/Mitigates
+:Mitigates rdf:type owl:ObjectProperty ;
+           rdfs:subPropertyOf :De-IdentificationTechniques ;
+           rdfs:domain :DeIdentificationTechniques ;
+           rdfs:range :RiskAssessment .
+
+
 ###  http://www.semanticweb.org/ek279783/ontologies/2025/8/ontologySD/PrivacyGuarantee
 :PrivacyGuarantee rdf:type owl:ObjectProperty ;
                   rdfs:domain :SemanticPrivacyGuarantees .
@@ -389,6 +376,13 @@ xsd:date rdf:type rdfs:Datatype .
 
 ###  http://www.semanticweb.org/ek279783/ontologies/2025/8/ontologySD/PrivacyMetrics
 :PrivacyMetrics rdf:type owl:ObjectProperty .
+
+
+###  http://www.semanticweb.org/ek279783/ontologies/2025/8/ontologySD/Produces
+:Produces rdf:type owl:ObjectProperty ;
+          rdfs:subPropertyOf :ComplianceControl ;
+          rdfs:domain :ComplianceRequirements ;
+          rdfs:range :DatasetCharacteristicsAssessed .
 
 
 ###  http://www.semanticweb.org/ek279783/ontologies/2025/8/ontologySD/ProducesEvidence
@@ -574,19 +568,14 @@ xsd:date rdf:type rdfs:Datatype .
 #    Classes
 #################################################################
 
-###  http://www.semanticweb.org/ek279783/ontologies/2025/8/ontologySD#BenchmarkThresholds
-:BenchmarkThresholds rdf:type owl:Class ;
-                     rdfs:subClassOf :ComplianceControl .
+###  http://www.semanticweb.org/ek279783/ontologies/2025/8/ontologySD#EnvironmentalFactorsInDataFailureModes
+:EnvironmentalFactorsInDataFailureModes rdf:type owl:Class ;
+                                        rdfs:subClassOf :FailureModes .
 
 
-###  http://www.semanticweb.org/ek279783/ontologies/2025/8/ontologySD#PrivacyModels
-:PrivacyModels rdf:type owl:Class ;
-               rdfs:subClassOf :DeIdentificationTechniques .
-
-
-###  http://www.semanticweb.org/ek279783/ontologies/2025/8/ontologySD#RiskAssessment
-:RiskAssessment rdf:type owl:Class ;
-                rdfs:subClassOf :ComplianceControl .
+###  http://www.semanticweb.org/ek279783/ontologies/2025/8/ontologySD#EnvironmentalFactorsInDataHazards
+:EnvironmentalFactorsInDataHazards rdf:type owl:Class ;
+                                   rdfs:subClassOf :Hazards .
 
 
 ###  http://www.semanticweb.org/ek279783/ontologies/2025/8/ontologySD#AssuranceCaseWorkingGroup(ACWG)
@@ -659,19 +648,15 @@ liaison with the organisation responsible for publication of the Structured Assu
            rdfs:subClassOf :UnstructuredData .
 
 
-###  http://www.semanticweb.org/ek279783/ontologies/2025/8/ontologySD/AudioDataCauses
-:AudioDataCauses rdf:type owl:Class ;
-                 rdfs:subClassOf :PotentialCauses .
-
-
-###  http://www.semanticweb.org/ek279783/ontologies/2025/8/ontologySD/AudioDataConsequences
-:AudioDataConsequences rdf:type owl:Class ;
-                       rdfs:subClassOf :Consequences .
-
-
 ###  http://www.semanticweb.org/ek279783/ontologies/2025/8/ontologySD/AudioDataHazards
 :AudioDataHazards rdf:type owl:Class ;
-                  rdfs:subClassOf :HazardModesModalities .
+                  rdfs:subClassOf :FailureModesModalities ,
+                                  :Hazards .
+
+
+###  http://www.semanticweb.org/ek279783/ontologies/2025/8/ontologySD/AudioDataRisks
+:AudioDataRisks rdf:type owl:Class ;
+                rdfs:subClassOf :PotentialRisks .
 
 
 ###  http://www.semanticweb.org/ek279783/ontologies/2025/8/ontologySD/AuditLogsEvidence
@@ -706,6 +691,11 @@ squared error or cross-entropy. In healthcare, Autoencoder based models have dem
                 rdfs:subClassOf :MLMethods .
 
 
+###  http://www.semanticweb.org/ek279783/ontologies/2025/8/ontologySD/BenchmarkThresholds
+:BenchmarkThresholds rdf:type owl:Class ;
+                     rdfs:subClassOf :ComplianceControl .
+
+
 ###  http://www.semanticweb.org/ek279783/ontologies/2025/8/ontologySD/BiasDetectionFrameworks
 :BiasDetectionFrameworks rdf:type owl:Class ;
                          rdfs:subClassOf :RegulatoryBody-TechnicalStandards .
@@ -721,9 +711,9 @@ squared error or cross-entropy. In healthcare, Autoencoder based models have dem
                                   rdfs:subClassOf :MitigationOfModelBiasEvidence .
 
 
-###  http://www.semanticweb.org/ek279783/ontologies/2025/8/ontologySD/ClinicalDataHazards
-:ClinicalDataHazards rdf:type owl:Class ;
-                     rdfs:subClassOf :HazardModes .
+###  http://www.semanticweb.org/ek279783/ontologies/2025/8/ontologySD/ClinicalDataFailureModes
+:ClinicalDataFailureModes rdf:type owl:Class ;
+                          rdfs:subClassOf :FailureModes .
 
 
 ###  http://www.semanticweb.org/ek279783/ontologies/2025/8/ontologySD/ClinicalRequirments
@@ -764,11 +754,6 @@ squared error or cross-entropy. In healthcare, Autoencoder based models have dem
 :ComplianceRequirements rdf:type owl:Class ;
                         rdfs:subClassOf :ComplianceControl ;
                         rdfs:comment "For data characteristics." .
-
-
-###  http://www.semanticweb.org/ek279783/ontologies/2025/8/ontologySD/Consequences
-:Consequences rdf:type owl:Class ;
-              rdfs:subClassOf :DataHazards .
 
 
 ###  http://www.semanticweb.org/ek279783/ontologies/2025/8/ontologySD/Context
@@ -883,23 +868,23 @@ squared error or cross-entropy. In healthcare, Autoencoder based models have dem
 
 ###  http://www.semanticweb.org/ek279783/ontologies/2025/8/ontologySD/DataEntryAndCollection
 :DataEntryAndCollection rdf:type owl:Class ;
-                        rdfs:subClassOf :HazardModes ;
+                        rdfs:subClassOf :FailureModes ;
                         rdfs:comment "This category focuses on the initial stage of data handling, where information is first captured or entered into the system. Errors at this stage can have far-reaching consequences, compromising the accuracy, completeness, and reliability of the data." .
 
 
-###  http://www.semanticweb.org/ek279783/ontologies/2025/8/ontologySD/DataEntryAndCollectionCauses
-:DataEntryAndCollectionCauses rdf:type owl:Class ;
-                              rdfs:subClassOf :PotentialCauses .
-
-
-###  http://www.semanticweb.org/ek279783/ontologies/2025/8/ontologySD/DataEntryAndCollectionConsequences
-:DataEntryAndCollectionConsequences rdf:type owl:Class ;
-                                    rdfs:subClassOf :Consequences .
+###  http://www.semanticweb.org/ek279783/ontologies/2025/8/ontologySD/DataEntryAndCollectionHazards
+:DataEntryAndCollectionHazards rdf:type owl:Class ;
+                               rdfs:subClassOf :Hazards .
 
 
 ###  http://www.semanticweb.org/ek279783/ontologies/2025/8/ontologySD/DataEntryAndCollectionMitigations
 :DataEntryAndCollectionMitigations rdf:type owl:Class ;
                                    rdfs:subClassOf :MitigationStrategies .
+
+
+###  http://www.semanticweb.org/ek279783/ontologies/2025/8/ontologySD/DataEntryAndCollectionRisks
+:DataEntryAndCollectionRisks rdf:type owl:Class ;
+                             rdfs:subClassOf :PotentialRisks .
 
 
 ###  http://www.semanticweb.org/ek279783/ontologies/2025/8/ontologySD/DataFragmentationMitigation
@@ -983,23 +968,23 @@ squared error or cross-entropy. In healthcare, Autoencoder based models have dem
 
 ###  http://www.semanticweb.org/ek279783/ontologies/2025/8/ontologySD/DataProcessingAndAnalysis
 :DataProcessingAndAnalysis rdf:type owl:Class ;
-                           rdfs:subClassOf :HazardModes ;
+                           rdfs:subClassOf :FailureModes ;
                            rdfs:comment "Data processing and analysis are necessary stages in healthcare, where raw data is transformed into actionable insights to inform clinical decisions. However, these stages are prone to various hazards, including technical flaws, biases, and errors in interpretation. Understanding and mitigating these hazards is essential for ensuring the accuracy, reliability, and fairness of data-driven healthcare decisions. The risks associated with data processing and analysis, such as inaccuracies, algorithmic bias, overfitting, and real-time processing failures, can have significant consequences for patient outcomes if not properly managed." .
 
 
-###  http://www.semanticweb.org/ek279783/ontologies/2025/8/ontologySD/DataProcessingAndAnalysisCauses
-:DataProcessingAndAnalysisCauses rdf:type owl:Class ;
-                                 rdfs:subClassOf :PotentialCauses .
-
-
-###  http://www.semanticweb.org/ek279783/ontologies/2025/8/ontologySD/DataProcessingAndAnalysisConsequences
-:DataProcessingAndAnalysisConsequences rdf:type owl:Class ;
-                                       rdfs:subClassOf :Consequences .
+###  http://www.semanticweb.org/ek279783/ontologies/2025/8/ontologySD/DataProcessingAndAnalysisHazards
+:DataProcessingAndAnalysisHazards rdf:type owl:Class ;
+                                  rdfs:subClassOf :Hazards .
 
 
 ###  http://www.semanticweb.org/ek279783/ontologies/2025/8/ontologySD/DataProcessingAndAnalysisHazardsMitigations
 :DataProcessingAndAnalysisHazardsMitigations rdf:type owl:Class ;
                                              rdfs:subClassOf :MitigationStrategies .
+
+
+###  http://www.semanticweb.org/ek279783/ontologies/2025/8/ontologySD/DataProcessingAndAnalysisRisks
+:DataProcessingAndAnalysisRisks rdf:type owl:Class ;
+                                rdfs:subClassOf :PotentialRisks .
 
 
 ###  http://www.semanticweb.org/ek279783/ontologies/2025/8/ontologySD/DataProportion
@@ -1040,18 +1025,13 @@ squared error or cross-entropy. In healthcare, Autoencoder based models have dem
 
 ###  http://www.semanticweb.org/ek279783/ontologies/2025/8/ontologySD/DataSecurityAndPrivacy
 :DataSecurityAndPrivacy rdf:type owl:Class ;
-                        rdfs:subClassOf :HazardModes ;
+                        rdfs:subClassOf :FailureModes ;
                         rdfs:comment "Data security and privacy are critical to healthcare systems as they handle sensitive patient information. Protecting this data from unauthorized access, use, or disclosure is crucial for maintaining patient trust and ensuring compliance with legal standards. The hazards, such as unauthorized access, inadequate encryption, compliance failures, data leakage, phishing attacks, and physical security breaches, can lead to severe consequences, including legal penalties, financial losses, and damage to reputation. Implementing comprehensive security measures and conducting regular audits are crucial to mitigating these risks and ensuring the integrity and confidentiality of healthcare data. The security and privacy controls discussed here are aligned with internationally recognised frameworks for health software security. Specifically, it aligns with the FDA Cybersecurity in Medical Devices: Quality System Considerations. This includes integrating security risk management into the software life cycle, implementing secure-by-design architecture and coding practices, ensuring authentication and access control, utilizing cryptography and key management, implementing security logging and monitoring, managing vulnerabilities, patching and updating software, maintaining a software bill of materials (SBOM), responding to incidents, coordinating vulnerability disclosures, and conducting postmarket surveillance. These alignments ensure that the recommended controls support both technical robustness and regulatory expectations." .
 
 
-###  http://www.semanticweb.org/ek279783/ontologies/2025/8/ontologySD/DataSecurityAndPrivacyCauses
-:DataSecurityAndPrivacyCauses rdf:type owl:Class ;
-                              rdfs:subClassOf :PotentialCauses .
-
-
-###  http://www.semanticweb.org/ek279783/ontologies/2025/8/ontologySD/DataSecurityAndPrivacyConsequences
-:DataSecurityAndPrivacyConsequences rdf:type owl:Class ;
-                                    rdfs:subClassOf :Consequences .
+###  http://www.semanticweb.org/ek279783/ontologies/2025/8/ontologySD/DataSecurityAndPrivacyHazards
+:DataSecurityAndPrivacyHazards rdf:type owl:Class ;
+                               rdfs:subClassOf :Hazards .
 
 
 ###  http://www.semanticweb.org/ek279783/ontologies/2025/8/ontologySD/DataSecurityAndPrivacyHazardsMitigations
@@ -1059,25 +1039,30 @@ squared error or cross-entropy. In healthcare, Autoencoder based models have dem
                                           rdfs:subClassOf :MitigationStrategies .
 
 
+###  http://www.semanticweb.org/ek279783/ontologies/2025/8/ontologySD/DataSecurityAndPrivacyRisks
+:DataSecurityAndPrivacyRisks rdf:type owl:Class ;
+                             rdfs:subClassOf :PotentialRisks .
+
+
 ###  http://www.semanticweb.org/ek279783/ontologies/2025/8/ontologySD/DataStorageAndManagement
 :DataStorageAndManagement rdf:type owl:Class ;
-                          rdfs:subClassOf :HazardModes ;
+                          rdfs:subClassOf :FailureModes ;
                           rdfs:comment "Data storage and management are significant for maintaining the integrity, security, and accessibility of healthcare data. Effective management ensures that data is reliable and accessible throughout its lifecycle, supporting continuity of care and compliance with legal and ethical standards.This phase involves several potential hazards like data corruption, loss, duplication, fragmentation, and inadequate backups, which can significantly impact patient safety and operational efficiency." .
 
 
-###  http://www.semanticweb.org/ek279783/ontologies/2025/8/ontologySD/DataStorageAndManagementCauses
-:DataStorageAndManagementCauses rdf:type owl:Class ;
-                                rdfs:subClassOf :PotentialCauses .
-
-
-###  http://www.semanticweb.org/ek279783/ontologies/2025/8/ontologySD/DataStorageAndManagementConsequences
-:DataStorageAndManagementConsequences rdf:type owl:Class ;
-                                      rdfs:subClassOf :Consequences .
+###  http://www.semanticweb.org/ek279783/ontologies/2025/8/ontologySD/DataStorageAndManagementHazards
+:DataStorageAndManagementHazards rdf:type owl:Class ;
+                                 rdfs:subClassOf :Hazards .
 
 
 ###  http://www.semanticweb.org/ek279783/ontologies/2025/8/ontologySD/DataStorageAndManagementMitigations
 :DataStorageAndManagementMitigations rdf:type owl:Class ;
                                      rdfs:subClassOf :MitigationStrategies .
+
+
+###  http://www.semanticweb.org/ek279783/ontologies/2025/8/ontologySD/DataStorageAndManagementRisks
+:DataStorageAndManagementRisks rdf:type owl:Class ;
+                               rdfs:subClassOf :PotentialRisks .
 
 
 ###  http://www.semanticweb.org/ek279783/ontologies/2025/8/ontologySD/DataSychronisationFailuresMitigation
@@ -1097,23 +1082,23 @@ squared error or cross-entropy. In healthcare, Autoencoder based models have dem
 
 ###  http://www.semanticweb.org/ek279783/ontologies/2025/8/ontologySD/DataTransmissionAndSharing
 :DataTransmissionAndSharing rdf:type owl:Class ;
-                            rdfs:subClassOf :HazardModes ;
+                            rdfs:subClassOf :FailureModes ;
                             rdfs:comment "The transfer and exchange of data between different systems, devices, or organizations are imperative in healthcare, where accurate and secure data transmission ensures patient safety and effective healthcare delivery. However, this process comes with risks such as transmission errors, data breaches, inconsistent formats, latency, which can compromise the reliability, security, and accuracy of healthcare data. Effective mitigation strategies such as robust encryption, standardized data formats, and real-time processing are required to minimize these risks." .
 
 
-###  http://www.semanticweb.org/ek279783/ontologies/2025/8/ontologySD/DataTransmissionAndSharingCauses
-:DataTransmissionAndSharingCauses rdf:type owl:Class ;
-                                  rdfs:subClassOf :PotentialCauses .
-
-
-###  http://www.semanticweb.org/ek279783/ontologies/2025/8/ontologySD/DataTransmissionAndSharingConsequences
-:DataTransmissionAndSharingConsequences rdf:type owl:Class ;
-                                        rdfs:subClassOf :Consequences .
+###  http://www.semanticweb.org/ek279783/ontologies/2025/8/ontologySD/DataTransmissionAndSharingHazards
+:DataTransmissionAndSharingHazards rdf:type owl:Class ;
+                                   rdfs:subClassOf :Hazards .
 
 
 ###  http://www.semanticweb.org/ek279783/ontologies/2025/8/ontologySD/DataTransmissionAndSharingMitigations
 :DataTransmissionAndSharingMitigations rdf:type owl:Class ;
                                        rdfs:subClassOf :MitigationStrategies .
+
+
+###  http://www.semanticweb.org/ek279783/ontologies/2025/8/ontologySD/DataTransmissionAndSharingRisks
+:DataTransmissionAndSharingRisks rdf:type owl:Class ;
+                                 rdfs:subClassOf :PotentialRisks .
 
 
 ###  http://www.semanticweb.org/ek279783/ontologies/2025/8/ontologySD/DataTransmissionErrorsMitigation
@@ -1123,23 +1108,23 @@ squared error or cross-entropy. In healthcare, Autoencoder based models have dem
 
 ###  http://www.semanticweb.org/ek279783/ontologies/2025/8/ontologySD/DataUseAndInterpretation
 :DataUseAndInterpretation rdf:type owl:Class ;
-                          rdfs:subClassOf :HazardModes ;
+                          rdfs:subClassOf :FailureModes ;
                           rdfs:comment "The stage of data use and interpretation is critical in healthcare as it directly influences clinical decisionmaking and patient outcomes. Despite accurate data collection and processing, hazards can arise when data is misinterpreted, overrelied upon, or used out of context. The risks include incorrect clinical decisions, patient harm, and loss of trust in datadriven systems. To ensure data is utilized effectively and safely, healthcare organizations must be aware of these hazards and implement strategies to mitigate them, thereby improving the quality of care and patient safety." .
 
 
-###  http://www.semanticweb.org/ek279783/ontologies/2025/8/ontologySD/DataUseAndInterpretationCauses
-:DataUseAndInterpretationCauses rdf:type owl:Class ;
-                                rdfs:subClassOf :PotentialCauses .
-
-
-###  http://www.semanticweb.org/ek279783/ontologies/2025/8/ontologySD/DataUseAndInterpretationConsequences
-:DataUseAndInterpretationConsequences rdf:type owl:Class ;
-                                      rdfs:subClassOf :Consequences .
+###  http://www.semanticweb.org/ek279783/ontologies/2025/8/ontologySD/DataUseAndInterpretationHazards
+:DataUseAndInterpretationHazards rdf:type owl:Class ;
+                                 rdfs:subClassOf :Hazards .
 
 
 ###  http://www.semanticweb.org/ek279783/ontologies/2025/8/ontologySD/DataUseAndInterpretationHazardsMitigations
 :DataUseAndInterpretationHazardsMitigations rdf:type owl:Class ;
                                             rdfs:subClassOf :MitigationStrategies .
+
+
+###  http://www.semanticweb.org/ek279783/ontologies/2025/8/ontologySD/DataUseAndInterpretationRisks
+:DataUseAndInterpretationRisks rdf:type owl:Class ;
+                               rdfs:subClassOf :PotentialRisks .
 
 
 ###  http://www.semanticweb.org/ek279783/ontologies/2025/8/ontologySD/Dataset
@@ -1304,25 +1289,14 @@ squared error or cross-entropy. In healthcare, Autoencoder based models have dem
                                                  rdfs:subClassOf :SemanticPrivacyGuarantessEvidence .
 
 
-###  http://www.semanticweb.org/ek279783/ontologies/2025/8/ontologySD/EnvironmentalFactorsInDataHazards
-:EnvironmentalFactorsInDataHazards rdf:type owl:Class ;
-                                   rdfs:subClassOf :HazardModes ;
-                                   rdfs:comment "Environmental factors, encompassing external conditions and events, significantly impact the integrity, availability, and security of healthcare data systems. These hazards include system outages, cyber-attacks, physical security breaches, supply chain disruptions, and environmental interferences such as electromagnetic interference (EMI) and temperature extremes. These can lead to data loss, system downtime, and compromised patient care. Addressing these risks requires robust infrastructure, disaster recovery plans, and proactive security measures to ensure healthcare systems remain resilient against external disruptions." .
-
-
-###  http://www.semanticweb.org/ek279783/ontologies/2025/8/ontologySD/EnvironmentalFactorsInDataHazardsCauses
-:EnvironmentalFactorsInDataHazardsCauses rdf:type owl:Class ;
-                                         rdfs:subClassOf :PotentialCauses .
-
-
-###  http://www.semanticweb.org/ek279783/ontologies/2025/8/ontologySD/EnvironmentalFactorsInDataHazardsConsequences
-:EnvironmentalFactorsInDataHazardsConsequences rdf:type owl:Class ;
-                                               rdfs:subClassOf :Consequences .
-
-
 ###  http://www.semanticweb.org/ek279783/ontologies/2025/8/ontologySD/EnvironmentalFactorsInDataHazardsModesMitigations
 :EnvironmentalFactorsInDataHazardsModesMitigations rdf:type owl:Class ;
                                                    rdfs:subClassOf :MitigationStrategies .
+
+
+###  http://www.semanticweb.org/ek279783/ontologies/2025/8/ontologySD/EnvironmentalFactorsInDataHazardsRisks
+:EnvironmentalFactorsInDataHazardsRisks rdf:type owl:Class ;
+                                        rdfs:subClassOf :PotentialRisks .
 
 
 ###  http://www.semanticweb.org/ek279783/ontologies/2025/8/ontologySD/EvaluationMetrics
@@ -1392,6 +1366,25 @@ squared error or cross-entropy. In healthcare, Autoencoder based models have dem
 ###  http://www.semanticweb.org/ek279783/ontologies/2025/8/ontologySD/FailureAnalysisJustification
 :FailureAnalysisJustification rdf:type owl:Class ;
                               rdfs:subClassOf :ModelBasedJustification .
+
+
+###  http://www.semanticweb.org/ek279783/ontologies/2025/8/ontologySD/FailureModes
+:FailureModes rdf:type owl:Class ;
+              rdfs:subClassOf :DataHazards ,
+                              [ rdf:type owl:Restriction ;
+                                owl:onProperty :HasHazardMode ;
+                                owl:someValuesFrom :FailureModes
+                              ] .
+
+
+###  http://www.semanticweb.org/ek279783/ontologies/2025/8/ontologySD/FailureModesModalities
+:FailureModesModalities rdf:type owl:Class ;
+                        rdfs:subClassOf :FailureModes .
+
+
+###  http://www.semanticweb.org/ek279783/ontologies/2025/8/ontologySD/FailureModesRisks
+:FailureModesRisks rdf:type owl:Class ;
+                   rdfs:subClassOf :FailureModes .
 
 
 ###  http://www.semanticweb.org/ek279783/ontologies/2025/8/ontologySD/FailureScenariosEvidence
@@ -1529,23 +1522,9 @@ In healthcare, GANs have proven valuable in generating synthetic patient dataset
      rdfs:subClassOf :RegulatoryBody-TechnicalStandards .
 
 
-###  http://www.semanticweb.org/ek279783/ontologies/2025/8/ontologySD/HazardModes
-:HazardModes rdf:type owl:Class ;
-             rdfs:subClassOf :DataHazards ,
-                             [ rdf:type owl:Restriction ;
-                               owl:onProperty :HasHazardMode ;
-                               owl:someValuesFrom :HazardModes
-                             ] .
-
-
-###  http://www.semanticweb.org/ek279783/ontologies/2025/8/ontologySD/HazardModesModalities
-:HazardModesModalities rdf:type owl:Class ;
-                       rdfs:subClassOf :HazardModes .
-
-
-###  http://www.semanticweb.org/ek279783/ontologies/2025/8/ontologySD/HazardModesRisk
-:HazardModesRisk rdf:type owl:Class ;
-                 rdfs:subClassOf :HazardModes .
+###  http://www.semanticweb.org/ek279783/ontologies/2025/8/ontologySD/Hazards
+:Hazards rdf:type owl:Class ;
+         rdfs:subClassOf :DataHazards .
 
 
 ###  http://www.semanticweb.org/ek279783/ontologies/2025/8/ontologySD/HealthcareOrganisation
@@ -1555,7 +1534,7 @@ In healthcare, GANs have proven valuable in generating synthetic patient dataset
 
 ###  http://www.semanticweb.org/ek279783/ontologies/2025/8/ontologySD/HighRiskHazard
 :HighRiskHazard rdf:type owl:Class ;
-                rdfs:subClassOf :HazardModesRisk .
+                rdfs:subClassOf :FailureModesRisks .
 
 
 ###  http://www.semanticweb.org/ek279783/ontologies/2025/8/ontologySD/HybridMethods
@@ -1604,19 +1583,15 @@ In healthcare, GANs have proven valuable in generating synthetic patient dataset
            rdfs:subClassOf :UnstructuredData .
 
 
-###  http://www.semanticweb.org/ek279783/ontologies/2025/8/ontologySD/ImageDataConsequences
-:ImageDataConsequences rdf:type owl:Class ;
-                       rdfs:subClassOf :Consequences .
-
-
 ###  http://www.semanticweb.org/ek279783/ontologies/2025/8/ontologySD/ImageDataHazards
 :ImageDataHazards rdf:type owl:Class ;
-                  rdfs:subClassOf :HazardModesModalities .
+                  rdfs:subClassOf :FailureModesModalities ,
+                                  :Hazards .
 
 
-###  http://www.semanticweb.org/ek279783/ontologies/2025/8/ontologySD/ImageDataPotentialCauses
-:ImageDataPotentialCauses rdf:type owl:Class ;
-                          rdfs:subClassOf :PotentialCauses .
+###  http://www.semanticweb.org/ek279783/ontologies/2025/8/ontologySD/ImageDataPotentialRisks
+:ImageDataPotentialRisks rdf:type owl:Class ;
+                         rdfs:subClassOf :PotentialRisks .
 
 
 ###  http://www.semanticweb.org/ek279783/ontologies/2025/8/ontologySD/ImpactLevel
@@ -1716,7 +1691,7 @@ In healthcare, GANs have proven valuable in generating synthetic patient dataset
 
 ###  http://www.semanticweb.org/ek279783/ontologies/2025/8/ontologySD/LowRiskHazard
 :LowRiskHazard rdf:type owl:Class ;
-               rdfs:subClassOf :HazardModesRisk .
+               rdfs:subClassOf :FailureModesRisks .
 
 
 ###  http://www.semanticweb.org/ek279783/ontologies/2025/8/ontologySD/MLMethods
@@ -1836,7 +1811,7 @@ In healthcare, GANs have proven valuable in generating synthetic patient dataset
 
 ###  http://www.semanticweb.org/ek279783/ontologies/2025/8/ontologySD/ModerateRiskHazard
 :ModerateRiskHazard rdf:type owl:Class ;
-                    rdfs:subClassOf :HazardModesRisk .
+                    rdfs:subClassOf :FailureModesRisks .
 
 
 ###  http://www.semanticweb.org/ek279783/ontologies/2025/8/ontologySD/MonteCarloMethod
@@ -1891,7 +1866,7 @@ In healthcare, GANs have proven valuable in generating synthetic patient dataset
 
 ###  http://www.semanticweb.org/ek279783/ontologies/2025/8/ontologySD/OperationalData
 :OperationalData rdf:type owl:Class ;
-                 rdfs:subClassOf :HazardModesModalities .
+                 rdfs:subClassOf :FailureModesModalities .
 
 
 ###  http://www.semanticweb.org/ek279783/ontologies/2025/8/ontologySD/Organisation
@@ -1931,17 +1906,17 @@ In healthcare, GANs have proven valuable in generating synthetic patient dataset
 
 ###  http://www.semanticweb.org/ek279783/ontologies/2025/8/ontologySD/PatientReportedData
 :PatientReportedData rdf:type owl:Class ;
-                     rdfs:subClassOf :HazardModesModalities .
+                     rdfs:subClassOf :FailureModesModalities .
 
 
-###  http://www.semanticweb.org/ek279783/ontologies/2025/8/ontologySD/PatientReportedDataCauses
-:PatientReportedDataCauses rdf:type owl:Class ;
-                           rdfs:subClassOf :PotentialCauses .
+###  http://www.semanticweb.org/ek279783/ontologies/2025/8/ontologySD/PatientReportedDataHazards
+:PatientReportedDataHazards rdf:type owl:Class ;
+                            rdfs:subClassOf :Hazards .
 
 
-###  http://www.semanticweb.org/ek279783/ontologies/2025/8/ontologySD/PatientReportedDataConsequences
-:PatientReportedDataConsequences rdf:type owl:Class ;
-                                 rdfs:subClassOf :Consequences .
+###  http://www.semanticweb.org/ek279783/ontologies/2025/8/ontologySD/PatientReportedDataRisks
+:PatientReportedDataRisks rdf:type owl:Class ;
+                          rdfs:subClassOf :PotentialRisks .
 
 
 ###  http://www.semanticweb.org/ek279783/ontologies/2025/8/ontologySD/PerformanceMetrics
@@ -1994,9 +1969,9 @@ In healthcare, GANs have proven valuable in generating synthetic patient dataset
                      rdfs:subClassOf :ComplianceControl .
 
 
-###  http://www.semanticweb.org/ek279783/ontologies/2025/8/ontologySD/PotentialCauses
-:PotentialCauses rdf:type owl:Class ;
-                 rdfs:subClassOf :DataHazards .
+###  http://www.semanticweb.org/ek279783/ontologies/2025/8/ontologySD/PotentialRisks
+:PotentialRisks rdf:type owl:Class ;
+                rdfs:subClassOf :DataHazards .
 
 
 ###  http://www.semanticweb.org/ek279783/ontologies/2025/8/ontologySD/PredictionsBoundedEvidence
@@ -2022,6 +1997,11 @@ In healthcare, GANs have proven valuable in generating synthetic patient dataset
 ###  http://www.semanticweb.org/ek279783/ontologies/2025/8/ontologySD/PrivacyMetrics
 :PrivacyMetrics rdf:type owl:Class ;
                 rdfs:subClassOf :EvaluationMetrics .
+
+
+###  http://www.semanticweb.org/ek279783/ontologies/2025/8/ontologySD/PrivacyModels
+:PrivacyModels rdf:type owl:Class ;
+               rdfs:subClassOf :DeIdentificationTechniques .
 
 
 ###  http://www.semanticweb.org/ek279783/ontologies/2025/8/ontologySD/PseudonymisationTechniques
@@ -2136,6 +2116,11 @@ In healthcare, GANs have proven valuable in generating synthetic patient dataset
 ###  http://www.semanticweb.org/ek279783/ontologies/2025/8/ontologySD/ReviewedClinicianFeedbackEvidence
 :ReviewedClinicianFeedbackEvidence rdf:type owl:Class ;
                                    rdfs:subClassOf :ContinuousExplainabilityValidationEvidence .
+
+
+###  http://www.semanticweb.org/ek279783/ontologies/2025/8/ontologySD/RiskAssessment
+:RiskAssessment rdf:type owl:Class ;
+                rdfs:subClassOf :ComplianceControl .
 
 
 ###  http://www.semanticweb.org/ek279783/ontologies/2025/8/ontologySD/RiskManagement
@@ -2443,19 +2428,15 @@ In healthcare, GANs have proven valuable in generating synthetic patient dataset
      rdfs:subClassOf :RegulatoryBody-TechnicalStandards .
 
 
-###  http://www.semanticweb.org/ek279783/ontologies/2025/8/ontologySD/TabularDataCauses
-:TabularDataCauses rdf:type owl:Class ;
-                   rdfs:subClassOf :PotentialCauses .
-
-
-###  http://www.semanticweb.org/ek279783/ontologies/2025/8/ontologySD/TabularDataConsequences
-:TabularDataConsequences rdf:type owl:Class ;
-                         rdfs:subClassOf :Consequences .
-
-
 ###  http://www.semanticweb.org/ek279783/ontologies/2025/8/ontologySD/TabularDataHazards
 :TabularDataHazards rdf:type owl:Class ;
-                    rdfs:subClassOf :HazardModesModalities .
+                    rdfs:subClassOf :FailureModesModalities ,
+                                    :Hazards .
+
+
+###  http://www.semanticweb.org/ek279783/ontologies/2025/8/ontologySD/TabularDataRisks
+:TabularDataRisks rdf:type owl:Class ;
+                  rdfs:subClassOf :PotentialRisks .
 
 
 ###  http://www.semanticweb.org/ek279783/ontologies/2025/8/ontologySD/TechnicalControl
@@ -2485,7 +2466,7 @@ In healthcare, GANs have proven valuable in generating synthetic patient dataset
 
 ###  http://www.semanticweb.org/ek279783/ontologies/2025/8/ontologySD/TextDataHazards
 :TextDataHazards rdf:type owl:Class ;
-                 rdfs:subClassOf :HazardModesModalities .
+                 rdfs:subClassOf :FailureModesModalities .
 
 
 ###  http://www.semanticweb.org/ek279783/ontologies/2025/8/ontologySD/ThreshholdsAgainstClinicalBenchmarksEvidence
@@ -2589,19 +2570,15 @@ In healthcare, GANs have proven valuable in generating synthetic patient dataset
            rdfs:subClassOf :UnstructuredData .
 
 
-###  http://www.semanticweb.org/ek279783/ontologies/2025/8/ontologySD/VideoDataCauses
-:VideoDataCauses rdf:type owl:Class ;
-                 rdfs:subClassOf :PotentialCauses .
-
-
-###  http://www.semanticweb.org/ek279783/ontologies/2025/8/ontologySD/VideoDataConsequences
-:VideoDataConsequences rdf:type owl:Class ;
-                       rdfs:subClassOf :Consequences .
-
-
 ###  http://www.semanticweb.org/ek279783/ontologies/2025/8/ontologySD/VideoDataHazards
 :VideoDataHazards rdf:type owl:Class ;
-                  rdfs:subClassOf :HazardModesModalities .
+                  rdfs:subClassOf :FailureModesModalities ,
+                                  :Hazards .
+
+
+###  http://www.semanticweb.org/ek279783/ontologies/2025/8/ontologySD/VideoDataRisks
+:VideoDataRisks rdf:type owl:Class ;
+                rdfs:subClassOf :PotentialRisks .
 
 
 ###  http://www.semanticweb.org/ek279783/ontologies/2025/8/ontologySD/VisualSimilarity
@@ -2625,7 +2602,7 @@ In healthcare, GANs have proven valuable in generating synthetic patient dataset
 
 ###  http://www.semanticweb.org/ek279783/ontologies/2025/8/ontologySD#AmbiguousGuidelines;EvolvingPractices
 <http://www.semanticweb.org/ek279783/ontologies/2025/8/ontologySD#AmbiguousGuidelines;EvolvingPractices> rdf:type owl:NamedIndividual ,
-                                                                                                                  :DataUseAndInterpretationCauses .
+                                                                                                                  :DataUseAndInterpretationRisks .
 
 
 ###  http://www.semanticweb.org/ek279783/ontologies/2025/8/ontologySD#Anomaly/InconsistencyDetectionLog
@@ -2646,113 +2623,113 @@ In healthcare, GANs have proven valuable in generating synthetic patient dataset
 
 ###  http://www.semanticweb.org/ek279783/ontologies/2025/8/ontologySD#BiasedTrainingData;FlawedDesign
 <http://www.semanticweb.org/ek279783/ontologies/2025/8/ontologySD#BiasedTrainingData;FlawedDesign> rdf:type owl:NamedIndividual ,
-                                                                                                            :DataProcessingAndAnalysisCauses .
+                                                                                                            :DataProcessingAndAnalysisRisks .
 
 
 ###  http://www.semanticweb.org/ek279783/ontologies/2025/8/ontologySD#BreachesOfPatientConfidentiality;IdentityTheft
 <http://www.semanticweb.org/ek279783/ontologies/2025/8/ontologySD#BreachesOfPatientConfidentiality;IdentityTheft> rdf:type owl:NamedIndividual ,
-                                                                                                                           :DataSecurityAndPrivacyConsequences .
+                                                                                                                           :DataSecurityAndPrivacyHazards .
 
 
 ###  http://www.semanticweb.org/ek279783/ontologies/2025/8/ontologySD#ClinicalMisjudgement;ReducedCareQuality
 <http://www.semanticweb.org/ek279783/ontologies/2025/8/ontologySD#ClinicalMisjudgement;ReducedCareQuality> rdf:type owl:NamedIndividual ,
-                                                                                                                    :DataProcessingAndAnalysisConsequences .
+                                                                                                                    :DataProcessingAndAnalysisHazards .
 
 
 ###  http://www.semanticweb.org/ek279783/ontologies/2025/8/ontologySD#ComplexDataStructures;LackOfTraining
 <http://www.semanticweb.org/ek279783/ontologies/2025/8/ontologySD#ComplexDataStructures;LackOfTraining> rdf:type owl:NamedIndividual ,
-                                                                                                                 :DataUseAndInterpretationCauses .
+                                                                                                                 :DataUseAndInterpretationRisks .
 
 
 ###  http://www.semanticweb.org/ek279783/ontologies/2025/8/ontologySD#ComplexModels;InsufficientData
 <http://www.semanticweb.org/ek279783/ontologies/2025/8/ontologySD#ComplexModels;InsufficientData> rdf:type owl:NamedIndividual ,
-                                                                                                           :DataProcessingAndAnalysisCauses .
+                                                                                                           :DataProcessingAndAnalysisRisks .
 
 
 ###  http://www.semanticweb.org/ek279783/ontologies/2025/8/ontologySD#ComplexModels;PoorCommunication
 <http://www.semanticweb.org/ek279783/ontologies/2025/8/ontologySD#ComplexModels;PoorCommunication> rdf:type owl:NamedIndividual ,
-                                                                                                            :DataProcessingAndAnalysisCauses .
+                                                                                                            :DataProcessingAndAnalysisRisks .
 
 
 ###  http://www.semanticweb.org/ek279783/ontologies/2025/8/ontologySD#CompromisedPatientData;ServiceDisruption
 <http://www.semanticweb.org/ek279783/ontologies/2025/8/ontologySD#CompromisedPatientData;ServiceDisruption> rdf:type owl:NamedIndividual ,
-                                                                                                                     :DataSecurityAndPrivacyConsequences .
+                                                                                                                     :DataSecurityAndPrivacyHazards .
 
 
 ###  http://www.semanticweb.org/ek279783/ontologies/2025/8/ontologySD#CriticalDelays;DroppedConnections
 <http://www.semanticweb.org/ek279783/ontologies/2025/8/ontologySD#CriticalDelays;DroppedConnections> rdf:type owl:NamedIndividual ,
-                                                                                                              :DataTransmissionAndSharingConsequences .
+                                                                                                              :DataTransmissionAndSharingHazards .
 
 
 ###  http://www.semanticweb.org/ek279783/ontologies/2025/8/ontologySD#DataBreaches;FinancialLosses
 <http://www.semanticweb.org/ek279783/ontologies/2025/8/ontologySD#DataBreaches;FinancialLosses> rdf:type owl:NamedIndividual ,
-                                                                                                         :EnvironmentalFactorsInDataHazardsConsequences .
+                                                                                                         :EnvironmentalFactorsInDataHazards .
 
 
 ###  http://www.semanticweb.org/ek279783/ontologies/2025/8/ontologySD#DataCorruption;ServiceDisruptions
 <http://www.semanticweb.org/ek279783/ontologies/2025/8/ontologySD#DataCorruption;ServiceDisruptions> rdf:type owl:NamedIndividual ,
-                                                                                                              :EnvironmentalFactorsInDataHazardsConsequences .
+                                                                                                              :EnvironmentalFactorsInDataHazards .
 
 
 ###  http://www.semanticweb.org/ek279783/ontologies/2025/8/ontologySD#DataErrors;HardwareFailures
 <http://www.semanticweb.org/ek279783/ontologies/2025/8/ontologySD#DataErrors;HardwareFailures> rdf:type owl:NamedIndividual ,
-                                                                                                        :EnvironmentalFactorsInDataHazardsConsequences .
+                                                                                                        :EnvironmentalFactorsInDataHazards .
 
 
 ###  http://www.semanticweb.org/ek279783/ontologies/2025/8/ontologySD#DataMisinterpretation;TreatmentDelays
 <http://www.semanticweb.org/ek279783/ontologies/2025/8/ontologySD#DataMisinterpretation;TreatmentDelays> rdf:type owl:NamedIndividual ,
-                                                                                                                  :DataTransmissionAndSharingConsequences .
+                                                                                                                  :DataTransmissionAndSharingHazards .
 
 
 ###  http://www.semanticweb.org/ek279783/ontologies/2025/8/ontologySD#DataTheft;SystemCompromise
 <http://www.semanticweb.org/ek279783/ontologies/2025/8/ontologySD#DataTheft;SystemCompromise> rdf:type owl:NamedIndividual ,
-                                                                                                       :EnvironmentalFactorsInDataHazardsConsequences .
+                                                                                                       :EnvironmentalFactorsInDataHazards .
 
 
 ###  http://www.semanticweb.org/ek279783/ontologies/2025/8/ontologySD#DecisionImmobility;MissedCriticalInformation
 <http://www.semanticweb.org/ek279783/ontologies/2025/8/ontologySD#DecisionImmobility;MissedCriticalInformation> rdf:type owl:NamedIndividual ,
-                                                                                                                         :DataUseAndInterpretationConsequences .
+                                                                                                                         :DataUseAndInterpretationHazards .
 
 
 ###  http://www.semanticweb.org/ek279783/ontologies/2025/8/ontologySD#DelayedDecisions;ImpactedCare
 <http://www.semanticweb.org/ek279783/ontologies/2025/8/ontologySD#DelayedDecisions;ImpactedCare> rdf:type owl:NamedIndividual ,
-                                                                                                          :DataTransmissionAndSharingConsequences .
+                                                                                                          :DataTransmissionAndSharingHazards .
 
 
 ###  http://www.semanticweb.org/ek279783/ontologies/2025/8/ontologySD#DelayedInterventions;IncorrectAlerts
 <http://www.semanticweb.org/ek279783/ontologies/2025/8/ontologySD#DelayedInterventions;IncorrectAlerts> rdf:type owl:NamedIndividual ,
-                                                                                                                 :DataProcessingAndAnalysisConsequences .
+                                                                                                                 :DataProcessingAndAnalysisHazards .
 
 
 ###  http://www.semanticweb.org/ek279783/ontologies/2025/8/ontologySD#DelayedTreatments;ImpairedPatientOutcomes
 <http://www.semanticweb.org/ek279783/ontologies/2025/8/ontologySD#DelayedTreatments;ImpairedPatientOutcomes> rdf:type owl:NamedIndividual ,
-                                                                                                                      :DataEntryAndCollectionConsequences .
+                                                                                                                      :DataEntryAndCollectionHazards .
 
 
 ###  http://www.semanticweb.org/ek279783/ontologies/2025/8/ontologySD#ExcessiveData;PoorFilteringTools
 <http://www.semanticweb.org/ek279783/ontologies/2025/8/ontologySD#ExcessiveData;PoorFilteringTools> rdf:type owl:NamedIndividual ,
-                                                                                                             :DataUseAndInterpretationCauses .
+                                                                                                             :DataUseAndInterpretationRisks .
 
 
 ###  http://www.semanticweb.org/ek279783/ontologies/2025/8/ontologySD#ExposureOfSensitiveData;IncreasedBreachRisk
 <http://www.semanticweb.org/ek279783/ontologies/2025/8/ontologySD#ExposureOfSensitiveData;IncreasedBreachRisk> rdf:type owl:NamedIndividual ,
-                                                                                                                        :DataSecurityAndPrivacyConsequences .
+                                                                                                                        :DataSecurityAndPrivacyHazards .
 
 
 ###  http://www.semanticweb.org/ek279783/ontologies/2025/8/ontologySD#ExtendedDowntime;LossOfOperationalDataAndContinuity
 <http://www.semanticweb.org/ek279783/ontologies/2025/8/ontologySD#ExtendedDowntime;LossOfOperationalDataAndContinuity> rdf:type owl:NamedIndividual ,
-                                                                                                                                :DataStorageAndManagementConsequences .
+                                                                                                                                :DataStorageAndManagementHazards .
 
 
 ###  http://www.semanticweb.org/ek279783/ontologies/2025/8/ontologySD#FalsePositives/NegativesInPredictiveModeling
 <http://www.semanticweb.org/ek279783/ontologies/2025/8/ontologySD#FalsePositives/NegativesInPredictiveModeling> rdf:type owl:NamedIndividual ,
                                                                                                                          :DataProcessingAndAnalysis ;
-                                                                                                                :HasConsequence <http://www.semanticweb.org/ek279783/ontologies/2025/8/ontologySD#UnnecessaryTreatments;MissedDiagnoses> ;
                                                                                                                 :HasDetectability :MediumDetectability ;
+                                                                                                                :HasHazardMode <http://www.semanticweb.org/ek279783/ontologies/2025/8/ontologySD#UnnecessaryTreatments;MissedDiagnoses> ;
                                                                                                                 :HasLikelihood :MediumLikelihood ;
                                                                                                                 :HasMitigation :BalanceDatasets ,
                                                                                                                                :RecalibrationTechniques ;
-                                                                                                                :HasPotentialCause <http://www.semanticweb.org/ek279783/ontologies/2025/8/ontologySD#ModelOverfitting;ImbalancedDatasets> ;
+                                                                                                                :HasRisk <http://www.semanticweb.org/ek279783/ontologies/2025/8/ontologySD#ModelOverfitting;ImbalancedDatasets> ;
                                                                                                                 :HasSeverity :HighSeverity ;
                                                                                                                 :HasDetectabilityScore 6 ;
                                                                                                                 :HasLikelihoodScore 6 ;
@@ -2764,7 +2741,7 @@ In healthcare diagnostics, false positives can lead to unnecessary treatments, w
 
 ###  http://www.semanticweb.org/ek279783/ontologies/2025/8/ontologySD#FaultyAlgorithms;SoftwareBugs
 <http://www.semanticweb.org/ek279783/ontologies/2025/8/ontologySD#FaultyAlgorithms;SoftwareBugs> rdf:type owl:NamedIndividual ,
-                                                                                                          :DataProcessingAndAnalysisCauses .
+                                                                                                          :DataProcessingAndAnalysisRisks .
 
 
 ###  http://www.semanticweb.org/ek279783/ontologies/2025/8/ontologySD#GDPREU2016/679Standard
@@ -2775,7 +2752,7 @@ In healthcare diagnostics, false positives can lead to unnecessary treatments, w
 
 ###  http://www.semanticweb.org/ek279783/ontologies/2025/8/ontologySD#HighConfidenceInAlgorithms;LackOfAlternatives
 <http://www.semanticweb.org/ek279783/ontologies/2025/8/ontologySD#HighConfidenceInAlgorithms;LackOfAlternatives> rdf:type owl:NamedIndividual ,
-                                                                                                                          :DataUseAndInterpretationCauses .
+                                                                                                                          :DataUseAndInterpretationRisks .
 
 
 ###  http://www.semanticweb.org/ek279783/ontologies/2025/8/ontologySD#IEC60812:2018Standard
@@ -3033,107 +3010,107 @@ presence of a rare diagnosis, or the conjunction of age, sex, and geographical i
 
 ###  http://www.semanticweb.org/ek279783/ontologies/2025/8/ontologySD#ImpairedDataAnalysis;Inefficiencies;DelayedCare
 <http://www.semanticweb.org/ek279783/ontologies/2025/8/ontologySD#ImpairedDataAnalysis;Inefficiencies;DelayedCare> rdf:type owl:NamedIndividual ,
-                                                                                                                            :DataStorageAndManagementConsequences .
+                                                                                                                            :DataStorageAndManagementHazards .
 
 
 ###  http://www.semanticweb.org/ek279783/ontologies/2025/8/ontologySD#InaccuratePatientRecords;OperationalDisruptions
 <http://www.semanticweb.org/ek279783/ontologies/2025/8/ontologySD#InaccuratePatientRecords;OperationalDisruptions> rdf:type owl:NamedIndividual ,
-                                                                                                                            :DataStorageAndManagementConsequences .
+                                                                                                                            :DataStorageAndManagementHazards .
 
 
 ###  http://www.semanticweb.org/ek279783/ontologies/2025/8/ontologySD#InadequateProtocols;SystemConflicts
 <http://www.semanticweb.org/ek279783/ontologies/2025/8/ontologySD#InadequateProtocols;SystemConflicts> rdf:type owl:NamedIndividual ,
-                                                                                                                :DataTransmissionAndSharingCauses .
+                                                                                                                :DataTransmissionAndSharingRisks .
 
 
 ###  http://www.semanticweb.org/ek279783/ontologies/2025/8/ontologySD#InadequateResourceAllocation;FlawedDocumentation
 <http://www.semanticweb.org/ek279783/ontologies/2025/8/ontologySD#InadequateResourceAllocation;FlawedDocumentation> rdf:type owl:NamedIndividual ,
-                                                                                                                             :DataSecurityAndPrivacyCauses .
+                                                                                                                             :DataSecurityAndPrivacyRisks .
 
 
 ###  http://www.semanticweb.org/ek279783/ontologies/2025/8/ontologySD#InadequateSecurity;Weakncryption
 <http://www.semanticweb.org/ek279783/ontologies/2025/8/ontologySD#InadequateSecurity;Weakncryption> rdf:type owl:NamedIndividual ,
-                                                                                                             :DataTransmissionAndSharingCauses .
+                                                                                                             :DataTransmissionAndSharingRisks .
 
 
 ###  http://www.semanticweb.org/ek279783/ontologies/2025/8/ontologySD#InadequateSurveillance;LackOfControls
 <http://www.semanticweb.org/ek279783/ontologies/2025/8/ontologySD#InadequateSurveillance;LackOfControls> rdf:type owl:NamedIndividual ,
-                                                                                                                  :EnvironmentalFactorsInDataHazardsCauses .
+                                                                                                                  :EnvironmentalFactorsInDataHazardsRisks .
 
 
 ###  http://www.semanticweb.org/ek279783/ontologies/2025/8/ontologySD#InappropriateTreatments;AdverseEvents
 <http://www.semanticweb.org/ek279783/ontologies/2025/8/ontologySD#InappropriateTreatments;AdverseEvents> rdf:type owl:NamedIndividual ,
-                                                                                                                  :DataUseAndInterpretationConsequences .
+                                                                                                                  :DataUseAndInterpretationHazards .
 
 
 ###  http://www.semanticweb.org/ek279783/ontologies/2025/8/ontologySD#InappropriateTreatments;HealthcareDisparities
 <http://www.semanticweb.org/ek279783/ontologies/2025/8/ontologySD#InappropriateTreatments;HealthcareDisparities> rdf:type owl:NamedIndividual ,
-                                                                                                                          :DataEntryAndCollectionConsequences .
+                                                                                                                          :DataEntryAndCollectionHazards .
 
 
 ###  http://www.semanticweb.org/ek279783/ontologies/2025/8/ontologySD#InconsistentCare;PotentialErrors
 <http://www.semanticweb.org/ek279783/ontologies/2025/8/ontologySD#InconsistentCare;PotentialErrors> rdf:type owl:NamedIndividual ,
-                                                                                                             :DataUseAndInterpretationConsequences .
+                                                                                                             :DataUseAndInterpretationHazards .
 
 
 ###  http://www.semanticweb.org/ek279783/ontologies/2025/8/ontologySD#InconsistentDataEntry;PoorDecisions
 <http://www.semanticweb.org/ek279783/ontologies/2025/8/ontologySD#InconsistentDataEntry;PoorDecisions> rdf:type owl:NamedIndividual ,
-                                                                                                                :DataEntryAndCollectionConsequences .
+                                                                                                                :DataEntryAndCollectionHazards .
 
 
 ###  http://www.semanticweb.org/ek279783/ontologies/2025/8/ontologySD#InconsistentFormats;LackOfPreprocessing
 <http://www.semanticweb.org/ek279783/ontologies/2025/8/ontologySD#InconsistentFormats;LackOfPreprocessing> rdf:type owl:NamedIndividual ,
-                                                                                                                    :DataProcessingAndAnalysisCauses .
+                                                                                                                    :DataProcessingAndAnalysisRisks .
 
 
 ###  http://www.semanticweb.org/ek279783/ontologies/2025/8/ontologySD#IncorrectClinicalDecisions;PatientHarm
 <http://www.semanticweb.org/ek279783/ontologies/2025/8/ontologySD#IncorrectClinicalDecisions;PatientHarm> rdf:type owl:NamedIndividual ,
-                                                                                                                   :DataUseAndInterpretationConsequences .
+                                                                                                                   :DataUseAndInterpretationHazards .
 
 
 ###  http://www.semanticweb.org/ek279783/ontologies/2025/8/ontologySD#IncreasedCosts;ClinicalErrors
 <http://www.semanticweb.org/ek279783/ontologies/2025/8/ontologySD#IncreasedCosts;ClinicalErrors> rdf:type owl:NamedIndividual ,
-                                                                                                          :DataStorageAndManagementConsequences .
+                                                                                                          :DataStorageAndManagementHazards .
 
 
 ###  http://www.semanticweb.org/ek279783/ontologies/2025/8/ontologySD#IncreasedEntryErrors;UserDissatisfaction
 <http://www.semanticweb.org/ek279783/ontologies/2025/8/ontologySD#IncreasedEntryErrors;UserDissatisfaction> rdf:type owl:NamedIndividual ,
-                                                                                                                     :DataEntryAndCollectionConsequences .
+                                                                                                                     :DataEntryAndCollectionHazards .
 
 
 ###  http://www.semanticweb.org/ek279783/ontologies/2025/8/ontologySD#InsufficientBandwidth;HighDemand
 <http://www.semanticweb.org/ek279783/ontologies/2025/8/ontologySD#InsufficientBandwidth;HighDemand> rdf:type owl:NamedIndividual ,
-                                                                                                             :DataTransmissionAndSharingCauses .
+                                                                                                             :DataTransmissionAndSharingRisks .
 
 
 ###  http://www.semanticweb.org/ek279783/ontologies/2025/8/ontologySD#LackOfContextualInformation;Overgeneralisation
 <http://www.semanticweb.org/ek279783/ontologies/2025/8/ontologySD#LackOfContextualInformation;Overgeneralisation> rdf:type owl:NamedIndividual ,
-                                                                                                                           :DataUseAndInterpretationCauses .
+                                                                                                                           :DataUseAndInterpretationRisks .
 
 
 ###  http://www.semanticweb.org/ek279783/ontologies/2025/8/ontologySD#LackOfIntegration;SystemMergers
 <http://www.semanticweb.org/ek279783/ontologies/2025/8/ontologySD#LackOfIntegration;SystemMergers> rdf:type owl:NamedIndividual ,
-                                                                                                            :DataStorageAndManagementCauses .
+                                                                                                            :DataStorageAndManagementRisks .
 
 
 ###  http://www.semanticweb.org/ek279783/ontologies/2025/8/ontologySD#LackOfReal-timeValidation;OutdatedData
 <http://www.semanticweb.org/ek279783/ontologies/2025/8/ontologySD#LackOfReal-timeValidation;OutdatedData> rdf:type owl:NamedIndividual ,
-                                                                                                                   :DataEntryAndCollectionCauses .
+                                                                                                                   :DataEntryAndCollectionRisks .
 
 
 ###  http://www.semanticweb.org/ek279783/ontologies/2025/8/ontologySD#LackOfStandards;SystemVariances
 <http://www.semanticweb.org/ek279783/ontologies/2025/8/ontologySD#LackOfStandards;SystemVariances> rdf:type owl:NamedIndividual ,
-                                                                                                            :DataTransmissionAndSharingCauses .
+                                                                                                            :DataTransmissionAndSharingRisks .
 
 
 ###  http://www.semanticweb.org/ek279783/ontologies/2025/8/ontologySD#LackOfUserAwareness;PoorEmailSecurity
 <http://www.semanticweb.org/ek279783/ontologies/2025/8/ontologySD#LackOfUserAwareness;PoorEmailSecurity> rdf:type owl:NamedIndividual ,
-                                                                                                                  :DataSecurityAndPrivacyCauses .
+                                                                                                                  :DataSecurityAndPrivacyRisks .
 
 
 ###  http://www.semanticweb.org/ek279783/ontologies/2025/8/ontologySD#LegalPenalties;OperationalDisruptions
 <http://www.semanticweb.org/ek279783/ontologies/2025/8/ontologySD#LegalPenalties;OperationalDisruptions> rdf:type owl:NamedIndividual ,
-                                                                                                                  :DataSecurityAndPrivacyConsequences .
+                                                                                                                  :DataSecurityAndPrivacyHazards .
 
 
 ###  http://www.semanticweb.org/ek279783/ontologies/2025/8/ontologySD#Linkability/InferenceTesting
@@ -3145,27 +3122,27 @@ presence of a rare diagnosis, or the conjunction of age, sex, and geographical i
 
 ###  http://www.semanticweb.org/ek279783/ontologies/2025/8/ontologySD#LossOfPatientData;OperationalDowntime;LegalConsequences
 <http://www.semanticweb.org/ek279783/ontologies/2025/8/ontologySD#LossOfPatientData;OperationalDowntime;LegalConsequences> rdf:type owl:NamedIndividual ,
-                                                                                                                                    :DataStorageAndManagementConsequences .
+                                                                                                                                    :DataStorageAndManagementHazards .
 
 
 ###  http://www.semanticweb.org/ek279783/ontologies/2025/8/ontologySD#LossOfTrust;LegalRepercussions
 <http://www.semanticweb.org/ek279783/ontologies/2025/8/ontologySD#LossOfTrust;LegalRepercussions> rdf:type owl:NamedIndividual ,
-                                                                                                           :DataEntryAndCollectionConsequences .
+                                                                                                           :DataEntryAndCollectionHazards .
 
 
 ###  http://www.semanticweb.org/ek279783/ontologies/2025/8/ontologySD#ManualErrors;SystemMalfunctions
 <http://www.semanticweb.org/ek279783/ontologies/2025/8/ontologySD#ManualErrors;SystemMalfunctions> rdf:type owl:NamedIndividual ,
-                                                                                                            :DataEntryAndCollectionCauses .
+                                                                                                            :DataEntryAndCollectionRisks .
 
 
 ###  http://www.semanticweb.org/ek279783/ontologies/2025/8/ontologySD#ManualLabelling;FlawedTools
 <http://www.semanticweb.org/ek279783/ontologies/2025/8/ontologySD#ManualLabelling;FlawedTools> rdf:type owl:NamedIndividual ,
-                                                                                                        :DataProcessingAndAnalysisCauses .
+                                                                                                        :DataProcessingAndAnalysisRisks .
 
 
 ###  http://www.semanticweb.org/ek279783/ontologies/2025/8/ontologySD#MedicalErrors;IncreasedHealthcareCosts
 <http://www.semanticweb.org/ek279783/ontologies/2025/8/ontologySD#MedicalErrors;IncreasedHealthcareCosts> rdf:type owl:NamedIndividual ,
-                                                                                                                   :DataEntryAndCollectionConsequences .
+                                                                                                                   :DataEntryAndCollectionHazards .
 
 
 ###  http://www.semanticweb.org/ek279783/ontologies/2025/8/ontologySD#Membership/InversionTestsLog
@@ -3175,47 +3152,47 @@ presence of a rare diagnosis, or the conjunction of age, sex, and geographical i
 
 ###  http://www.semanticweb.org/ek279783/ontologies/2025/8/ontologySD#Misconfigurations;NetworkCongestion
 <http://www.semanticweb.org/ek279783/ontologies/2025/8/ontologySD#Misconfigurations;NetworkCongestion> rdf:type owl:NamedIndividual ,
-                                                                                                                :DataTransmissionAndSharingCauses .
+                                                                                                                :DataTransmissionAndSharingRisks .
 
 
 ###  http://www.semanticweb.org/ek279783/ontologies/2025/8/ontologySD#Misdiagnoses;IncorrectTreatmentPlans
 <http://www.semanticweb.org/ek279783/ontologies/2025/8/ontologySD#Misdiagnoses;IncorrectTreatmentPlans> rdf:type owl:NamedIndividual ,
-                                                                                                                 :DataEntryAndCollectionConsequences .
+                                                                                                                 :DataEntryAndCollectionHazards .
 
 
 ###  http://www.semanticweb.org/ek279783/ontologies/2025/8/ontologySD#MisleadingClinicalInsights;PatientHarm
 <http://www.semanticweb.org/ek279783/ontologies/2025/8/ontologySD#MisleadingClinicalInsights;PatientHarm> rdf:type owl:NamedIndividual ,
-                                                                                                                   :DataProcessingAndAnalysisConsequences .
+                                                                                                                   :DataProcessingAndAnalysisHazards .
 
 
 ###  http://www.semanticweb.org/ek279783/ontologies/2025/8/ontologySD#ModelMisclassification;ReducedAccuracy
 <http://www.semanticweb.org/ek279783/ontologies/2025/8/ontologySD#ModelMisclassification;ReducedAccuracy> rdf:type owl:NamedIndividual ,
-                                                                                                                   :DataProcessingAndAnalysisConsequences .
+                                                                                                                   :DataProcessingAndAnalysisHazards .
 
 
 ###  http://www.semanticweb.org/ek279783/ontologies/2025/8/ontologySD#ModelOverfitting;ImbalancedDatasets
 <http://www.semanticweb.org/ek279783/ontologies/2025/8/ontologySD#ModelOverfitting;ImbalancedDatasets> rdf:type owl:NamedIndividual ,
-                                                                                                                :DataProcessingAndAnalysisCauses .
+                                                                                                                :DataProcessingAndAnalysisRisks .
 
 
 ###  http://www.semanticweb.org/ek279783/ontologies/2025/8/ontologySD#NearbyDevices;InadequateControls
 <http://www.semanticweb.org/ek279783/ontologies/2025/8/ontologySD#NearbyDevices;InadequateControls> rdf:type owl:NamedIndividual ,
-                                                                                                             :EnvironmentalFactorsInDataHazardsCauses .
+                                                                                                             :EnvironmentalFactorsInDataHazardsRisks .
 
 
 ###  http://www.semanticweb.org/ek279783/ontologies/2025/8/ontologySD#NetworkCongestion;BandwidthLimitations
 <http://www.semanticweb.org/ek279783/ontologies/2025/8/ontologySD#NetworkCongestion;BandwidthLimitations> rdf:type owl:NamedIndividual ,
-                                                                                                                   :DataTransmissionAndSharingCauses .
+                                                                                                                   :DataTransmissionAndSharingRisks .
 
 
 ###  http://www.semanticweb.org/ek279783/ontologies/2025/8/ontologySD#NetworkIssues;HumanErrors
 <http://www.semanticweb.org/ek279783/ontologies/2025/8/ontologySD#NetworkIssues;HumanErrors> rdf:type owl:NamedIndividual ,
-                                                                                                      :DataTransmissionAndSharingCauses .
+                                                                                                      :DataTransmissionAndSharingRisks .
 
 
 ###  http://www.semanticweb.org/ek279783/ontologies/2025/8/ontologySD#OutdatedAlgorithms;PoorKeyManagement
 <http://www.semanticweb.org/ek279783/ontologies/2025/8/ontologySD#OutdatedAlgorithms;PoorKeyManagement> rdf:type owl:NamedIndividual ,
-                                                                                                                 :DataSecurityAndPrivacyCauses .
+                                                                                                                 :DataSecurityAndPrivacyRisks .
 
 
 ###  http://www.semanticweb.org/ek279783/ontologies/2025/8/ontologySD#PIMSLinkage/AssuranceCase
@@ -3228,42 +3205,42 @@ presence of a rare diagnosis, or the conjunction of age, sex, and geographical i
 
 ###  http://www.semanticweb.org/ek279783/ontologies/2025/8/ontologySD#PatientConfidentialityBreaches;LegalDamage
 <http://www.semanticweb.org/ek279783/ontologies/2025/8/ontologySD#PatientConfidentialityBreaches;LegalDamage> rdf:type owl:NamedIndividual ,
-                                                                                                                       :DataTransmissionAndSharingConsequences .
+                                                                                                                       :DataTransmissionAndSharingHazards .
 
 
 ###  http://www.semanticweb.org/ek279783/ontologies/2025/8/ontologySD#PoorDataHandling;LackOfTraining
 <http://www.semanticweb.org/ek279783/ontologies/2025/8/ontologySD#PoorDataHandling;LackOfTraining> rdf:type owl:NamedIndividual ,
-                                                                                                            :DataSecurityAndPrivacyCauses .
+                                                                                                            :DataSecurityAndPrivacyRisks .
 
 
 ###  http://www.semanticweb.org/ek279783/ontologies/2025/8/ontologySD#PoorSystemIntegration;ManualEntry
 <http://www.semanticweb.org/ek279783/ontologies/2025/8/ontologySD#PoorSystemIntegration;ManualEntry> rdf:type owl:NamedIndividual ,
-                                                                                                              :DataStorageAndManagementCauses .
+                                                                                                              :DataStorageAndManagementRisks .
 
 
 ###  http://www.semanticweb.org/ek279783/ontologies/2025/8/ontologySD#PoorlyDesignedInterfaces;LackOfFeedback
 <http://www.semanticweb.org/ek279783/ontologies/2025/8/ontologySD#PoorlyDesignedInterfaces;LackOfFeedback> rdf:type owl:NamedIndividual ,
-                                                                                                                    :DataEntryAndCollectionCauses .
+                                                                                                                    :DataEntryAndCollectionRisks .
 
 
 ###  http://www.semanticweb.org/ek279783/ontologies/2025/8/ontologySD#PowerFailures;ServerCrashes
 <http://www.semanticweb.org/ek279783/ontologies/2025/8/ontologySD#PowerFailures;ServerCrashes> rdf:type owl:NamedIndividual ,
-                                                                                                        :EnvironmentalFactorsInDataHazardsCauses .
+                                                                                                        :EnvironmentalFactorsInDataHazardsRisks .
 
 
 ###  http://www.semanticweb.org/ek279783/ontologies/2025/8/ontologySD#PrivacyBreaches;LegalImplications
 <http://www.semanticweb.org/ek279783/ontologies/2025/8/ontologySD#PrivacyBreaches;LegalImplications> rdf:type owl:NamedIndividual ,
-                                                                                                              :DataSecurityAndPrivacyConsequences .
+                                                                                                              :DataSecurityAndPrivacyHazards .
 
 
 ###  http://www.semanticweb.org/ek279783/ontologies/2025/8/ontologySD#PrivacyBreaches;ReducedDataUtility
 <http://www.semanticweb.org/ek279783/ontologies/2025/8/ontologySD#PrivacyBreaches;ReducedDataUtility> rdf:type owl:NamedIndividual ,
-                                                                                                               :DataProcessingAndAnalysisConsequences .
+                                                                                                               :DataProcessingAndAnalysisHazards .
 
 
 ###  http://www.semanticweb.org/ek279783/ontologies/2025/8/ontologySD#PrivacyBreaches;TreatmentDelays
 <http://www.semanticweb.org/ek279783/ontologies/2025/8/ontologySD#PrivacyBreaches;TreatmentDelays> rdf:type owl:NamedIndividual ,
-                                                                                                            :DataTransmissionAndSharingConsequences .
+                                                                                                            :DataTransmissionAndSharingHazards .
 
 
 ###  http://www.semanticweb.org/ek279783/ontologies/2025/8/ontologySD#Regulation2016/679
@@ -3278,62 +3255,62 @@ presence of a rare diagnosis, or the conjunction of age, sex, and geographical i
 
 ###  http://www.semanticweb.org/ek279783/ontologies/2025/8/ontologySD#SevereClinicalErrors;TrustLoss
 <http://www.semanticweb.org/ek279783/ontologies/2025/8/ontologySD#SevereClinicalErrors;TrustLoss> rdf:type owl:NamedIndividual ,
-                                                                                                           :DataStorageAndManagementConsequences .
+                                                                                                           :DataStorageAndManagementHazards .
 
 
 ###  http://www.semanticweb.org/ek279783/ontologies/2025/8/ontologySD#SkewedInsights;MisleadingDecisions
 <http://www.semanticweb.org/ek279783/ontologies/2025/8/ontologySD#SkewedInsights;MisleadingDecisions> rdf:type owl:NamedIndividual ,
-                                                                                                               :DataProcessingAndAnalysisConsequences .
+                                                                                                               :DataProcessingAndAnalysisHazards .
 
 
 ###  http://www.semanticweb.org/ek279783/ontologies/2025/8/ontologySD#SoftwareBugs;HardwareFailures
 <http://www.semanticweb.org/ek279783/ontologies/2025/8/ontologySD#SoftwareBugs;HardwareFailures> rdf:type owl:NamedIndividual ,
-                                                                                                          :DataStorageAndManagementCauses .
+                                                                                                          :DataStorageAndManagementRisks .
 
 
 ###  http://www.semanticweb.org/ek279783/ontologies/2025/8/ontologySD#SuboptimalCare;Mis-judgment
 <http://www.semanticweb.org/ek279783/ontologies/2025/8/ontologySD#SuboptimalCare;Mis-judgment> rdf:type owl:NamedIndividual ,
-                                                                                                        :DataEntryAndCollectionConsequences .
+                                                                                                        :DataEntryAndCollectionHazards .
 
 
 ###  http://www.semanticweb.org/ek279783/ontologies/2025/8/ontologySD#SystemAnomalies;ManualRepetition
 <http://www.semanticweb.org/ek279783/ontologies/2025/8/ontologySD#SystemAnomalies;ManualRepetition> rdf:type owl:NamedIndividual ,
-                                                                                                             :DataEntryAndCollectionCauses .
+                                                                                                             :DataEntryAndCollectionRisks .
 
 
 ###  http://www.semanticweb.org/ek279783/ontologies/2025/8/ontologySD#SystemCrashes;DataLoss
 <http://www.semanticweb.org/ek279783/ontologies/2025/8/ontologySD#SystemCrashes;DataLoss> rdf:type owl:NamedIndividual ,
-                                                                                                   :DataTransmissionAndSharingConsequences .
+                                                                                                   :DataTransmissionAndSharingHazards .
 
 
 ###  http://www.semanticweb.org/ek279783/ontologies/2025/8/ontologySD#SystemFailures;InadequateBackups
 <http://www.semanticweb.org/ek279783/ontologies/2025/8/ontologySD#SystemFailures;InadequateBackups> rdf:type owl:NamedIndividual ,
-                                                                                                             :DataStorageAndManagementCauses .
+                                                                                                             :DataStorageAndManagementRisks .
 
 
 ###  http://www.semanticweb.org/ek279783/ontologies/2025/8/ontologySD#SystemInefficiencies;HighWorkloads
 <http://www.semanticweb.org/ek279783/ontologies/2025/8/ontologySD#SystemInefficiencies;HighWorkloads> rdf:type owl:NamedIndividual ,
-                                                                                                               :DataEntryAndCollectionCauses .
+                                                                                                               :DataEntryAndCollectionRisks .
 
 
 ###  http://www.semanticweb.org/ek279783/ontologies/2025/8/ontologySD#SystemLatency;OverloadedSystems
 <http://www.semanticweb.org/ek279783/ontologies/2025/8/ontologySD#SystemLatency;OverloadedSystems> rdf:type owl:NamedIndividual ,
-                                                                                                            :DataProcessingAndAnalysisCauses .
+                                                                                                            :DataProcessingAndAnalysisRisks .
 
 
 ###  http://www.semanticweb.org/ek279783/ontologies/2025/8/ontologySD#SystemLimitations;HumanOversight
 <http://www.semanticweb.org/ek279783/ontologies/2025/8/ontologySD#SystemLimitations;HumanOversight> rdf:type owl:NamedIndividual ,
-                                                                                                             :DataEntryAndCollectionCauses .
+                                                                                                             :DataEntryAndCollectionRisks .
 
 
 ###  http://www.semanticweb.org/ek279783/ontologies/2025/8/ontologySD#SystemOutages;CompromisedDataSecurity
 <http://www.semanticweb.org/ek279783/ontologies/2025/8/ontologySD#SystemOutages;CompromisedDataSecurity> rdf:type owl:NamedIndividual ,
-                                                                                                                  :EnvironmentalFactorsInDataHazardsConsequences .
+                                                                                                                  :EnvironmentalFactorsInDataHazards .
 
 
 ###  http://www.semanticweb.org/ek279783/ontologies/2025/8/ontologySD#TechnicalFailures;InsufficientBackupFrequency
 <http://www.semanticweb.org/ek279783/ontologies/2025/8/ontologySD#TechnicalFailures;InsufficientBackupFrequency> rdf:type owl:NamedIndividual ,
-                                                                                                                          :DataStorageAndManagementCauses .
+                                                                                                                          :DataStorageAndManagementRisks .
 
 
 ###  http://www.semanticweb.org/ek279783/ontologies/2025/8/ontologySD#Top/BottomCoding
@@ -3349,47 +3326,47 @@ presence of a rare diagnosis, or the conjunction of age, sex, and geographical i
 
 ###  http://www.semanticweb.org/ek279783/ontologies/2025/8/ontologySD#UnauthorizedAccess;InadequateSecurityMeasures
 <http://www.semanticweb.org/ek279783/ontologies/2025/8/ontologySD#UnauthorizedAccess;InadequateSecurityMeasures> rdf:type owl:NamedIndividual ,
-                                                                                                                          :DataEntryAndCollectionCauses .
+                                                                                                                          :DataEntryAndCollectionRisks .
 
 
 ###  http://www.semanticweb.org/ek279783/ontologies/2025/8/ontologySD#UnauthorizedModifications;UserErrors
 <http://www.semanticweb.org/ek279783/ontologies/2025/8/ontologySD#UnauthorizedModifications;UserErrors> rdf:type owl:NamedIndividual ,
-                                                                                                                 :DataStorageAndManagementCauses .
+                                                                                                                 :DataStorageAndManagementRisks .
 
 
 ###  http://www.semanticweb.org/ek279783/ontologies/2025/8/ontologySD#Underreporting;SelectiveReporting
 <http://www.semanticweb.org/ek279783/ontologies/2025/8/ontologySD#Underreporting;SelectiveReporting> rdf:type owl:NamedIndividual ,
-                                                                                                              :DataEntryAndCollectionCauses .
+                                                                                                              :DataEntryAndCollectionRisks .
 
 
 ###  http://www.semanticweb.org/ek279783/ontologies/2025/8/ontologySD#UnnecessaryTreatments;MissedDiagnoses
 <http://www.semanticweb.org/ek279783/ontologies/2025/8/ontologySD#UnnecessaryTreatments;MissedDiagnoses> rdf:type owl:NamedIndividual ,
-                                                                                                                  :DataProcessingAndAnalysisConsequences .
+                                                                                                                  :DataProcessingAndAnalysisHazards .
 
 
 ###  http://www.semanticweb.org/ek279783/ontologies/2025/8/ontologySD#UnreliablePredictions;PatientHarm
 <http://www.semanticweb.org/ek279783/ontologies/2025/8/ontologySD#UnreliablePredictions;PatientHarm> rdf:type owl:NamedIndividual ,
-                                                                                                              :DataProcessingAndAnalysisConsequences .
+                                                                                                              :DataProcessingAndAnalysisHazards .
 
 
 ###  http://www.semanticweb.org/ek279783/ontologies/2025/8/ontologySD#VendorFailures;LackOfCompliance
 <http://www.semanticweb.org/ek279783/ontologies/2025/8/ontologySD#VendorFailures;LackOfCompliance> rdf:type owl:NamedIndividual ,
-                                                                                                            :EnvironmentalFactorsInDataHazardsCauses .
+                                                                                                            :EnvironmentalFactorsInDataHazardsRisks .
 
 
 ###  http://www.semanticweb.org/ek279783/ontologies/2025/8/ontologySD#WeakCybersecurity;UnPatchedSoftware
 <http://www.semanticweb.org/ek279783/ontologies/2025/8/ontologySD#WeakCybersecurity;UnPatchedSoftware> rdf:type owl:NamedIndividual ,
-                                                                                                                :EnvironmentalFactorsInDataHazardsCauses .
+                                                                                                                :EnvironmentalFactorsInDataHazardsRisks .
 
 
 ###  http://www.semanticweb.org/ek279783/ontologies/2025/8/ontologySD#WeakPasswords;InadequateAccessControls
 <http://www.semanticweb.org/ek279783/ontologies/2025/8/ontologySD#WeakPasswords;InadequateAccessControls> rdf:type owl:NamedIndividual ,
-                                                                                                                   :DataSecurityAndPrivacyCauses .
+                                                                                                                   :DataSecurityAndPrivacyRisks .
 
 
 ###  http://www.semanticweb.org/ek279783/ontologies/2025/8/ontologySD#WeakTechniques;ExcessiveAnonymisation
 <http://www.semanticweb.org/ek279783/ontologies/2025/8/ontologySD#WeakTechniques;ExcessiveAnonymisation> rdf:type owl:NamedIndividual ,
-                                                                                                                  :DataProcessingAndAnalysisCauses .
+                                                                                                                  :DataProcessingAndAnalysisRisks .
 
 
 ###  http://www.semanticweb.org/ek279783/ontologies/2025/8/ontologySD/AAEs
@@ -3743,23 +3720,23 @@ presence of a rare diagnosis, or the conjunction of age, sex, and geographical i
 
 ###  http://www.semanticweb.org/ek279783/ontologies/2025/8/ontologySD/AlgorithmBiasesIncorrectModeling
 :AlgorithmBiasesIncorrectModeling rdf:type owl:NamedIndividual ,
-                                           :TabularDataCauses .
+                                           :TabularDataRisks .
 
 
 ###  http://www.semanticweb.org/ek279783/ontologies/2025/8/ontologySD/AlgorithmErrorsBiasedDatasets
 :AlgorithmErrorsBiasedDatasets rdf:type owl:NamedIndividual ,
-                                        :ImageDataPotentialCauses .
+                                        :ImageDataPotentialRisks .
 
 
 ###  http://www.semanticweb.org/ek279783/ontologies/2025/8/ontologySD/AlgorithmicBias
 :AlgorithmicBias rdf:type owl:NamedIndividual ,
                           :DataProcessingAndAnalysis ;
-                 :HasConsequence :UnfairTreatmentRecommendations ;
                  :HasDetectability :LowDetectability ;
+                 :HasHazardMode :UnfairTreatmentRecommendations ;
                  :HasMitigation :BiasAuditsConduct ,
                                 :BiasDetectionFrameworks ,
                                 :CarefulImputationMethodsSelection ;
-                 :HasPotentialCause <http://www.semanticweb.org/ek279783/ontologies/2025/8/ontologySD#BiasedTrainingData;FlawedDesign> ;
+                 :HasRisk <http://www.semanticweb.org/ek279783/ontologies/2025/8/ontologySD#BiasedTrainingData;FlawedDesign> ;
                  :HasSeverity :HighSeverity ;
                  :RegulatedBy :AequitasFramework ,
                               :FairlearnFramework ,
@@ -3799,13 +3776,13 @@ Algorithmic bias can significantly impact health equity, leading to discriminato
 ###  http://www.semanticweb.org/ek279783/ontologies/2025/8/ontologySD/AmbiguousDataEntryGuidelines
 :AmbiguousDataEntryGuidelines rdf:type owl:NamedIndividual ,
                                        :DataEntryAndCollection ;
-                              :HasConsequence <http://www.semanticweb.org/ek279783/ontologies/2025/8/ontologySD#InconsistentDataEntry;PoorDecisions> ;
+                              :HasHazardMode <http://www.semanticweb.org/ek279783/ontologies/2025/8/ontologySD#InconsistentDataEntry;PoorDecisions> ;
                               :HasLikelihood :HighLikelihood ;
                               :HasMitigation :DecisionSupportTools ,
                                              :RegularUpdatedAndTraining ,
                                              :StandardizedGuidelines ,
                                              :ThoroughDocumentation ;
-                              :HasPotentialCause :LackOfStandardizedGuidelines ;
+                              :HasRisk :LackOfStandardizedGuidelines ;
                               :HasSeverity :MediumSeverity ;
                               :HasDetectabilityScore 5 ;
                               :HasLikelihoodScore 8 ;
@@ -4134,8 +4111,8 @@ Algorithmic bias can significantly impact health equity, leading to discriminato
 ###  http://www.semanticweb.org/ek279783/ontologies/2025/8/ontologySD/AudioDataLoss
 :AudioDataLoss rdf:type owl:NamedIndividual ,
                         :AudioDataHazards ;
-               :HasConsequence :IncompleteClinicalDocumentation ;
-               :HasPotentialCause :SystemCrashesInadequateStorage ;
+               :HasHazardMode :IncompleteClinicalDocumentation ;
+               :HasRisk :SystemCrashesInadequateStorage ;
                :HasDetectabilityScore 3 ;
                :HasLikelihoodScore 7 ;
                :HasSeverityScore 9 .
@@ -4151,8 +4128,8 @@ Algorithmic bias can significantly impact health equity, leading to discriminato
 ###  http://www.semanticweb.org/ek279783/ontologies/2025/8/ontologySD/AudioTransmissionErrors
 :AudioTransmissionErrors rdf:type owl:NamedIndividual ,
                                   :AudioDataHazards ;
-                         :HasConsequence :LossOfCriticalClinicalInformation ;
-                         :HasPotentialCause :NetworkInterruptionsTechnicalFailures ;
+                         :HasHazardMode :LossOfCriticalClinicalInformation ;
+                         :HasRisk :NetworkInterruptionsTechnicalFailures ;
                          :HasDetectabilityScore 4 ;
                          :HasLikelihoodScore 6 ;
                          :HasSeverityScore 8 .
@@ -4388,11 +4365,11 @@ series data.""" .
 ###  http://www.semanticweb.org/ek279783/ontologies/2025/8/ontologySD/BandwidthAndResourceAllocationIssues
 :BandwidthAndResourceAllocationIssues rdf:type owl:NamedIndividual ,
                                                :DataTransmissionAndSharing ;
-                                      :HasConsequence <http://www.semanticweb.org/ek279783/ontologies/2025/8/ontologySD#CriticalDelays;DroppedConnections> ;
                                       :HasDetectability :HighDetectability ;
+                                      :HasHazardMode <http://www.semanticweb.org/ek279783/ontologies/2025/8/ontologySD#CriticalDelays;DroppedConnections> ;
                                       :HasMitigation :NetworkTrafficShaping ,
                                                      :QualityofServiceControls ;
-                                      :HasPotentialCause <http://www.semanticweb.org/ek279783/ontologies/2025/8/ontologySD#InsufficientBandwidth;HighDemand> ;
+                                      :HasRisk <http://www.semanticweb.org/ek279783/ontologies/2025/8/ontologySD#InsufficientBandwidth;HighDemand> ;
                                       :HasSeverity :MediumSeverity ,
                                                    :MediumToHighSeverity ;
                                       :HasDetectabilityScore 2 ;
@@ -4487,12 +4464,12 @@ series data.""" .
 :BiasInDataCollection rdf:type owl:NamedIndividual ,
                                :DataEntryAndCollection ,
                                :PatientReportedData ;
-                      :HasConsequence <http://www.semanticweb.org/ek279783/ontologies/2025/8/ontologySD#InappropriateTreatments;HealthcareDisparities> ;
                       :HasDetectability :LowDetectability ;
+                      :HasHazardMode <http://www.semanticweb.org/ek279783/ontologies/2025/8/ontologySD#InappropriateTreatments;HealthcareDisparities> ;
                       :HasLikelihood :MediumToHighLikelihood ;
                       :HasMitigation :ErrorCheckingMechanisms ,
                                      :ThoroughDocumentation ;
-                      :HasPotentialCause <http://www.semanticweb.org/ek279783/ontologies/2025/8/ontologySD#Underreporting;SelectiveReporting> ;
+                      :HasRisk <http://www.semanticweb.org/ek279783/ontologies/2025/8/ontologySD#Underreporting;SelectiveReporting> ;
                       :HasSeverity :HighSeverity ;
                       :HasDetectabilityScore 7 ;
                       :HasLikelihoodScore 6 ;
@@ -4802,8 +4779,8 @@ similarity in their underlying distribution. Real and synthetic data receive opp
 
 ###  http://www.semanticweb.org/ek279783/ontologies/2025/8/ontologySD/ClinicalInaccuraciesCompromisedDecisions
 :ClinicalInaccuraciesCompromisedDecisions rdf:type owl:NamedIndividual ,
-                                                   :TabularDataConsequences ;
-                                          :HasConsequence :ClinicalInaccuraciesCompromisedDecisions .
+                                                   :TabularDataHazards ;
+                                          :HasHazardMode :ClinicalInaccuraciesCompromisedDecisions .
 
 
 ###  http://www.semanticweb.org/ek279783/ontologies/2025/8/ontologySD/ClinicalRequirments
@@ -4964,12 +4941,12 @@ image, text, and time series data.""" .
 ###  http://www.semanticweb.org/ek279783/ontologies/2025/8/ontologySD/ComplianceFailure
 :ComplianceFailure rdf:type owl:NamedIndividual ,
                             :DataSecurityAndPrivacy ;
-                   :HasConsequence <http://www.semanticweb.org/ek279783/ontologies/2025/8/ontologySD#LegalPenalties;OperationalDisruptions> ;
                    :HasDetectability :MediumDetectability ;
+                   :HasHazardMode <http://www.semanticweb.org/ek279783/ontologies/2025/8/ontologySD#LegalPenalties;OperationalDisruptions> ;
                    :HasLikelihood :MediumLikelihood ;
                    :HasMitigation :RegularComplianceAudits ,
                                   :ThoroughDocumentation ;
-                   :HasPotentialCause <http://www.semanticweb.org/ek279783/ontologies/2025/8/ontologySD#InadequateResourceAllocation;FlawedDocumentation> ;
+                   :HasRisk <http://www.semanticweb.org/ek279783/ontologies/2025/8/ontologySD#InadequateResourceAllocation;FlawedDocumentation> ;
                    :HasSeverity :HighSeverity ;
                    :HasDetectabilityScore 5 ;
                    :HasLikelihoodScore 6 ;
@@ -5081,13 +5058,13 @@ image, text, and time series data.""" .
 ###  http://www.semanticweb.org/ek279783/ontologies/2025/8/ontologySD/ContextualMisalignment
 :ContextualMisalignment rdf:type owl:NamedIndividual ,
                                  :DataUseAndInterpretation ;
-                        :HasConsequence <http://www.semanticweb.org/ek279783/ontologies/2025/8/ontologySD#InappropriateTreatments;AdverseEvents> ;
                         :HasDetectability :LowDetectability ;
+                        :HasHazardMode <http://www.semanticweb.org/ek279783/ontologies/2025/8/ontologySD#InappropriateTreatments;AdverseEvents> ;
                         :HasLikelihood :MediumLikelihood ;
                         :HasMitigation :IntegratedDataSystems ,
                                        :TailoredDecisionSupportTools ,
                                        :TrainingInContextualAwareness ;
-                        :HasPotentialCause <http://www.semanticweb.org/ek279783/ontologies/2025/8/ontologySD#LackOfContextualInformation;Overgeneralisation> ;
+                        :HasRisk <http://www.semanticweb.org/ek279783/ontologies/2025/8/ontologySD#LackOfContextualInformation;Overgeneralisation> ;
                         :HasSeverity :HighSeverity ;
                         :HasDetectabilityScore 9 ;
                         :HasLikelihoodScore 6 ;
@@ -5324,9 +5301,9 @@ Using data out of context can lead to inappropriate healthcare decisions with hi
 
 ###  http://www.semanticweb.org/ek279783/ontologies/2025/8/ontologySD/CyberAttacks
 :CyberAttacks rdf:type owl:NamedIndividual ,
-                       :EnvironmentalFactorsInDataHazards ;
-              :HasConsequence <http://www.semanticweb.org/ek279783/ontologies/2025/8/ontologySD#DataBreaches;FinancialLosses> ;
+                       :EnvironmentalFactorsInDataFailureModes ;
               :HasDetectability :LowToMediumDetectability ;
+              :HasHazardMode <http://www.semanticweb.org/ek279783/ontologies/2025/8/ontologySD#DataBreaches;FinancialLosses> ;
               :HasLikelihood :HighLikelihood ;
               :HasMitigation :AdvancedSecurityMeasures ,
                              :ContinuousVulnerabilityIdentificationAndRemediation ,
@@ -5339,7 +5316,7 @@ Using data out of context can lead to inappropriate healthcare decisions with hi
                              :SecureSDLCAndCodeReview ,
                              :SecurityLoggingAndAnomalyDetection ,
                              :ThreatModelling ;
-              :HasPotentialCause <http://www.semanticweb.org/ek279783/ontologies/2025/8/ontologySD#WeakCybersecurity;UnPatchedSoftware> ;
+              :HasRisk <http://www.semanticweb.org/ek279783/ontologies/2025/8/ontologySD#WeakCybersecurity;UnPatchedSoftware> ;
               :HasSeverity :HighSeverity ;
               :HasDetectabilityScore 7 ;
               :HasLikelihoodScore 9 ;
@@ -5482,13 +5459,13 @@ optimizers, including Adam, RMSprop, and SGD, can also be used to minimize the l
 ###  http://www.semanticweb.org/ek279783/ontologies/2025/8/ontologySD/DataAnonymisationErrors
 :DataAnonymisationErrors rdf:type owl:NamedIndividual ,
                                   :DataProcessingAndAnalysis ;
-                         :HasConsequence <http://www.semanticweb.org/ek279783/ontologies/2025/8/ontologySD#PrivacyBreaches;ReducedDataUtility> ;
                          :HasDetectability :LowDetectability ;
+                         :HasHazardMode <http://www.semanticweb.org/ek279783/ontologies/2025/8/ontologySD#PrivacyBreaches;ReducedDataUtility> ;
                          :HasLikelihood :MediumLikelihood ;
                          :HasMitigation :AdvancedAnonymisationTechniques ,
                                         :DeIdentificationTechniques ,
                                         :StructuredValidation ;
-                         :HasPotentialCause <http://www.semanticweb.org/ek279783/ontologies/2025/8/ontologySD#WeakTechniques;ExcessiveAnonymisation> ;
+                         :HasRisk <http://www.semanticweb.org/ek279783/ontologies/2025/8/ontologySD#WeakTechniques;ExcessiveAnonymisation> ;
                          :HasSeverity :HighSeverity ;
                          :HasDetectabilityScore 6 ;
                          :HasLikelihoodScore 8 ;
@@ -5516,15 +5493,15 @@ anonymization can occur when these techniques are not correctly applied, which e
 
 ###  http://www.semanticweb.org/ek279783/ontologies/2025/8/ontologySD/DataCorruption
 :DataCorruption rdf:type owl:NamedIndividual ,
-                         :ClinicalDataHazards ,
+                         :ClinicalDataFailureModes ,
                          :DataStorageAndManagement ;
-                :HasConsequence <http://www.semanticweb.org/ek279783/ontologies/2025/8/ontologySD#InaccuratePatientRecords;OperationalDisruptions> ;
                 :HasDetectability :LowDetectability ;
+                :HasHazardMode <http://www.semanticweb.org/ek279783/ontologies/2025/8/ontologySD#InaccuratePatientRecords;OperationalDisruptions> ;
                 :HasLikelihood :MediumToHighLikelihood ;
                 :HasMitigation :ErrorCheckingMechanisms ,
                                :RedundantStorageSolutions ,
                                :RegularBackups ;
-                :HasPotentialCause <http://www.semanticweb.org/ek279783/ontologies/2025/8/ontologySD#SoftwareBugs;HardwareFailures> ;
+                :HasRisk <http://www.semanticweb.org/ek279783/ontologies/2025/8/ontologySD#SoftwareBugs;HardwareFailures> ;
                 :HasSeverity :HighSeverity ;
                 :HasDetectabilityScore 8 ;
                 :HasLikelihoodScore 6 ;
@@ -5541,16 +5518,16 @@ anonymization can occur when these techniques are not correctly applied, which e
                           :DataStorageAndManagement ,
                           :OperationalData ,
                           :TabularDataHazards ;
-                 :HasConsequence <http://www.semanticweb.org/ek279783/ontologies/2025/8/ontologySD#IncreasedCosts;ClinicalErrors> ,
-                                 :IncreasedOperationalCostsConfusion ;
                  :HasDetectability :HighDetectability ;
+                 :HasHazardMode <http://www.semanticweb.org/ek279783/ontologies/2025/8/ontologySD#IncreasedCosts;ClinicalErrors> ,
+                                :IncreasedOperationalCostsConfusion ;
                  :HasLikelihood :HighLikelihood ;
                  :HasMitigation :CentralizedDataManagementSystems ,
                                 :DeduplicationAlgorithmsImplementation ,
                                 :RegularAudits ;
                  :HasModality :TabularData ;
-                 :HasPotentialCause <http://www.semanticweb.org/ek279783/ontologies/2025/8/ontologySD#PoorSystemIntegration;ManualEntry> ,
-                                    :PoorIntegrationManualProcesses ;
+                 :HasRisk <http://www.semanticweb.org/ek279783/ontologies/2025/8/ontologySD#PoorSystemIntegration;ManualEntry> ,
+                          :PoorIntegrationManualProcesses ;
                  :HasSeverity :HighSeverity ;
                  :HasDetectabilityScore 3 ;
                  :HasLikelihoodScore 7 ;
@@ -5571,9 +5548,9 @@ improves system performance. Given the complex data flows in healthcare systems,
 ###  http://www.semanticweb.org/ek279783/ontologies/2025/8/ontologySD/DataEntryErrors
 :DataEntryErrors rdf:type owl:NamedIndividual ,
                           :TabularDataHazards ;
-                 :HasConsequence :IncorrectPatientRecordsClinicalErrors ;
+                 :HasHazardMode :IncorrectPatientRecordsClinicalErrors ;
                  :HasModality :TabularData ;
-                 :HasPotentialCause :ManualInputsPoorValidation ;
+                 :HasRisk :ManualInputsPoorValidation ;
                  :HasDetectabilityScore 5 ;
                  :HasLikelihoodScore 6 ;
                  :HasSeverityScore 8 .
@@ -5582,13 +5559,13 @@ improves system performance. Given the complex data flows in healthcare systems,
 ###  http://www.semanticweb.org/ek279783/ontologies/2025/8/ontologySD/DataFragmentation
 :DataFragmentation rdf:type owl:NamedIndividual ,
                             :DataStorageAndManagement ;
-                   :HasConsequence <http://www.semanticweb.org/ek279783/ontologies/2025/8/ontologySD#ImpairedDataAnalysis;Inefficiencies;DelayedCare> ;
                    :HasDetectability :HighDetectability ;
+                   :HasHazardMode <http://www.semanticweb.org/ek279783/ontologies/2025/8/ontologySD#ImpairedDataAnalysis;Inefficiencies;DelayedCare> ;
                    :HasLikelihood :HighLikelihood ;
                    :HasMitigation :AdoptionOfInteroperabilityStandards ,
                                   :CentralizedDatabases ,
                                   :DataIntegrationSolutions ;
-                   :HasPotentialCause <http://www.semanticweb.org/ek279783/ontologies/2025/8/ontologySD#LackOfIntegration;SystemMergers> ;
+                   :HasRisk <http://www.semanticweb.org/ek279783/ontologies/2025/8/ontologySD#LackOfIntegration;SystemMergers> ;
                    :HasSeverity :MediumSeverity ;
                    :HasDetectabilityScore 3 ;
                    :HasLikelihoodScore 9 ;
@@ -5606,12 +5583,12 @@ The fragmentation of data creates the need to jump between interfaces and manual
 ###  http://www.semanticweb.org/ek279783/ontologies/2025/8/ontologySD/DataIntegrityAndValidationFailures
 :DataIntegrityAndValidationFailures rdf:type owl:NamedIndividual ,
                                              :DataEntryAndCollection ;
-                                    :HasConsequence :SignificantClinicalErrors ;
                                     :HasDetectability :LowDetectability ;
+                                    :HasHazardMode :SignificantClinicalErrors ;
                                     :HasLikelihood :MediumToHighLikelihood ;
                                     :HasMitigation :RegularUpdates ,
                                                    :RobustValidation ;
-                                    :HasPotentialCause <http://www.semanticweb.org/ek279783/ontologies/2025/8/ontologySD#LackOfReal-timeValidation;OutdatedData> ;
+                                    :HasRisk <http://www.semanticweb.org/ek279783/ontologies/2025/8/ontologySD#LackOfReal-timeValidation;OutdatedData> ;
                                     :HasSeverity :HighSeverity ;
                                     :HasDetectabilityScore 7 ;
                                     :HasLikelihoodScore 9 ;
@@ -5623,18 +5600,18 @@ Failures in data integrity can be extremely severe, as they may lead to incorrec
 
 ###  http://www.semanticweb.org/ek279783/ontologies/2025/8/ontologySD/DataIntegrityIssues
 :DataIntegrityIssues rdf:type owl:NamedIndividual ,
-                              :ClinicalDataHazards ,
+                              :ClinicalDataFailureModes ,
                               :DataStorageAndManagement ,
                               :TabularDataHazards ;
-                     :HasConsequence <http://www.semanticweb.org/ek279783/ontologies/2025/8/ontologySD#SevereClinicalErrors;TrustLoss> ;
                      :HasDetectability :HighDetectability ;
+                     :HasHazardMode <http://www.semanticweb.org/ek279783/ontologies/2025/8/ontologySD#SevereClinicalErrors;TrustLoss> ;
                      :HasLikelihood :HighLikelihood ;
                      :HasMitigation :AuditTrails ,
                                     :DataValidationChecks ,
                                     :StrictAccessControls ;
                      :HasModality :TabularData ;
-                     :HasPotentialCause <http://www.semanticweb.org/ek279783/ontologies/2025/8/ontologySD#UnauthorizedModifications;UserErrors> ,
-                                        :UnauthorizedModificationsCyberattacks ;
+                     :HasRisk <http://www.semanticweb.org/ek279783/ontologies/2025/8/ontologySD#UnauthorizedModifications;UserErrors> ,
+                              :UnauthorizedModificationsCyberattacks ;
                      :HasSeverity :HighSeverity ;
                      :HasDetectabilityScore 3 ,
                                             4 ;
@@ -5648,14 +5625,14 @@ Data integrity is often compromised when a large amount of patient information i
 ###  http://www.semanticweb.org/ek279783/ontologies/2025/8/ontologySD/DataInterceptionAndBreach
 :DataInterceptionAndBreach rdf:type owl:NamedIndividual ,
                                     :DataTransmissionAndSharing ;
-                           :HasConsequence <http://www.semanticweb.org/ek279783/ontologies/2025/8/ontologySD#PatientConfidentialityBreaches;LegalDamage> ;
                            :HasDetectability :MediumToHighDetectability ;
+                           :HasHazardMode <http://www.semanticweb.org/ek279783/ontologies/2025/8/ontologySD#PatientConfidentialityBreaches;LegalDamage> ;
                            :HasLikelihood :HighLikelihood ;
                            :HasMitigation :EndToEndEncryption ,
                                           :RegularSecurityAudits ,
                                           :SecureCommunicationProtocols ;
-                           :HasPotentialCause <http://www.semanticweb.org/ek279783/ontologies/2025/8/ontologySD#InadequateSecurity;Weakncryption> ,
-                                              <http://www.semanticweb.org/ek279783/ontologies/2025/8/ontologySD#NetworkCongestion;BandwidthLimitations> ;
+                           :HasRisk <http://www.semanticweb.org/ek279783/ontologies/2025/8/ontologySD#InadequateSecurity;Weakncryption> ,
+                                    <http://www.semanticweb.org/ek279783/ontologies/2025/8/ontologySD#NetworkCongestion;BandwidthLimitations> ;
                            :HasSeverity :HighSeverity ;
                            :HasDetectabilityScore 4 ;
                            :HasLikelihoodScore 9 ;
@@ -5668,12 +5645,12 @@ Data interception and breach can lead to significant privacy violations and fina
 ###  http://www.semanticweb.org/ek279783/ontologies/2025/8/ontologySD/DataLeakage
 :DataLeakage rdf:type owl:NamedIndividual ,
                       :DataSecurityAndPrivacy ;
-             :HasConsequence <http://www.semanticweb.org/ek279783/ontologies/2025/8/ontologySD#PrivacyBreaches;LegalImplications> ;
              :HasDetectability :LowDetectability ;
+             :HasHazardMode <http://www.semanticweb.org/ek279783/ontologies/2025/8/ontologySD#PrivacyBreaches;LegalImplications> ;
              :HasLikelihood :MediumToHighLikelihood ;
              :HasMitigation :DataLossPreventionTools ,
                             :EnforcingDataHandlingProtocols ;
-             :HasPotentialCause <http://www.semanticweb.org/ek279783/ontologies/2025/8/ontologySD#PoorDataHandling;LackOfTraining> ;
+             :HasRisk <http://www.semanticweb.org/ek279783/ontologies/2025/8/ontologySD#PoorDataHandling;LackOfTraining> ;
              :HasSeverity :HighSeverity ;
              :HasDetectabilityScore 8 ;
              :HasLikelihoodScore 7 ;
@@ -5684,13 +5661,13 @@ Data interception and breach can lead to significant privacy violations and fina
 :DataLoss rdf:type owl:NamedIndividual ,
                    :DataStorageAndManagement ,
                    :OperationalData ;
-          :HasConsequence <http://www.semanticweb.org/ek279783/ontologies/2025/8/ontologySD#LossOfPatientData;OperationalDowntime;LegalConsequences> ;
           :HasDetectability :MediumToHighDetectability ;
+          :HasHazardMode <http://www.semanticweb.org/ek279783/ontologies/2025/8/ontologySD#LossOfPatientData;OperationalDowntime;LegalConsequences> ;
           :HasLikelihood :HighLikelihood ;
           :HasMitigation :AutomatedBackupSystems ,
                          :ComprehensiveDisasterRecoveryPlans ,
                          :UserTraining ;
-          :HasPotentialCause <http://www.semanticweb.org/ek279783/ontologies/2025/8/ontologySD#SystemFailures;InadequateBackups> ;
+          :HasRisk <http://www.semanticweb.org/ek279783/ontologies/2025/8/ontologySD#SystemFailures;InadequateBackups> ;
           :HasSeverity :HighSeverity ;
           :HasDetectabilityScore 3 ;
           :HasLikelihoodScore 7 ;
@@ -5733,13 +5710,13 @@ Data loss in healthcare is critically severe because it can lead to irrecoverabl
 ###  http://www.semanticweb.org/ek279783/ontologies/2025/8/ontologySD/DataMisinterpretation
 :DataMisinterpretation rdf:type owl:NamedIndividual ,
                                 :DataProcessingAndAnalysis ;
-                       :HasConsequence <http://www.semanticweb.org/ek279783/ontologies/2025/8/ontologySD#ClinicalMisjudgement;ReducedCareQuality> ;
                        :HasDetectability :MediumDetectability ;
+                       :HasHazardMode <http://www.semanticweb.org/ek279783/ontologies/2025/8/ontologySD#ClinicalMisjudgement;ReducedCareQuality> ;
                        :HasLikelihood :MediumLikelihood ;
                        :HasMitigation :ClearActionableInsightsProvision ,
                                       :CommunicatoinBetweenDataExpertsAndClinicians ,
                                       :TrainingOnInterpretingDataAnalysisResults ;
-                       :HasPotentialCause <http://www.semanticweb.org/ek279783/ontologies/2025/8/ontologySD#ComplexModels;PoorCommunication> ;
+                       :HasRisk <http://www.semanticweb.org/ek279783/ontologies/2025/8/ontologySD#ComplexModels;PoorCommunication> ;
                        :HasSeverity :HighSeverity ;
                        :HasDetectabilityScore 4 ;
                        :HasLikelihoodScore 9 ;
@@ -5760,14 +5737,14 @@ mismatch provides the proportion of matching data types over columns between syn
 ###  http://www.semanticweb.org/ek279783/ontologies/2025/8/ontologySD/DataOverload
 :DataOverload rdf:type owl:NamedIndividual ,
                        :DataTransmissionAndSharing ;
-              :HasConsequence <http://www.semanticweb.org/ek279783/ontologies/2025/8/ontologySD#SystemCrashes;DataLoss> ;
               :HasDetectability :MediumDetectability ;
+              :HasHazardMode <http://www.semanticweb.org/ek279783/ontologies/2025/8/ontologySD#SystemCrashes;DataLoss> ;
               :HasLikelihood :MediumToHighLikelihood ;
               :HasMitigation :CompressionTechniques ,
                              :DataPrioritisation ,
                              :ScalableCloudBasedSolutions ;
-              :HasPotentialCause <http://www.semanticweb.org/ek279783/ontologies/2025/8/ontologySD#InadequateProtocols;SystemConflicts> ,
-                                 :ExcessiveDataTransmission ;
+              :HasRisk <http://www.semanticweb.org/ek279783/ontologies/2025/8/ontologySD#InadequateProtocols;SystemConflicts> ,
+                       :ExcessiveDataTransmission ;
               :HasSeverity :HighSeverity ;
               :HasDetectabilityScore 5 ;
               :HasLikelihoodScore 7 ;
@@ -5814,13 +5791,13 @@ Data overload can impede real-time decision-making and lead to information fatig
 ###  http://www.semanticweb.org/ek279783/ontologies/2025/8/ontologySD/DataRoutingAndSwitchingErrors
 :DataRoutingAndSwitchingErrors rdf:type owl:NamedIndividual ,
                                         :DataTransmissionAndSharing ;
-                               :HasConsequence <http://www.semanticweb.org/ek279783/ontologies/2025/8/ontologySD#PrivacyBreaches;TreatmentDelays> ;
                                :HasDetectability :MediumDetectability ;
+                               :HasHazardMode <http://www.semanticweb.org/ek279783/ontologies/2025/8/ontologySD#PrivacyBreaches;TreatmentDelays> ;
                                :HasLikelihood :RareToMediumLikelihood ;
                                :HasMitigation :AccurateConfigurationOfRoutingTables ,
                                               :ErrorCheckingProtocols ,
                                               :ReduntantNetworkPathsEmployment ;
-                               :HasPotentialCause <http://www.semanticweb.org/ek279783/ontologies/2025/8/ontologySD#Misconfigurations;NetworkCongestion> ;
+                               :HasRisk <http://www.semanticweb.org/ek279783/ontologies/2025/8/ontologySD#Misconfigurations;NetworkCongestion> ;
                                :HasSeverity :HighSeverity ;
                                :HasDetectabilityScore 5 ;
                                :HasLikelihoodScore 4 ;
@@ -5838,12 +5815,12 @@ Errors in data routing can lead to data loss or misdirection, impacting patient 
 ###  http://www.semanticweb.org/ek279783/ontologies/2025/8/ontologySD/DataSychronisationFailures
 :DataSychronisationFailures rdf:type owl:NamedIndividual ,
                                      :DataTransmissionAndSharing ;
-                            :HasConsequence :OutdatedOrConflictingInformation ;
                             :HasDetectability :MediumDetectability ;
+                            :HasHazardMode :OutdatedOrConflictingInformation ;
                             :HasLikelihood :MediumLikelihood ;
                             :HasMitigation :ResolutionMechanisms ;
                             :HasModality :SychronisationProtocols ;
-                            :HasPotentialCause <http://www.semanticweb.org/ek279783/ontologies/2025/8/ontologySD#InadequateProtocols;SystemConflicts> ;
+                            :HasRisk <http://www.semanticweb.org/ek279783/ontologies/2025/8/ontologySD#InadequateProtocols;SystemConflicts> ;
                             :HasSeverity :HighSeverity ;
                             :HasDetectabilityScore 5 ;
                             :HasLikelihoodScore 6 ;
@@ -5875,10 +5852,10 @@ ongoing value to the organization, highlights the importance of synchronization 
 
 ###  http://www.semanticweb.org/ek279783/ontologies/2025/8/ontologySD/DataTransmissionErrors
 :DataTransmissionErrors rdf:type owl:NamedIndividual ,
-                                 :ClinicalDataHazards ,
+                                 :ClinicalDataFailureModes ,
                                  :DataTransmissionAndSharing ;
-                        :HasConsequence <http://www.semanticweb.org/ek279783/ontologies/2025/8/ontologySD#DelayedDecisions;ImpactedCare> ;
                         :HasDetectability :MediumToHighDetectability ;
+                        :HasHazardMode <http://www.semanticweb.org/ek279783/ontologies/2025/8/ontologySD#DelayedDecisions;ImpactedCare> ;
                         :HasLikelihood :MediumToHighLikelihood ;
                         :HasMitigation :EncryptionAndDataIntegrity ,
                                        :ErrorDetectionProtocols ,
@@ -5886,7 +5863,7 @@ ongoing value to the organization, highlights the importance of synchronization 
                                        :RegulatoryAlignment ,
                                        :SecureSychronisation ,
                                        :SecurityControls ;
-                        :HasPotentialCause <http://www.semanticweb.org/ek279783/ontologies/2025/8/ontologySD#NetworkIssues;HumanErrors> ;
+                        :HasRisk <http://www.semanticweb.org/ek279783/ontologies/2025/8/ontologySD#NetworkIssues;HumanErrors> ;
                         :HasSeverity :HighSeverity ;
                         :RegulatedBy <http://www.semanticweb.org/ek279783/ontologies/2025/8/ontologySD#ISO/IEC27001:2022Standard> ,
                                      <http://www.semanticweb.org/ek279783/ontologies/2025/8/ontologySD#ISO27799:2016Standard> ,
@@ -6011,12 +5988,12 @@ The transmission errors can lead to incorrect data being recorded or used in pat
 :DelayedDataEntry rdf:type owl:NamedIndividual ,
                            :DataEntryAndCollection ,
                            :OperationalData ;
-                  :HasConsequence <http://www.semanticweb.org/ek279783/ontologies/2025/8/ontologySD#DelayedTreatments;ImpairedPatientOutcomes> ;
                   :HasDetectability :LowDetectability ;
+                  :HasHazardMode <http://www.semanticweb.org/ek279783/ontologies/2025/8/ontologySD#DelayedTreatments;ImpairedPatientOutcomes> ;
                   :HasLikelihood :MediumToHighLikelihood ;
                   :HasMitigation :RealTimeDataProcessing ,
                                  :SychronisationProtocols ;
-                  :HasPotentialCause <http://www.semanticweb.org/ek279783/ontologies/2025/8/ontologySD#SystemInefficiencies;HighWorkloads> ;
+                  :HasRisk <http://www.semanticweb.org/ek279783/ontologies/2025/8/ontologySD#SystemInefficiencies;HighWorkloads> ;
                   :HasSeverity :HighSeverity ;
                   :HasDetectabilityScore 8 ;
                   :HasLikelihoodScore 6 ;
@@ -6028,7 +6005,7 @@ Delayed updates in patient records can lead to harmful gaps in care, especially 
 
 ###  http://www.semanticweb.org/ek279783/ontologies/2025/8/ontologySD/DelayedOrIncorrectTreatment
 :DelayedOrIncorrectTreatment rdf:type owl:NamedIndividual ,
-                                      :DataTransmissionAndSharingConsequences .
+                                      :DataTransmissionAndSharingHazards .
 
 
 ###  http://www.semanticweb.org/ek279783/ontologies/2025/8/ontologySD/Delta
@@ -6099,7 +6076,7 @@ Delayed updates in patient records can lead to harmful gaps in care, especially 
 
 ###  http://www.semanticweb.org/ek279783/ontologies/2025/8/ontologySD/DiagnosticErrorsClinicalMisunderstandings
 :DiagnosticErrorsClinicalMisunderstandings rdf:type owl:NamedIndividual ,
-                                                    :AudioDataConsequences .
+                                                    :AudioDataHazards .
 
 
 ###  http://www.semanticweb.org/ek279783/ontologies/2025/8/ontologySD/DialogueData
@@ -6125,8 +6102,8 @@ Delayed updates in patient records can lead to harmful gaps in care, especially 
 
 ###  http://www.semanticweb.org/ek279783/ontologies/2025/8/ontologySD/DifferentialPrivacy
 :DifferentialPrivacy rdf:type owl:NamedIndividual ,
-                              :PrivacyModels ,
                               :MetricThreshold ,
+                              :PrivacyModels ,
                               :Techniques ;
                      :ApplicableToTypesOfValues "All" ;
                      :DataTruthfulnessAtRecordLevel "NO" ;
@@ -6221,7 +6198,7 @@ Delayed updates in patient records can lead to harmful gaps in care, especially 
 
 ###  http://www.semanticweb.org/ek279783/ontologies/2025/8/ontologySD/DisruptionOfClinicalWorkflow
 :DisruptionOfClinicalWorkflow rdf:type owl:NamedIndividual ,
-                                       :VideoDataConsequences .
+                                       :VideoDataHazards .
 
 
 ###  http://www.semanticweb.org/ek279783/ontologies/2025/8/ontologySD/DistanceFromOriginalData
@@ -6409,14 +6386,14 @@ in performance and training speed. ELECTRA’s training involves two primary com
 
 ###  http://www.semanticweb.org/ek279783/ontologies/2025/8/ontologySD/EMI-RFIAndTemperatureExtremes
 :EMI-RFIAndTemperatureExtremes rdf:type owl:NamedIndividual ,
-                                        :EnvironmentalFactorsInDataHazards ;
-                               :HasConsequence <http://www.semanticweb.org/ek279783/ontologies/2025/8/ontologySD#DataCorruption;ServiceDisruptions> ;
+                                        :EnvironmentalFactorsInDataFailureModes ;
                                :HasDetectability :MediumToHighDetectability ;
+                               :HasHazardMode <http://www.semanticweb.org/ek279783/ontologies/2025/8/ontologySD#DataCorruption;ServiceDisruptions> ;
                                :HasLikelihood :MediumLikelihood ;
                                :HasMitigation :MaintainingStableEnvironmentalConditions ,
                                               :RedudantCoolingSystems ,
                                               :ShieldingCriticalEquipmentFromInterference ;
-                               :HasPotentialCause <http://www.semanticweb.org/ek279783/ontologies/2025/8/ontologySD#NearbyDevices;InadequateControls> ;
+                               :HasRisk <http://www.semanticweb.org/ek279783/ontologies/2025/8/ontologySD#NearbyDevices;InadequateControls> ;
                                :HasSeverity :MediumToHighSeverity ;
                                :HasDetectabilityScore 4 ;
                                :HasLikelihoodScore 6 ;
@@ -6634,7 +6611,7 @@ epsilon>5 - Weak privacy protection""" ;
 
 ###  http://www.semanticweb.org/ek279783/ontologies/2025/8/ontologySD/ExcessiveDataTransmission
 :ExcessiveDataTransmission rdf:type owl:NamedIndividual ,
-                                    :DataTransmissionAndSharingCauses .
+                                    :DataTransmissionAndSharingRisks .
 
 
 ###  http://www.semanticweb.org/ek279783/ontologies/2025/8/ontologySD/ExpertOpinion
@@ -6883,7 +6860,7 @@ data augmentation, and differential privacy.""" .
 
 ###  http://www.semanticweb.org/ek279783/ontologies/2025/8/ontologySD/FaultyAIModelsBiasedTraining
 :FaultyAIModelsBiasedTraining rdf:type owl:NamedIndividual ,
-                                       :VideoDataCauses .
+                                       :VideoDataRisks .
 
 
 ###  http://www.semanticweb.org/ek279783/ontologies/2025/8/ontologySD/FeatureImportanceDifference
@@ -7684,7 +7661,7 @@ SD.""" .
 
 ###  http://www.semanticweb.org/ek279783/ontologies/2025/8/ontologySD/IdentityTheftLossOfPatientTrust
 :IdentityTheftLossOfPatientTrust rdf:type owl:NamedIndividual ,
-                                          :PatientReportedDataConsequences .
+                                          :PatientReportedDataHazards .
 
 
 ###  http://www.semanticweb.org/ek279783/ontologies/2025/8/ontologySD/ImageAugmentation
@@ -7700,9 +7677,9 @@ SD.""" .
 ###  http://www.semanticweb.org/ek279783/ontologies/2025/8/ontologySD/ImageCorruption
 :ImageCorruption rdf:type owl:NamedIndividual ,
                           :ImageDataHazards ;
-                 :HasConsequence :UnreadableDiagnosticImagesClinicalErrors ;
+                 :HasHazardMode :UnreadableDiagnosticImagesClinicalErrors ;
                  :HasModality :ImageData ;
-                 :HasPotentialCause :TransmissionErrorsStorageIssues ;
+                 :HasRisk :TransmissionErrorsStorageIssues ;
                  :HasDetectabilityScore 8 ;
                  :HasLikelihoodScore 5 ;
                  :HasSeverityScore 8 .
@@ -7748,9 +7725,9 @@ SD.""" .
 ###  http://www.semanticweb.org/ek279783/ontologies/2025/8/ontologySD/ImageDataLoss
 :ImageDataLoss rdf:type owl:NamedIndividual ,
                         :ImageDataHazards ;
-               :HasConsequence :LostCriticalDiagnosticInformation ;
+               :HasHazardMode :LostCriticalDiagnosticInformation ;
                :HasModality :ImageData ;
-               :HasPotentialCause :InadequateBackupsStorageFailures ;
+               :HasRisk :InadequateBackupsStorageFailures ;
                :HasDetectabilityScore 3 ;
                :HasLikelihoodScore 7 ;
                :HasSeverityScore 9 .
@@ -7790,9 +7767,9 @@ SD.""" .
 ###  http://www.semanticweb.org/ek279783/ontologies/2025/8/ontologySD/InaccurateDataAnalysis
 :InaccurateDataAnalysis rdf:type owl:NamedIndividual ,
                                  :TabularDataHazards ;
-                        :HasConsequence :MisguidedDecisionsClinicalErrors ;
+                        :HasHazardMode :MisguidedDecisionsClinicalErrors ;
                         :HasModality :TabularData ;
-                        :HasPotentialCause :AlgorithmBiasesIncorrectModeling ;
+                        :HasRisk :AlgorithmBiasesIncorrectModeling ;
                         :HasDetectabilityScore 8 ;
                         :HasLikelihoodScore 6 ;
                         :HasSeverityScore 8 .
@@ -7802,13 +7779,13 @@ SD.""" .
 :InaccurateDataProcessing rdf:type owl:NamedIndividual ,
                                    :DataProcessingAndAnalysis ,
                                    :PatientReportedData ;
-                          :HasConsequence <http://www.semanticweb.org/ek279783/ontologies/2025/8/ontologySD#MisleadingClinicalInsights;PatientHarm> ;
                           :HasDetectability :LowDetectability ;
+                          :HasHazardMode <http://www.semanticweb.org/ek279783/ontologies/2025/8/ontologySD#MisleadingClinicalInsights;PatientHarm> ;
                           :HasLikelihood :MediumToHighLikelihood ;
                           :HasMitigation :ContinuousMonitoringOfDataProcessingWorkflows ,
                                          :RobustTestingAndValidationAlgorithms ,
                                          :ThoroughDocumentation ;
-                          :HasPotentialCause <http://www.semanticweb.org/ek279783/ontologies/2025/8/ontologySD#FaultyAlgorithms;SoftwareBugs> ;
+                          :HasRisk <http://www.semanticweb.org/ek279783/ontologies/2025/8/ontologySD#FaultyAlgorithms;SoftwareBugs> ;
                           :HasSeverity :HighSeverity ;
                           :HasDetectabilityScore 7 ;
                           :HasLikelihoodScore 8 ;
@@ -7821,9 +7798,9 @@ Inaccurate data processing can lead to significant misdiagnoses, incorrect treat
 ###  http://www.semanticweb.org/ek279783/ontologies/2025/8/ontologySD/InaccurateImageProcessing
 :InaccurateImageProcessing rdf:type owl:NamedIndividual ,
                                     :ImageDataHazards ;
-                           :HasConsequence :IncorrectDiagnosticsTreatmentErrors ;
+                           :HasHazardMode :IncorrectDiagnosticsTreatmentErrors ;
                            :HasModality :ImageData ;
-                           :HasPotentialCause :AlgorithmErrorsBiasedDatasets ;
+                           :HasRisk :AlgorithmErrorsBiasedDatasets ;
                            :HasDetectabilityScore 8 ;
                            :HasLikelihoodScore 5 ;
                            :HasSeverityScore 10 .
@@ -7832,9 +7809,9 @@ Inaccurate data processing can lead to significant misdiagnoses, incorrect treat
 ###  http://www.semanticweb.org/ek279783/ontologies/2025/8/ontologySD/InaccurateVideoAnalysis
 :InaccurateVideoAnalysis rdf:type owl:NamedIndividual ,
                                   :VideoDataHazards ;
-                         :HasConsequence :MisclassificationInappropriateDecisions ;
+                         :HasHazardMode :MisclassificationInappropriateDecisions ;
                          :HasModality :VideoData ;
-                         :HasPotentialCause :ModelOverfittingInadequateTraining ;
+                         :HasRisk :ModelOverfittingInadequateTraining ;
                          :HasDetectabilityScore 8 ;
                          :HasLikelihoodScore 5 ;
                          :HasSeverityScore 8 .
@@ -7842,20 +7819,20 @@ Inaccurate data processing can lead to significant misdiagnoses, incorrect treat
 
 ###  http://www.semanticweb.org/ek279783/ontologies/2025/8/ontologySD/InadequateBackupsStorageFailures
 :InadequateBackupsStorageFailures rdf:type owl:NamedIndividual ,
-                                           :ImageDataPotentialCauses .
+                                           :ImageDataPotentialRisks .
 
 
 ###  http://www.semanticweb.org/ek279783/ontologies/2025/8/ontologySD/InadequateDataBackupAndRecovery
 :InadequateDataBackupAndRecovery rdf:type owl:NamedIndividual ,
                                           :DataStorageAndManagement ,
                                           :OperationalData ;
-                                 :HasConsequence <http://www.semanticweb.org/ek279783/ontologies/2025/8/ontologySD#ExtendedDowntime;LossOfOperationalDataAndContinuity> ;
                                  :HasDetectability :MediumDetectability ;
+                                 :HasHazardMode <http://www.semanticweb.org/ek279783/ontologies/2025/8/ontologySD#ExtendedDowntime;LossOfOperationalDataAndContinuity> ;
                                  :HasLikelihood :MediumLikelihood ;
                                  :HasMitigation :AutomatedBackupSystem ,
                                                 :BackupStorageInMultipleLocations ,
                                                 :IntegrityBackups ;
-                                 :HasPotentialCause <http://www.semanticweb.org/ek279783/ontologies/2025/8/ontologySD#TechnicalFailures;InsufficientBackupFrequency> ;
+                                 :HasRisk <http://www.semanticweb.org/ek279783/ontologies/2025/8/ontologySD#TechnicalFailures;InsufficientBackupFrequency> ;
                                  :HasSeverity :HighSeverity ;
                                  :HasDetectabilityScore 5 ;
                                  :HasLikelihoodScore 5 ;
@@ -7868,12 +7845,12 @@ The failure to effectively back up and perform data recovery can result in signi
 ###  http://www.semanticweb.org/ek279783/ontologies/2025/8/ontologySD/InadequateDataNormalisation
 :InadequateDataNormalisation rdf:type owl:NamedIndividual ,
                                       :DataProcessingAndAnalysis ;
-                             :HasConsequence <http://www.semanticweb.org/ek279783/ontologies/2025/8/ontologySD#SkewedInsights;MisleadingDecisions> ;
                              :HasDetectability :LowDetectability ;
+                             :HasHazardMode <http://www.semanticweb.org/ek279783/ontologies/2025/8/ontologySD#SkewedInsights;MisleadingDecisions> ;
                              :HasLikelihood :MediumLikelihood ;
                              :HasMitigation :CarefulPreprocessingSteps ,
                                             :ConsistentDataNormalisationProtocols ;
-                             :HasPotentialCause <http://www.semanticweb.org/ek279783/ontologies/2025/8/ontologySD#InconsistentFormats;LackOfPreprocessing> ;
+                             :HasRisk <http://www.semanticweb.org/ek279783/ontologies/2025/8/ontologySD#InconsistentFormats;LackOfPreprocessing> ;
                              :HasSeverity :HighSeverity ;
                              :HasDetectabilityScore 5 ;
                              :HasLikelihoodScore 8 ;
@@ -7886,14 +7863,14 @@ Incomplete or inadequate data normalization carries a high severity rating, as i
 ###  http://www.semanticweb.org/ek279783/ontologies/2025/8/ontologySD/InadequateEncryption
 :InadequateEncryption rdf:type owl:NamedIndividual ,
                                :DataSecurityAndPrivacy ;
-                      :HasConsequence <http://www.semanticweb.org/ek279783/ontologies/2025/8/ontologySD#ExposureOfSensitiveData;IncreasedBreachRisk> ;
                       :HasDetectability :LowToMediumDetectability ;
+                      :HasHazardMode <http://www.semanticweb.org/ek279783/ontologies/2025/8/ontologySD#ExposureOfSensitiveData;IncreasedBreachRisk> ;
                       :HasLikelihood :MediumLikelihood ;
                       :HasMitigation :CrossCheckedPractises ,
                                      :CryptographicProtections ,
                                      :EncryptionAlgorithms ,
                                      :SectorSpecificRequirements ;
-                      :HasPotentialCause <http://www.semanticweb.org/ek279783/ontologies/2025/8/ontologySD#InadequateResourceAllocation;FlawedDocumentation> ;
+                      :HasRisk <http://www.semanticweb.org/ek279783/ontologies/2025/8/ontologySD#InadequateResourceAllocation;FlawedDocumentation> ;
                       :HasSeverity :HighSeverity ;
                       :RegulatedBy <http://www.semanticweb.org/ek279783/ontologies/2025/8/ontologySD#ISO/IEC27799Standard> ,
                                    <http://www.semanticweb.org/ek279783/ontologies/2025/8/ontologySD#Regulation2017/745Standard> ,
@@ -7915,7 +7892,7 @@ the data lifecycle in mobile health applications. They mentioned that data secur
 
 ###  http://www.semanticweb.org/ek279783/ontologies/2025/8/ontologySD/InappropriateClinicalDecisions
 :InappropriateClinicalDecisions rdf:type owl:NamedIndividual ,
-                                         :DataUseAndInterpretationConsequences .
+                                         :DataUseAndInterpretationHazards .
 
 
 ###  http://www.semanticweb.org/ek279783/ontologies/2025/8/ontologySD/IncidentOrBiasDiscrepancyReportsClaim
@@ -7953,20 +7930,20 @@ the data lifecycle in mobile health applications. They mentioned that data secur
 
 ###  http://www.semanticweb.org/ek279783/ontologies/2025/8/ontologySD/IncompleteClinicalDocumentation
 :IncompleteClinicalDocumentation rdf:type owl:NamedIndividual ,
-                                          :AudioDataConsequences .
+                                          :AudioDataHazards .
 
 
 ###  http://www.semanticweb.org/ek279783/ontologies/2025/8/ontologySD/IncompleteDataCollection
 :IncompleteDataCollection rdf:type owl:NamedIndividual ,
-                                   :ClinicalDataHazards ,
+                                   :ClinicalDataFailureModes ,
                                    :DataEntryAndCollection ,
                                    :PatientReportedData ;
-                          :HasConsequence <http://www.semanticweb.org/ek279783/ontologies/2025/8/ontologySD#SuboptimalCare;Mis-judgment> ;
                           :HasDetectability :LowDetectability ;
+                          :HasHazardMode <http://www.semanticweb.org/ek279783/ontologies/2025/8/ontologySD#SuboptimalCare;Mis-judgment> ;
                           :HasLikelihood :MediumToHighLikelihood ;
                           :HasMitigation :DataValidationChecks ,
                                          :RegularAudits ;
-                          :HasPotentialCause <http://www.semanticweb.org/ek279783/ontologies/2025/8/ontologySD#SystemLimitations;HumanOversight> ;
+                          :HasRisk <http://www.semanticweb.org/ek279783/ontologies/2025/8/ontologySD#SystemLimitations;HumanOversight> ;
                           :HasSeverity :HighSeverity ;
                           :HasDetectabilityScore 8 ;
                           :HasLikelihoodScore 6 ;
@@ -7979,8 +7956,8 @@ Incomplete or missing patient data, such as medical history or allergy informati
 ###  http://www.semanticweb.org/ek279783/ontologies/2025/8/ontologySD/InconsistentAudioQuality
 :InconsistentAudioQuality rdf:type owl:NamedIndividual ,
                                    :AudioDataHazards ;
-                          :HasConsequence :DiagnosticErrorsClinicalMisunderstandings ;
-                          :HasPotentialCause :RecordingIssuesCompressionArtifacts ;
+                          :HasHazardMode :DiagnosticErrorsClinicalMisunderstandings ;
+                          :HasRisk :RecordingIssuesCompressionArtifacts ;
                           :HasDetectabilityScore 7 ;
                           :HasLikelihoodScore 5 ;
                           :HasSeverityScore 7 .
@@ -7990,13 +7967,13 @@ Incomplete or missing patient data, such as medical history or allergy informati
 :InconsistentDataFormats rdf:type owl:NamedIndividual ,
                                   :DataTransmissionAndSharing ,
                                   :TextDataHazards ;
-                         :HasConsequence <http://www.semanticweb.org/ek279783/ontologies/2025/8/ontologySD#DataMisinterpretation;TreatmentDelays> ;
                          :HasDetectability :HighDetectability ;
+                         :HasHazardMode <http://www.semanticweb.org/ek279783/ontologies/2025/8/ontologySD#DataMisinterpretation;TreatmentDelays> ;
                          :HasLikelihood :HighLikelihood ;
                          :HasMitigation :MiddlewareForDataFormatConversion ,
                                         :StandardsAdoption ;
                          :HasModality :TextData ;
-                         :HasPotentialCause <http://www.semanticweb.org/ek279783/ontologies/2025/8/ontologySD#LackOfStandards;SystemVariances> ;
+                         :HasRisk <http://www.semanticweb.org/ek279783/ontologies/2025/8/ontologySD#LackOfStandards;SystemVariances> ;
                          :HasSeverity :MediumToHighSeverity ;
                          :RegulatedBy :DICOMStandard ,
                                       :HealthLevel7FHIRStandard ;
@@ -8012,12 +7989,12 @@ The detectability of inconsistent data formats is often high, as the tools for d
 ###  http://www.semanticweb.org/ek279783/ontologies/2025/8/ontologySD/InconsistentDataLabeling
 :InconsistentDataLabeling rdf:type owl:NamedIndividual ,
                                    :DataProcessingAndAnalysis ;
-                          :HasConsequence <http://www.semanticweb.org/ek279783/ontologies/2025/8/ontologySD#ModelMisclassification;ReducedAccuracy> ;
                           :HasDetectability :MediumDetectability ;
+                          :HasHazardMode <http://www.semanticweb.org/ek279783/ontologies/2025/8/ontologySD#ModelMisclassification;ReducedAccuracy> ;
                           :HasLikelihood :MediumLikelihood ;
                           :HasMitigation :QualityChecksImplementation ,
                                          :StandardizedDataLabelingProcessesDevelopment ;
-                          :HasPotentialCause <http://www.semanticweb.org/ek279783/ontologies/2025/8/ontologySD#ManualLabelling;FlawedTools> ;
+                          :HasRisk <http://www.semanticweb.org/ek279783/ontologies/2025/8/ontologySD#ManualLabelling;FlawedTools> ;
                           :HasSeverity :MediumToHighSeverity ;
                           :HasDetectabilityScore 6 ;
                           :HasLikelihoodScore 5 ;
@@ -8030,13 +8007,13 @@ Inconsistent labeling of healthcare data, particularly during the training of ma
 ###  http://www.semanticweb.org/ek279783/ontologies/2025/8/ontologySD/InconsistentInterpretationsAndDataDrift
 :InconsistentInterpretationsAndDataDrift rdf:type owl:NamedIndividual ,
                                                   :DataUseAndInterpretation ;
-                                         :HasConsequence <http://www.semanticweb.org/ek279783/ontologies/2025/8/ontologySD#InconsistentCare;PotentialErrors> ;
                                          :HasDetectability :LowToMediumDetectability ;
+                                         :HasHazardMode <http://www.semanticweb.org/ek279783/ontologies/2025/8/ontologySD#InconsistentCare;PotentialErrors> ;
                                          :HasLikelihood :MediumLikelihood ;
                                          :HasMitigation :ImplementingPeerReviewSystems ,
                                                         :RegularUpdatedAndTraining ,
                                                         :StandardizedGuidelines ;
-                                         :HasPotentialCause <http://www.semanticweb.org/ek279783/ontologies/2025/8/ontologySD#AmbiguousGuidelines;EvolvingPractices> ;
+                                         :HasRisk <http://www.semanticweb.org/ek279783/ontologies/2025/8/ontologySD#AmbiguousGuidelines;EvolvingPractices> ;
                                          :HasSeverity :HighSeverity ;
                                          :HasDetectabilityScore 4 ;
                                          :HasLikelihoodScore 6 ;
@@ -8049,9 +8026,9 @@ Inconsistent interpretations can significantly impact patient care through error
 ###  http://www.semanticweb.org/ek279783/ontologies/2025/8/ontologySD/InconsistentLabelling
 :InconsistentLabelling rdf:type owl:NamedIndividual ,
                                 :ImageDataHazards ;
-                       :HasConsequence :MisclassificationDiagnosticConfusion ;
+                       :HasHazardMode :MisclassificationDiagnosticConfusion ;
                        :HasModality :ImageData ;
-                       :HasPotentialCause :ManualErrorsInadequateStandards ;
+                       :HasRisk :ManualErrorsInadequateStandards ;
                        :HasDetectabilityScore 5 ;
                        :HasLikelihoodScore 6 ;
                        :HasSeverityScore 7 .
@@ -8066,11 +8043,11 @@ Inconsistent interpretations can significantly impact patient care through error
 ###  http://www.semanticweb.org/ek279783/ontologies/2025/8/ontologySD/IncorrectDataEntry
 :IncorrectDataEntry rdf:type owl:NamedIndividual ,
                              :DataEntryAndCollection ;
-                    :HasConsequence <http://www.semanticweb.org/ek279783/ontologies/2025/8/ontologySD#Misdiagnoses;IncorrectTreatmentPlans> ;
+                    :HasHazardMode <http://www.semanticweb.org/ek279783/ontologies/2025/8/ontologySD#Misdiagnoses;IncorrectTreatmentPlans> ;
                     :HasLikelihood :MediumLikelihood ;
                     :HasMitigation :AutomatedDataCapture ,
                                    :ErrorCheckingMechanisms ;
-                    :HasPotentialCause <http://www.semanticweb.org/ek279783/ontologies/2025/8/ontologySD#ManualErrors;SystemMalfunctions> ;
+                    :HasRisk <http://www.semanticweb.org/ek279783/ontologies/2025/8/ontologySD#ManualErrors;SystemMalfunctions> ;
                     :HasSeverity :HighSeverity ;
                     :HasDetectabilityScore 5 ;
                     :HasLikelihoodScore 6 ;
@@ -8083,17 +8060,17 @@ Incorrect data entry is a significant concern in healthcare, particularly in sys
 
 ###  http://www.semanticweb.org/ek279783/ontologies/2025/8/ontologySD/IncorrectDiagnosticsTreatmentErrors
 :IncorrectDiagnosticsTreatmentErrors rdf:type owl:NamedIndividual ,
-                                              :ImageDataConsequences .
+                                              :ImageDataHazards .
 
 
 ###  http://www.semanticweb.org/ek279783/ontologies/2025/8/ontologySD/IncorrectPatientRecordsClinicalErrors
 :IncorrectPatientRecordsClinicalErrors rdf:type owl:NamedIndividual ,
-                                                :TabularDataConsequences .
+                                                :TabularDataHazards .
 
 
 ###  http://www.semanticweb.org/ek279783/ontologies/2025/8/ontologySD/IncreasedOperationalCostsConfusion
 :IncreasedOperationalCostsConfusion rdf:type owl:NamedIndividual ,
-                                             :TabularDataConsequences .
+                                             :TabularDataHazards .
 
 
 ###  http://www.semanticweb.org/ek279783/ontologies/2025/8/ontologySD/IndirectIdentifiers
@@ -8121,13 +8098,13 @@ Incorrect data entry is a significant concern in healthcare, particularly in sys
 ###  http://www.semanticweb.org/ek279783/ontologies/2025/8/ontologySD/InformationOverload
 :InformationOverload rdf:type owl:NamedIndividual ,
                               :DataUseAndInterpretation ;
-                     :HasConsequence <http://www.semanticweb.org/ek279783/ontologies/2025/8/ontologySD#DecisionImmobility;MissedCriticalInformation> ;
                      :HasDetectability :MediumDetectability ;
+                     :HasHazardMode <http://www.semanticweb.org/ek279783/ontologies/2025/8/ontologySD#DecisionImmobility;MissedCriticalInformation> ;
                      :HasLikelihood :HighLikelihood ;
                      :HasMitigation :CustomizableDashboards ,
                                     :ImplementingDataSummarisationTools ,
                                     :TrainingOnEffectiveDataManagement ;
-                     :HasPotentialCause <http://www.semanticweb.org/ek279783/ontologies/2025/8/ontologySD#ExcessiveData;PoorFilteringTools> ;
+                     :HasRisk <http://www.semanticweb.org/ek279783/ontologies/2025/8/ontologySD#ExcessiveData;PoorFilteringTools> ;
                      :HasSeverity :HighSeverity ;
                      :HasDetectabilityScore 5 ;
                      :HasLikelihoodScore 9 ;
@@ -8156,7 +8133,7 @@ Information overload can lead to critical information being overlooked, potentia
 
 ###  http://www.semanticweb.org/ek279783/ontologies/2025/8/ontologySD/InsiderThreatsWeakEncryption
 :InsiderThreatsWeakEncryption rdf:type owl:NamedIndividual ,
-                                       :PatientReportedDataCauses .
+                                       :PatientReportedDataRisks .
 
 
 ###  http://www.semanticweb.org/ek279783/ontologies/2025/8/ontologySD/InstanceNormalisation
@@ -8211,15 +8188,15 @@ Information overload can lead to critical information being overlooked, potentia
 
 ###  http://www.semanticweb.org/ek279783/ontologies/2025/8/ontologySD/InterruptedPatientMonitoringDelayedInterventions
 :InterruptedPatientMonitoringDelayedInterventions rdf:type owl:NamedIndividual ,
-                                                           :VideoDataConsequences .
+                                                           :VideoDataHazards .
 
 
 ###  http://www.semanticweb.org/ek279783/ontologies/2025/8/ontologySD/InterruptionInVideoFeed
 :InterruptionInVideoFeed rdf:type owl:NamedIndividual ,
                                   :VideoDataHazards ;
-                         :HasConsequence :InterruptedPatientMonitoringDelayedInterventions ;
+                         :HasHazardMode :InterruptedPatientMonitoringDelayedInterventions ;
                          :HasModality :VideoData ;
-                         :HasPotentialCause :NetworkInstabilityEquipmentMalfunctions ;
+                         :HasRisk :NetworkInstabilityEquipmentMalfunctions ;
                          :HasDetectabilityScore 4 ;
                          :HasLikelihoodScore 5 ;
                          :HasSeverityScore 7 .
@@ -8273,9 +8250,9 @@ JS divergence is also widely used in training and assessing generative models.""
 
 ###  http://www.semanticweb.org/ek279783/ontologies/2025/8/ontologySD/KAnonymity
 :KAnonymity rdf:type owl:NamedIndividual ,
-                     :PrivacyModels ,
                      :MetricThreshold ,
-                     :PrivacyAgainstInference ;
+                     :PrivacyAgainstInference ,
+                     :PrivacyModels ;
             :AttributeCategory :Quasi-Identifiers ;
             :HasModality :TabularData ,
                          :TimeSeriesData ;
@@ -8437,7 +8414,7 @@ l>=3-5 - Adequate protection""" .
 
 ###  http://www.semanticweb.org/ek279783/ontologies/2025/8/ontologySD/LackOfStandardizedGuidelines
 :LackOfStandardizedGuidelines rdf:type owl:NamedIndividual ,
-                                       :DataEntryAndCollectionCauses .
+                                       :DataEntryAndCollectionRisks .
 
 
 ###  http://www.semanticweb.org/ek279783/ontologies/2025/8/ontologySD/Langevin
@@ -8458,12 +8435,12 @@ l>=3-5 - Adequate protection""" .
 ###  http://www.semanticweb.org/ek279783/ontologies/2025/8/ontologySD/LatencyInDataTransmission
 :LatencyInDataTransmission rdf:type owl:NamedIndividual ,
                                     :DataTransmissionAndSharing ;
-                           :HasConsequence <http://www.semanticweb.org/ek279783/ontologies/2025/8/ontologySD#DelayedDecisions;ImpactedCare> ;
                            :HasDetectability :HighDetectability ;
+                           :HasHazardMode <http://www.semanticweb.org/ek279783/ontologies/2025/8/ontologySD#DelayedDecisions;ImpactedCare> ;
                            :HasMitigation :OptimizingNetworkInfrastructure ,
                                           :RealTimeDataProcessing ,
                                           :UtilizingEdgeComputing ;
-                           :HasPotentialCause <http://www.semanticweb.org/ek279783/ontologies/2025/8/ontologySD#NetworkCongestion;BandwidthLimitations> ;
+                           :HasRisk <http://www.semanticweb.org/ek279783/ontologies/2025/8/ontologySD#NetworkCongestion;BandwidthLimitations> ;
                            :HasSeverity :MediumSeverity ;
                            :HasDetectabilityScore 3 ;
                            :HasLikelihoodScore 5 ;
@@ -8654,12 +8631,12 @@ Delays in the transmission of healthcare data can impact the timeliness and effi
 
 ###  http://www.semanticweb.org/ek279783/ontologies/2025/8/ontologySD/LossOfCriticalClinicalInformation
 :LossOfCriticalClinicalInformation rdf:type owl:NamedIndividual ,
-                                            :AudioDataConsequences .
+                                            :AudioDataHazards .
 
 
 ###  http://www.semanticweb.org/ek279783/ontologies/2025/8/ontologySD/LostCriticalDiagnosticInformation
 :LostCriticalDiagnosticInformation rdf:type owl:NamedIndividual ,
-                                            :ImageDataConsequences .
+                                            :ImageDataHazards .
 
 
 ###  http://www.semanticweb.org/ek279783/ontologies/2025/8/ontologySD/LowDetectability
@@ -8798,12 +8775,12 @@ MMAEs can handle various data types, including images, text audio, and video, an
 
 ###  http://www.semanticweb.org/ek279783/ontologies/2025/8/ontologySD/ManualErrorsInadequateStandards
 :ManualErrorsInadequateStandards rdf:type owl:NamedIndividual ,
-                                          :ImageDataPotentialCauses .
+                                          :ImageDataPotentialRisks .
 
 
 ###  http://www.semanticweb.org/ek279783/ontologies/2025/8/ontologySD/ManualInputsPoorValidation
 :ManualInputsPoorValidation rdf:type owl:NamedIndividual ,
-                                     :TabularDataCauses .
+                                     :TabularDataRisks .
 
 
 ###  http://www.semanticweb.org/ek279783/ontologies/2025/8/ontologySD/MarkovChain
@@ -9049,29 +9026,29 @@ Researchers from Google recently introduced this model, which is a new image syn
 
 ###  http://www.semanticweb.org/ek279783/ontologies/2025/8/ontologySD/MisclassificationDiagnosticConfusion
 :MisclassificationDiagnosticConfusion rdf:type owl:NamedIndividual ,
-                                               :ImageDataConsequences .
+                                               :ImageDataHazards .
 
 
 ###  http://www.semanticweb.org/ek279783/ontologies/2025/8/ontologySD/MisclassificationInappropriateDecisions
 :MisclassificationInappropriateDecisions rdf:type owl:NamedIndividual ,
-                                                  :VideoDataConsequences .
+                                                  :VideoDataHazards .
 
 
 ###  http://www.semanticweb.org/ek279783/ontologies/2025/8/ontologySD/MisguidedDecisionsClinicalErrors
 :MisguidedDecisionsClinicalErrors rdf:type owl:NamedIndividual ,
-                                           :TabularDataConsequences .
+                                           :TabularDataHazards .
 
 
 ###  http://www.semanticweb.org/ek279783/ontologies/2025/8/ontologySD/MisinterpretationAndMisrepresentationOfData
 :MisinterpretationAndMisrepresentationOfData rdf:type owl:NamedIndividual ,
                                                       :DataUseAndInterpretation ;
-                                             :HasConsequence <http://www.semanticweb.org/ek279783/ontologies/2025/8/ontologySD#IncorrectClinicalDecisions;PatientHarm> ;
                                              :HasDetectability :LowToMediumDetectability ;
+                                             :HasHazardMode <http://www.semanticweb.org/ek279783/ontologies/2025/8/ontologySD#IncorrectClinicalDecisions;PatientHarm> ;
                                              :HasLikelihood :MediumLikelihood ;
                                              :HasMitigation :DataEnhancement ,
                                                             :DecisionSupportTools ,
                                                             :StandardizedDataPresentationProtocols ;
-                                             :HasPotentialCause <http://www.semanticweb.org/ek279783/ontologies/2025/8/ontologySD#ComplexDataStructures;LackOfTraining> ;
+                                             :HasRisk <http://www.semanticweb.org/ek279783/ontologies/2025/8/ontologySD#ComplexDataStructures;LackOfTraining> ;
                                              :HasSeverity :HighSeverity ;
                                              :HasDetectabilityScore 7 ;
                                              :HasLikelihoodScore 6 ;
@@ -9083,7 +9060,7 @@ Misinterpretation of data can lead to incorrect clinical decisions, potentially 
 
 ###  http://www.semanticweb.org/ek279783/ontologies/2025/8/ontologySD/MisinterpretationClinicalErrors
 :MisinterpretationClinicalErrors rdf:type owl:NamedIndividual ,
-                                          :VideoDataConsequences .
+                                          :VideoDataHazards .
 
 
 ###  http://www.semanticweb.org/ek279783/ontologies/2025/8/ontologySD/MitigationStepstoAvertRepeatedFailuresJustification
@@ -9142,7 +9119,7 @@ Misinterpretation of data can lead to incorrect clinical decisions, potentially 
 
 ###  http://www.semanticweb.org/ek279783/ontologies/2025/8/ontologySD/ModelOverfittingInadequateTraining
 :ModelOverfittingInadequateTraining rdf:type owl:NamedIndividual ,
-                                             :VideoDataCauses .
+                                             :VideoDataRisks .
 
 
 ###  http://www.semanticweb.org/ek279783/ontologies/2025/8/ontologySD/ModelRealibilitySustainabilityJustification
@@ -9381,12 +9358,12 @@ Misinterpretation of data can lead to incorrect clinical decisions, potentially 
 
 ###  http://www.semanticweb.org/ek279783/ontologies/2025/8/ontologySD/NetworkInstabilityEquipmentMalfunctions
 :NetworkInstabilityEquipmentMalfunctions rdf:type owl:NamedIndividual ,
-                                                  :VideoDataCauses .
+                                                  :VideoDataRisks .
 
 
 ###  http://www.semanticweb.org/ek279783/ontologies/2025/8/ontologySD/NetworkInterruptionsTechnicalFailures
 :NetworkInterruptionsTechnicalFailures rdf:type owl:NamedIndividual ,
-                                                :AudioDataCauses .
+                                                :AudioDataRisks .
 
 
 ###  http://www.semanticweb.org/ek279783/ontologies/2025/8/ontologySD/NetworkTrafficShaping
@@ -9569,7 +9546,7 @@ Misinterpretation of data can lead to incorrect clinical decisions, potentially 
 
 ###  http://www.semanticweb.org/ek279783/ontologies/2025/8/ontologySD/OutdatedOrConflictingInformation
 :OutdatedOrConflictingInformation rdf:type owl:NamedIndividual ,
-                                           :DataTransmissionAndSharingConsequences .
+                                           :DataTransmissionAndSharingHazards .
 
 
 ###  http://www.semanticweb.org/ek279783/ontologies/2025/8/ontologySD/OutputExtremesPreventionJustification
@@ -9581,13 +9558,13 @@ Misinterpretation of data can lead to incorrect clinical decisions, potentially 
 ###  http://www.semanticweb.org/ek279783/ontologies/2025/8/ontologySD/OverfittingAndUnderfittingOfModels
 :OverfittingAndUnderfittingOfModels rdf:type owl:NamedIndividual ,
                                              :DataProcessingAndAnalysis ;
-                                    :HasConsequence <http://www.semanticweb.org/ek279783/ontologies/2025/8/ontologySD#UnreliablePredictions;PatientHarm> ;
                                     :HasDetectability :MediumDetectability ;
+                                    :HasHazardMode <http://www.semanticweb.org/ek279783/ontologies/2025/8/ontologySD#UnreliablePredictions;PatientHarm> ;
                                     :HasLikelihood :MediumToHighLikelihood ;
                                     :HasMitigation :BalancesDatasetsEmployment ,
                                                    :CrossValidationTechniques ,
                                                    :SimplifyingModels ;
-                                    :HasPotentialCause <http://www.semanticweb.org/ek279783/ontologies/2025/8/ontologySD#ComplexModels;InsufficientData> ;
+                                    :HasRisk <http://www.semanticweb.org/ek279783/ontologies/2025/8/ontologySD#ComplexModels;InsufficientData> ;
                                     :HasSeverity :HighSeverity ;
                                     :HasDetectabilityScore 6 ;
                                     :HasLikelihoodScore 7 ;
@@ -9600,13 +9577,13 @@ Overfitting and underfitting can lead to poor generalization of machine learning
 ###  http://www.semanticweb.org/ek279783/ontologies/2025/8/ontologySD/OverrelianceOnData
 :OverrelianceOnData rdf:type owl:NamedIndividual ,
                              :DataUseAndInterpretation ;
-                    :HasConsequence :InappropriateClinicalDecisions ;
                     :HasDetectability :MediumDetectability ;
+                    :HasHazardMode :InappropriateClinicalDecisions ;
                     :HasLikelihood :HighLikelihood ;
                     :HasMitigation :BalancedDecisionMaking ,
                                    :ClinicalDecisionSupportSystems ,
                                    :TechnicalSupportAndEducation ;
-                    :HasPotentialCause <http://www.semanticweb.org/ek279783/ontologies/2025/8/ontologySD#HighConfidenceInAlgorithms;LackOfAlternatives> ;
+                    :HasRisk <http://www.semanticweb.org/ek279783/ontologies/2025/8/ontologySD#HighConfidenceInAlgorithms;LackOfAlternatives> ;
                     :HasSeverity :MediumToHighSeverity ;
                     :HasDetectabilityScore 6 ;
                     :HasLikelihoodScore 9 ;
@@ -10102,13 +10079,13 @@ In its analytical framework, the ICO observes that PETs contribute to compliance
 ###  http://www.semanticweb.org/ek279783/ontologies/2025/8/ontologySD/PhishingAndSocialEngineering
 :PhishingAndSocialEngineering rdf:type owl:NamedIndividual ,
                                        :DataSecurityAndPrivacy ;
-                              :HasConsequence <http://www.semanticweb.org/ek279783/ontologies/2025/8/ontologySD#CompromisedPatientData;ServiceDisruption> ;
                               :HasDetectability :LowDetectability ;
+                              :HasHazardMode <http://www.semanticweb.org/ek279783/ontologies/2025/8/ontologySD#CompromisedPatientData;ServiceDisruption> ;
                               :HasLikelihood :HighLikelihood ;
                               :HasMitigation :AntiPhishingTechnologies ,
                                              :IncidentResponsePlans ,
                                              :MFAMethods ;
-                              :HasPotentialCause <http://www.semanticweb.org/ek279783/ontologies/2025/8/ontologySD#LackOfUserAwareness;PoorEmailSecurity> ;
+                              :HasRisk <http://www.semanticweb.org/ek279783/ontologies/2025/8/ontologySD#LackOfUserAwareness;PoorEmailSecurity> ;
                               :HasSeverity :HighSeverity ;
                               :HasDetectabilityScore 9 ;
                               :HasLikelihoodScore 9 ;
@@ -10122,14 +10099,14 @@ In its analytical framework, the ICO observes that PETs contribute to compliance
 
 ###  http://www.semanticweb.org/ek279783/ontologies/2025/8/ontologySD/PhysicalSecurityBreaches
 :PhysicalSecurityBreaches rdf:type owl:NamedIndividual ,
-                                   :EnvironmentalFactorsInDataHazards ;
-                          :HasConsequence <http://www.semanticweb.org/ek279783/ontologies/2025/8/ontologySD#DataTheft;SystemCompromise> ;
+                                   :EnvironmentalFactorsInDataFailureModes ;
                           :HasDetectability :MediumDetectability ;
+                          :HasHazardMode <http://www.semanticweb.org/ek279783/ontologies/2025/8/ontologySD#DataTheft;SystemCompromise> ;
                           :HasLikelihood :MediumLikelihood ;
                           :HasMitigation :EnhancingPhysicalSecurity ,
                                          :RegularSecurityAudits ,
                                          :SecureStorage ;
-                          :HasPotentialCause <http://www.semanticweb.org/ek279783/ontologies/2025/8/ontologySD#InadequateSurveillance;LackOfControls> ;
+                          :HasRisk <http://www.semanticweb.org/ek279783/ontologies/2025/8/ontologySD#InadequateSurveillance;LackOfControls> ;
                           :HasSeverity :HighSeverity ;
                           :HasDetectabilityScore 6 ;
                           :HasLikelihoodScore 6 ;
@@ -10181,7 +10158,7 @@ Physical breaches, such as unauthorized access to secure areas within hospitals,
 
 ###  http://www.semanticweb.org/ek279783/ontologies/2025/8/ontologySD/PoorIntegrationManualProcesses
 :PoorIntegrationManualProcesses rdf:type owl:NamedIndividual ,
-                                         :TabularDataCauses .
+                                         :TabularDataRisks .
 
 
 ###  http://www.semanticweb.org/ek279783/ontologies/2025/8/ontologySD/PopulationOrSampleBasedAttackAssumptions
@@ -10303,13 +10280,13 @@ The Privacy Act includes 13 Australian Privacy Principles (APPs), which apply to
 ###  http://www.semanticweb.org/ek279783/ontologies/2025/8/ontologySD/PrivacyAndSecurityConcernsDuringDataCollection
 :PrivacyAndSecurityConcernsDuringDataCollection rdf:type owl:NamedIndividual ,
                                                          :DataEntryAndCollection ;
-                                                :HasConsequence <http://www.semanticweb.org/ek279783/ontologies/2025/8/ontologySD#LossOfTrust;LegalRepercussions> ;
                                                 :HasDetectability :LowDetectability ;
+                                                :HasHazardMode <http://www.semanticweb.org/ek279783/ontologies/2025/8/ontologySD#LossOfTrust;LegalRepercussions> ;
                                                 :HasLikelihood :HighLikelihood ;
                                                 :HasMitigation :ConductingBackgroundChecks ,
                                                                :DataLossPreventionTools ,
                                                                :RegularlyUpdatingAccessControls ;
-                                                :HasPotentialCause <http://www.semanticweb.org/ek279783/ontologies/2025/8/ontologySD#UnauthorizedAccess;InadequateSecurityMeasures> ;
+                                                :HasRisk <http://www.semanticweb.org/ek279783/ontologies/2025/8/ontologySD#UnauthorizedAccess;InadequateSecurityMeasures> ;
                                                 :HasSeverity :HighSeverity ;
                                                 :HasDetectabilityScore 9 ;
                                                 :HasLikelihoodScore 8 ;
@@ -10322,10 +10299,10 @@ The impact of breaches in privacy and security can be very high, leading to loss
 ###  http://www.semanticweb.org/ek279783/ontologies/2025/8/ontologySD/PrivacyBreaches
 :PrivacyBreaches rdf:type owl:NamedIndividual ,
                           :PatientReportedData ;
-                 :HasConsequence :IdentityTheftLossOfPatientTrust ;
                  :HasDetectability :LowDetectability ;
+                 :HasHazardMode :IdentityTheftLossOfPatientTrust ;
                  :HasLikelihood :HighLikelihood ;
-                 :HasPotentialCause :InsiderThreatsWeakEncryption ;
+                 :HasRisk :InsiderThreatsWeakEncryption ;
                  :HasDetectabilityScore 8 ;
                  :HasLikelihoodScore 8 ;
                  :HasSeverityScore 10 .
@@ -10698,13 +10675,13 @@ The impact of breaches in privacy and security can be very high, leading to loss
 ###  http://www.semanticweb.org/ek279783/ontologies/2025/8/ontologySD/RealTimeDataProcessingFailures
 :RealTimeDataProcessingFailures rdf:type owl:NamedIndividual ,
                                          :DataProcessingAndAnalysis ;
-                                :HasConsequence <http://www.semanticweb.org/ek279783/ontologies/2025/8/ontologySD#DelayedInterventions;IncorrectAlerts> ;
                                 :HasDetectability :LowDetectability ;
+                                :HasHazardMode <http://www.semanticweb.org/ek279783/ontologies/2025/8/ontologySD#DelayedInterventions;IncorrectAlerts> ;
                                 :HasLikelihood :MediumToHighLikelihood ;
                                 :HasMitigation :ErrorHandlingMechanismsImprovement ,
                                                :RobustSystemInteroperability ,
                                                :SystemPerformanceOptimisation ;
-                                :HasPotentialCause <http://www.semanticweb.org/ek279783/ontologies/2025/8/ontologySD#SystemLatency;OverloadedSystems> ;
+                                :HasRisk <http://www.semanticweb.org/ek279783/ontologies/2025/8/ontologySD#SystemLatency;OverloadedSystems> ;
                                 :HasSeverity :HighSeverity ;
                                 :HasDetectabilityScore 7 ;
                                 :HasLikelihoodScore 9 ;
@@ -10761,7 +10738,7 @@ These failures are considered highly severe because they can immediately threate
 
 ###  http://www.semanticweb.org/ek279783/ontologies/2025/8/ontologySD/RecordingIssuesCompressionArtifacts
 :RecordingIssuesCompressionArtifacts rdf:type owl:NamedIndividual ,
-                                              :AudioDataCauses .
+                                              :AudioDataRisks .
 
 
 ###  http://www.semanticweb.org/ek279783/ontologies/2025/8/ontologySD/RecoveryTestingLog
@@ -10796,13 +10773,13 @@ These failures are considered highly severe because they can immediately threate
 :RedundantOrDuplicateDataEntry rdf:type owl:NamedIndividual ,
                                         :DataEntryAndCollection ,
                                         :TextDataHazards ;
-                               :HasConsequence <http://www.semanticweb.org/ek279783/ontologies/2025/8/ontologySD#MedicalErrors;IncreasedHealthcareCosts> ;
+                               :HasHazardMode <http://www.semanticweb.org/ek279783/ontologies/2025/8/ontologySD#MedicalErrors;IncreasedHealthcareCosts> ;
                                :HasLikelihood :HighLikelihood ;
                                :HasMitigation :CentralizedDataManagementSystems ,
                                               :RegularAudits ;
                                :HasModality :DeduplicationAlgorithmsImplementation ,
                                             :TextData ;
-                               :HasPotentialCause <http://www.semanticweb.org/ek279783/ontologies/2025/8/ontologySD#SystemAnomalies;ManualRepetition> ;
+                               :HasRisk <http://www.semanticweb.org/ek279783/ontologies/2025/8/ontologySD#SystemAnomalies;ManualRepetition> ;
                                :HasSeverity :MediumSeverity ;
                                :HasDetectabilityScore 3 ;
                                :HasLikelihoodScore 7 ;
@@ -11590,7 +11567,7 @@ medical imaging.""" .
 
 ###  http://www.semanticweb.org/ek279783/ontologies/2025/8/ontologySD/SignificantClinicalErrors
 :SignificantClinicalErrors rdf:type owl:NamedIndividual ,
-                                    :DataEntryAndCollectionConsequences .
+                                    :DataEntryAndCollectionHazards .
 
 
 ###  http://www.semanticweb.org/ek279783/ontologies/2025/8/ontologySD/SimplifyingModels
@@ -11776,7 +11753,7 @@ the classification model uses a learning rate of 0.001 and a batch size of 64. T
 
 ###  http://www.semanticweb.org/ek279783/ontologies/2025/8/ontologySD/Storage-NetworkFailures
 :Storage-NetworkFailures rdf:type owl:NamedIndividual ,
-                                  :VideoDataCauses .
+                                  :VideoDataRisks .
 
 
 ###  http://www.semanticweb.org/ek279783/ontologies/2025/8/ontologySD/StorageCostReductionJustification
@@ -11879,14 +11856,14 @@ outputs. The model’s design and training procedures are meticulously documente
 
 ###  http://www.semanticweb.org/ek279783/ontologies/2025/8/ontologySD/SupplyChainAndThird-PartyRisks
 :SupplyChainAndThird-PartyRisks rdf:type owl:NamedIndividual ,
-                                         :EnvironmentalFactorsInDataHazards ;
-                                :HasConsequence <http://www.semanticweb.org/ek279783/ontologies/2025/8/ontologySD#SystemOutages;CompromisedDataSecurity> ;
+                                         :EnvironmentalFactorsInDataFailureModes ;
                                 :HasDetectability :MediumDetectability ;
+                                :HasHazardMode <http://www.semanticweb.org/ek279783/ontologies/2025/8/ontologySD#SystemOutages;CompromisedDataSecurity> ;
                                 :HasLikelihood :HighLikelihood ;
                                 :HasMitigation :DiversifyingSuppliers ,
                                                :IncorporatingContingencyPlans ,
                                                :ThirdPartyCompliance ;
-                                :HasPotentialCause <http://www.semanticweb.org/ek279783/ontologies/2025/8/ontologySD#VendorFailures;LackOfCompliance> ;
+                                :HasRisk <http://www.semanticweb.org/ek279783/ontologies/2025/8/ontologySD#VendorFailures;LackOfCompliance> ;
                                 :HasSeverity :HighSeverity ;
                                 :HasDetectabilityScore 5 ;
                                 :HasLikelihoodScore 8 ;
@@ -12002,21 +11979,21 @@ Models (GMM) for transforming non-Gaussian continuous variables into Gaussian di
 
 ###  http://www.semanticweb.org/ek279783/ontologies/2025/8/ontologySD/SystemCrashesInadequateStorage
 :SystemCrashesInadequateStorage rdf:type owl:NamedIndividual ,
-                                         :AudioDataCauses .
+                                         :AudioDataRisks .
 
 
 ###  http://www.semanticweb.org/ek279783/ontologies/2025/8/ontologySD/SystemDesignAndUserInterfaceIssuesHazard
 :SystemDesignAndUserInterfaceIssuesHazard rdf:type owl:NamedIndividual ,
                                                    :DataEntryAndCollection ;
-                                          :HasConsequence <http://www.semanticweb.org/ek279783/ontologies/2025/8/ontologySD#IncreasedEntryErrors;UserDissatisfaction> ;
                                           :HasDetectability :LowDetectability ;
+                                          :HasHazardMode <http://www.semanticweb.org/ek279783/ontologies/2025/8/ontologySD#IncreasedEntryErrors;UserDissatisfaction> ;
                                           :HasLikelihood :MediumLikelihood ;
                                           :HasMitigation :HumanFactorsIntegration ,
                                                          :RiskMeasuresForUsability ,
                                                          :UsabilityEngineeringProcessIntegration ,
                                                          :UseRelatedRiskAnalysis ,
                                                          :UserErrorAnalysis ;
-                                          :HasPotentialCause <http://www.semanticweb.org/ek279783/ontologies/2025/8/ontologySD#PoorlyDesignedInterfaces;LackOfFeedback> ;
+                                          :HasRisk <http://www.semanticweb.org/ek279783/ontologies/2025/8/ontologySD#PoorlyDesignedInterfaces;LackOfFeedback> ;
                                           :HasSeverity :HighSeverity ;
                                           :RegulatedBy <http://www.semanticweb.org/ek279783/ontologies/2025/8/ontologySD#ISO/IEC62366-1:2015Standard> ;
                                           :HasDetectabilityScore 7 ;
@@ -12029,14 +12006,14 @@ The system design significantly impacts everything in healthcare settings, from 
 
 ###  http://www.semanticweb.org/ek279783/ontologies/2025/8/ontologySD/SystemOutages
 :SystemOutages rdf:type owl:NamedIndividual ,
-                        :EnvironmentalFactorsInDataHazards ;
-               :HasConsequence <http://www.semanticweb.org/ek279783/ontologies/2025/8/ontologySD#DataCorruption;ServiceDisruptions> ;
+                        :EnvironmentalFactorsInDataFailureModes ;
                :HasDetectability :HighDetectability ;
+               :HasHazardMode <http://www.semanticweb.org/ek279783/ontologies/2025/8/ontologySD#DataCorruption;ServiceDisruptions> ;
                :HasLikelihood :MediumLikelihood ;
                :HasMitigation :ComprehensiveDisasterRecoveryProtocols ,
                               :RegularServerMaintenance ,
                               :UninterruptiblePowerSupplies-UPS ;
-               :HasPotentialCause <http://www.semanticweb.org/ek279783/ontologies/2025/8/ontologySD#PowerFailures;ServerCrashes> ;
+               :HasRisk <http://www.semanticweb.org/ek279783/ontologies/2025/8/ontologySD#PowerFailures;ServerCrashes> ;
                :HasSeverity :HighSeverity ;
                :HasDetectabilityScore 2 ;
                :HasLikelihoodScore 5 ;
@@ -12656,7 +12633,7 @@ Information, correlation) andthe 2 privacy metrics (Membership inference and ide
 
 ###  http://www.semanticweb.org/ek279783/ontologies/2025/8/ontologySD/TransmissionErrorsStorageIssues
 :TransmissionErrorsStorageIssues rdf:type owl:NamedIndividual ,
-                                          :ImageDataPotentialCauses .
+                                          :ImageDataPotentialRisks .
 
 
 ###  http://www.semanticweb.org/ek279783/ontologies/2025/8/ontologySD/TransparencyAndTraceabilityOfPrivacyDecisions
@@ -12723,15 +12700,15 @@ Information, correlation) andthe 2 privacy metrics (Membership inference and ide
 
 ###  http://www.semanticweb.org/ek279783/ontologies/2025/8/ontologySD/UnauthorizedAccess
 :UnauthorizedAccess rdf:type owl:NamedIndividual ,
-                             :ClinicalDataHazards ,
+                             :ClinicalDataFailureModes ,
                              :DataSecurityAndPrivacy ;
-                    :HasConsequence <http://www.semanticweb.org/ek279783/ontologies/2025/8/ontologySD#BreachesOfPatientConfidentiality;IdentityTheft> ;
                     :HasDetectability :MediumDetectability ;
+                    :HasHazardMode <http://www.semanticweb.org/ek279783/ontologies/2025/8/ontologySD#BreachesOfPatientConfidentiality;IdentityTheft> ;
                     :HasLikelihood :HighLikelihood ;
                     :HasMitigation :ConductingBackgroundChecks ,
                                    :MultiFactorAuthentication-MFA ,
                                    :RegularlyUpdatingAccessControls ;
-                    :HasPotentialCause <http://www.semanticweb.org/ek279783/ontologies/2025/8/ontologySD#WeakPasswords;InadequateAccessControls> ;
+                    :HasRisk <http://www.semanticweb.org/ek279783/ontologies/2025/8/ontologySD#WeakPasswords;InadequateAccessControls> ;
                     :HasSeverity :HighSeverity ;
                     :HasDetectabilityScore 6 ;
                     :HasLikelihoodScore 8 ;
@@ -12743,7 +12720,7 @@ Unauthorized access to healthcare data can lead to significant breaches of high 
 
 ###  http://www.semanticweb.org/ek279783/ontologies/2025/8/ontologySD/UnauthorizedModificationsCyberattacks
 :UnauthorizedModificationsCyberattacks rdf:type owl:NamedIndividual ,
-                                                :TabularDataCauses .
+                                                :TabularDataRisks .
 
 
 ###  http://www.semanticweb.org/ek279783/ontologies/2025/8/ontologySD/UnauthorizedOrMaliciousCodeJustification
@@ -12759,7 +12736,7 @@ Unauthorized access to healthcare data can lead to significant breaches of high 
 
 ###  http://www.semanticweb.org/ek279783/ontologies/2025/8/ontologySD/UnfairTreatmentRecommendations
 :UnfairTreatmentRecommendations rdf:type owl:NamedIndividual ,
-                                         :DataProcessingAndAnalysisConsequences .
+                                         :DataProcessingAndAnalysisHazards .
 
 
 ###  http://www.semanticweb.org/ek279783/ontologies/2025/8/ontologySD/UninterruptiblePowerSupplies-UPS
@@ -12781,7 +12758,7 @@ Unauthorized access to healthcare data can lead to significant breaches of high 
 
 ###  http://www.semanticweb.org/ek279783/ontologies/2025/8/ontologySD/UnreadableDiagnosticImagesClinicalErrors
 :UnreadableDiagnosticImagesClinicalErrors rdf:type owl:NamedIndividual ,
-                                                   :ImageDataConsequences .
+                                                   :ImageDataHazards .
 
 
 ###  http://www.semanticweb.org/ek279783/ontologies/2025/8/ontologySD/UnsupervisedClustering
@@ -13102,9 +13079,9 @@ accidental losses.""" .
 ###  http://www.semanticweb.org/ek279783/ontologies/2025/8/ontologySD/VideoDataLoss
 :VideoDataLoss rdf:type owl:NamedIndividual ,
                         :VideoDataHazards ;
-               :HasConsequence :DisruptionOfClinicalWorkflow ;
+               :HasHazardMode :DisruptionOfClinicalWorkflow ;
                :HasModality :VideoData ;
-               :HasPotentialCause :Storage-NetworkFailures ;
+               :HasRisk :Storage-NetworkFailures ;
                :HasDetectabilityScore 5 ;
                :HasLikelihoodScore 6 ;
                :HasSeverityScore 9 .
@@ -13113,9 +13090,9 @@ accidental losses.""" .
 ###  http://www.semanticweb.org/ek279783/ontologies/2025/8/ontologySD/VideoProcessingErrors
 :VideoProcessingErrors rdf:type owl:NamedIndividual ,
                                 :VideoDataHazards ;
-                       :HasConsequence :MisinterpretationClinicalErrors ;
+                       :HasHazardMode :MisinterpretationClinicalErrors ;
                        :HasModality :VideoData ;
-                       :HasPotentialCause :FaultyAIModelsBiasedTraining ;
+                       :HasRisk :FaultyAIModelsBiasedTraining ;
                        :HasDetectabilityScore 7 ;
                        :HasLikelihoodScore 7 ;
                        :HasSeverityScore 8 .
