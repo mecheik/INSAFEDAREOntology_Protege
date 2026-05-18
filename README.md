@@ -77,20 +77,6 @@ The ontology instantiates individuals for over 60 regulatory standards and frame
 
 ---
 
-## `ontologySD.properties` – Configuration
-
-This file configures JDBC connectivity for environments where the ontology is backed by a relational database. All fields are empty and must be set before use:
-
-```properties
-jdbc.url=        # e.g. jdbc:postgresql://localhost:5432/ontologydb
-jdbc.user=       # database username
-jdbc.password=   # database password
-jdbc.driver=     # e.g. org.postgresql.Driver
-```
-
-> **Note:** Do not commit credentials to version control. Use environment variables or a secrets manager in production.
-
----
 
 ## Usage
 
