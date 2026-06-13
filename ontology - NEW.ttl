@@ -40,184 +40,61 @@ xsd:date rdf:type rdfs:Datatype .
 #    Object Properties
 #################################################################
 
-###  http://www.semanticweb.org/ek279783/ontologies/2025/8/ontologySD#AttributeOf
-:AttributeOf rdf:type owl:ObjectProperty ;
-             rdfs:subPropertyOf :HasAttribute ;
-             owl:inverseOf :HasAttribute ;
-             rdfs:domain :Dataset ;
-             rdfs:range :Dataset .
+###  http://www.semanticweb.org/ek279783/ontologies/2025/8/ontologySD#AddressesGSPR
+:AddressesGSPR rdf:type owl:ObjectProperty ;
+               rdfs:subPropertyOf :Assurance ;
+               rdfs:domain :SafetyClaim ;
+               rdfs:range :GeneralSafetyAndPerformanceRequirement .
 
 
-###  http://www.semanticweb.org/ek279783/ontologies/2025/8/ontologySD#ComponentOf
-:ComponentOf rdf:type owl:ObjectProperty ;
-             rdfs:subPropertyOf :HasComponent ;
-             owl:inverseOf :HasComponent ;
-             rdfs:domain :PipelineComponent ;
-             rdfs:range :SyntheticDataPipeline .
-
-
-###  http://www.semanticweb.org/ek279783/ontologies/2025/8/ontologySD#ControlLinkedBy
-:ControlLinkedBy rdf:type owl:ObjectProperty ;
-                 rdfs:subPropertyOf :LinkedToControl ;
-                 owl:inverseOf :LinkedToControl ;
-                 rdfs:domain :ImplementedControl-INSAFEDARE ;
-                 rdfs:range :DatasetCharacteristic ,
-                            :DatasetCharacteristicsAssessed .
-
-
-###  http://www.semanticweb.org/ek279783/ontologies/2025/8/ontologySD#EvaluatedBy
-:EvaluatedBy rdf:type owl:ObjectProperty ;
-             rdfs:subPropertyOf :Evaluates ;
-             owl:inverseOf :Evaluates ;
-             rdfs:domain :Datasets ;
-             rdfs:range :ComplianceControl .
-
-
-###  http://www.semanticweb.org/ek279783/ontologies/2025/8/ontologySD#FailureModeIndicatedBy
-:FailureModeIndicatedBy rdf:type owl:ObjectProperty ;
-                        rdfs:subPropertyOf :IndicatesFailureMode ;
-                        owl:inverseOf :IndicatesFailureMode ;
-                        rdfs:domain :Hazards ;
-                        rdfs:range :EvaluationMetrics .
-
-
-###  http://www.semanticweb.org/ek279783/ontologies/2025/8/ontologySD#FailureModeOfComponent
-:FailureModeOfComponent rdf:type owl:ObjectProperty ;
-                        rdfs:subPropertyOf :ComponentHasFailureMode ;
-                        owl:inverseOf :ComponentHasFailureMode ;
-                        rdfs:domain :FailureModes ;
-                        rdfs:range :PipelineComponent .
-
-
-###  http://www.semanticweb.org/ek279783/ontologies/2025/8/ontologySD#FailureModeOfGenerator
-:FailureModeOfGenerator rdf:type owl:ObjectProperty ;
-                        owl:inverseOf :GeneratorHasFailureMode ;
-                        rdfs:domain :FailureModes ;
-                        rdfs:range :SyntheticDataGenerationMethods .
-
-
-###  http://www.semanticweb.org/ek279783/ontologies/2025/8/ontologySD#FailureModeOfPipelineComponent
-:FailureModeOfPipelineComponent rdf:type owl:ObjectProperty ;
-                                rdfs:subPropertyOf :HasFailureMode ;
-                                owl:inverseOf :HasFailureMode ;
-                                rdfs:domain :FailureModes ,
-                                            :SyntheticDataFailureModes ;
-                                rdfs:range :PipelineComponent .
-
-
-###  http://www.semanticweb.org/ek279783/ontologies/2025/8/ontologySD#Follows
-:Follows rdf:type owl:ObjectProperty ;
-         rdfs:subPropertyOf :Precedes ;
-         rdfs:domain :PipelineComponent ;
-         rdfs:range :PipelineComponent .
-
-
-###  http://www.semanticweb.org/ek279783/ontologies/2025/8/ontologySD#Integrates
-:Integrates rdf:type owl:ObjectProperty ;
-            rdfs:subPropertyOf :IntegratedBy ;
-            owl:inverseOf :IntegratedBy ;
+###  http://www.semanticweb.org/ek279783/ontologies/2025/8/ontologySD#ApprovedBy
+:ApprovedBy rdf:type owl:ObjectProperty ;
+            rdfs:subPropertyOf :Compliance ;
             rdfs:domain :ComplianceControl ;
-            rdfs:range :HybridMethods .
+            rdfs:range :GenerationRationale .
 
 
-###  http://www.semanticweb.org/ek279783/ontologies/2025/8/ontologySD#MetricUsedBy
-:MetricUsedBy rdf:type owl:ObjectProperty ;
-              rdfs:subPropertyOf :UsesMetric ;
-              owl:inverseOf :UsesMetric ;
-              rdfs:domain :MetricThreshold ;
-              rdfs:range :ImplementedControl-INSAFEDARE .
+###  http://www.semanticweb.org/ek279783/ontologies/2025/8/ontologySD#ClassifiedByRule
+:ClassifiedByRule rdf:type owl:ObjectProperty ;
+                  rdfs:subPropertyOf :Compliance ;
+                  rdfs:domain :GenerationRationale ;
+                  rdfs:range :Roles .
 
 
-###  http://www.semanticweb.org/ek279783/ontologies/2025/8/ontologySD#MitigationOf
-:MitigationOf rdf:type owl:ObjectProperty ;
-              rdfs:subPropertyOf :HasMitigation ;
-              owl:inverseOf :HasMitigation ;
-              rdfs:domain :MitigationStrategies ;
-              rdfs:range :FailureModes .
+###  http://www.semanticweb.org/ek279783/ontologies/2025/8/ontologySD#DemonstratesFitness
+:DemonstratesFitness rdf:type owl:ObjectProperty ;
+                     rdfs:subPropertyOf :Assurance ;
+                     rdfs:domain :FitnessForPurpose ;
+                     rdfs:range :Evidence .
 
 
-###  http://www.semanticweb.org/ek279783/ontologies/2025/8/ontologySD#ProducedByEvidence
-:ProducedByEvidence rdf:type owl:ObjectProperty ;
-                    rdfs:subPropertyOf :ProducesEvidence ;
-                    rdfs:domain :ComplianceEvidence ,
-                                :Evidence ;
-                    rdfs:range :ControlID ,
-                               :TechnicalControl .
+###  http://www.semanticweb.org/ek279783/ontologies/2025/8/ontologySD#EstablishesSufficientEvidence
+:EstablishesSufficientEvidence rdf:type owl:ObjectProperty ;
+                               rdfs:subPropertyOf :Assurance ;
+                               rdfs:domain :Evidence ;
+                               rdfs:range :SafetyClaim ;
+                               rdfs:comment "Asserts the linked evidence is sufficient to support the claim under its assumptions and intended use." .
 
 
-###  http://www.semanticweb.org/ek279783/ontologies/2025/8/ontologySD#Regulates
-:Regulates rdf:type owl:ObjectProperty ;
-           rdfs:subPropertyOf :RegulatedBy ;
-           owl:inverseOf :RegulatedBy ;
-           rdfs:domain :RegulatoryBody-TechnicalStandards ;
-           rdfs:range :Assurance .
+###  http://www.semanticweb.org/ek279783/ontologies/2025/8/ontologySD#FitnessAcceptanceThreshold
+:FitnessAcceptanceThreshold rdf:type owl:ObjectProperty ;
+                            rdfs:subPropertyOf :Assurance ;
+                            rdfs:domain :FitnessForPurpose ;
+                            rdfs:range :MetricThreshold .
 
 
-###  http://www.semanticweb.org/ek279783/ontologies/2025/8/ontologySD#RequirementVerifiedBy
-:RequirementVerifiedBy rdf:type owl:ObjectProperty ;
-                       rdfs:subPropertyOf :VerifiesRequirement ;
-                       owl:inverseOf :VerifiesRequirement ;
-                       rdfs:domain :ComplianceRequirements ;
-                       rdfs:range :ControlID .
+###  http://www.semanticweb.org/ek279783/ontologies/2025/8/ontologySD#FitnessForIntendedUse
+:FitnessForIntendedUse rdf:type owl:ObjectProperty ;
+                       rdfs:subPropertyOf :Assurance ;
+                       rdfs:domain :FitnessForPurpose ;
+                       rdfs:range :IntendedUse .
 
 
-###  http://www.semanticweb.org/ek279783/ontologies/2025/8/ontologySD#RiskContributedToBy
-:RiskContributedToBy rdf:type owl:ObjectProperty ;
-                     rdfs:subPropertyOf :ContributesToRisk ;
-                     owl:inverseOf :ContributesToRisk ;
-                     rdfs:domain :RiskAssessment ;
-                     rdfs:range :Attribute .
-
-
-###  http://www.semanticweb.org/ek279783/ontologies/2025/8/ontologySD#StandardRequirmentBy
-:StandardRequirmentBy rdf:type owl:ObjectProperty ;
-                      rdfs:subPropertyOf :HasStandardRequirment ;
-                      owl:inverseOf :HasStandardRequirment ;
-                      rdfs:domain :StandardRequirment ;
-                      rdfs:range :TechnicalControl .
-
-
-###  http://www.semanticweb.org/ek279783/ontologies/2025/8/ontologySD#Supports
-:Supports rdf:type owl:ObjectProperty ;
-          rdfs:subPropertyOf :SupportedBy ;
-          owl:inverseOf :SupportedBy ;
-          rdfs:domain :SemanticPrivacyGuarantessEvidence ;
-          rdfs:range :SemanticPrivacyGuarantees .
-
-
-###  http://www.semanticweb.org/ek279783/ontologies/2025/8/ontologySD#TechnicalControlBy
-:TechnicalControlBy rdf:type owl:ObjectProperty ;
-                    rdfs:subPropertyOf :HasTechnicalControl ;
-                    owl:inverseOf :HasTechnicalControl ;
-                    rdfs:domain :GeneratedEvidence ,
-                                :TechnicalControl ;
-                    rdfs:range :DatasetCharacteristicsAssessed ,
-                               :TechnicalControl .
-
-
-###  http://www.semanticweb.org/ek279783/ontologies/2025/8/ontologySD#TechniqueUsedBy
-:TechniqueUsedBy rdf:type owl:ObjectProperty ;
-                 rdfs:subPropertyOf :UsesTechnique ;
-                 rdfs:domain :Techniques ;
-                 rdfs:range :SyntheticDataGenerationMethods .
-
-
-###  http://www.semanticweb.org/ek279783/ontologies/2025/8/ontologySD#TypeOfEvidence
-:TypeOfEvidence rdf:type owl:ObjectProperty ;
-                rdfs:subPropertyOf :EvidenceType ;
-                owl:inverseOf :EvidenceType ;
-                rdfs:domain :GeneratedEvidence ,
-                            :VerificationEvidence ;
-                rdfs:range :DatasetCharacteristic ,
-                           :DatasetCharacteristicsAssessed .
-
-
-###  http://www.semanticweb.org/ek279783/ontologies/2025/8/ontologySD#UsedBy
-:UsedBy rdf:type owl:ObjectProperty ;
-        rdfs:subPropertyOf :UsedFor ;
-        owl:inverseOf :UsedFor ;
-        rdfs:domain :DatasetMethodologies ;
-        rdfs:range :Dataset .
+###  http://www.semanticweb.org/ek279783/ontologies/2025/8/ontologySD#HasGenerationRationale
+:HasGenerationRationale rdf:type owl:ObjectProperty ;
+                        rdfs:subPropertyOf :Dataset ;
+                        rdfs:domain :Dataset ;
+                        rdfs:range :GenerationRationale .
 
 
 ###  http://www.semanticweb.org/ek279783/ontologies/2025/8/ontologySD/AffectsDownstreamTask
@@ -278,6 +155,14 @@ xsd:date rdf:type rdfs:Datatype .
                    rdfs:subPropertyOf :Attribute .
 
 
+###  http://www.semanticweb.org/ek279783/ontologies/2025/8/ontologySD/AttributeOf
+:AttributeOf rdf:type owl:ObjectProperty ;
+             rdfs:subPropertyOf :HasAttribute ;
+             owl:inverseOf :HasAttribute ;
+             rdfs:domain :Dataset ;
+             rdfs:range :Dataset .
+
+
 ###  http://www.semanticweb.org/ek279783/ontologies/2025/8/ontologySD/ClinicalConsequenceOf
 :ClinicalConsequenceOf rdf:type owl:ObjectProperty ;
                        rdfs:subPropertyOf :DataHazards ;
@@ -295,8 +180,17 @@ xsd:date rdf:type rdfs:Datatype .
 ###  http://www.semanticweb.org/ek279783/ontologies/2025/8/ontologySD/ComponentHasFailureMode
 :ComponentHasFailureMode rdf:type owl:ObjectProperty ;
                          rdfs:subPropertyOf :PipelineSteps ;
+                         owl:inverseOf :FailureModeOfComponent ;
                          rdfs:domain :PipelineComponent ;
                          rdfs:range :FailureModes .
+
+
+###  http://www.semanticweb.org/ek279783/ontologies/2025/8/ontologySD/ComponentOf
+:ComponentOf rdf:type owl:ObjectProperty ;
+             rdfs:subPropertyOf :HasComponent ;
+             owl:inverseOf :HasComponent ;
+             rdfs:domain :PipelineComponent ;
+             rdfs:range :SyntheticDataPipeline .
 
 
 ###  http://www.semanticweb.org/ek279783/ontologies/2025/8/ontologySD/ContextHasCriticality
@@ -309,9 +203,19 @@ xsd:date rdf:type rdfs:Datatype .
 ###  http://www.semanticweb.org/ek279783/ontologies/2025/8/ontologySD/ContributesToRisk
 :ContributesToRisk rdf:type owl:ObjectProperty ;
                    rdfs:subPropertyOf :Attribute ;
+                   owl:inverseOf :RiskContributedToBy ;
                    rdfs:domain :Attribute ;
                    rdfs:range :RiskAssessment ;
                    rdfs:comment "Risk derivation." .
+
+
+###  http://www.semanticweb.org/ek279783/ontologies/2025/8/ontologySD/ControlLinkedBy
+:ControlLinkedBy rdf:type owl:ObjectProperty ;
+                 rdfs:subPropertyOf :LinkedToControl ;
+                 owl:inverseOf :LinkedToControl ;
+                 rdfs:domain :ImplementedControl-INSAFEDARE ;
+                 rdfs:range :DatasetCharacteristic ,
+                            :DatasetCharacteristicsAssessed .
 
 
 ###  http://www.semanticweb.org/ek279783/ontologies/2025/8/ontologySD/DataAvailabilityContext
@@ -337,6 +241,14 @@ xsd:date rdf:type rdfs:Datatype .
                           rdfs:subPropertyOf :DataHazards .
 
 
+###  http://www.semanticweb.org/ek279783/ontologies/2025/8/ontologySD/EvaluatedBy
+:EvaluatedBy rdf:type owl:ObjectProperty ;
+             rdfs:subPropertyOf :Evaluates ;
+             owl:inverseOf :Evaluates ;
+             rdfs:domain :Datasets ;
+             rdfs:range :ComplianceControl .
+
+
 ###  http://www.semanticweb.org/ek279783/ontologies/2025/8/ontologySD/Evaluates
 :Evaluates rdf:type owl:ObjectProperty ;
            rdfs:subPropertyOf :ComplianceControl ;
@@ -347,10 +259,49 @@ xsd:date rdf:type rdfs:Datatype .
 ###  http://www.semanticweb.org/ek279783/ontologies/2025/8/ontologySD/EvidenceType
 :EvidenceType rdf:type owl:ObjectProperty ;
               rdfs:subPropertyOf :ProducesEvidence ;
+              owl:inverseOf :TypeOfEvidence ;
               rdfs:domain :DatasetCharacteristic ,
                           :DatasetCharacteristicsAssessed ;
               rdfs:range :GeneratedEvidence ,
                          :VerificationEvidence .
+
+
+###  http://www.semanticweb.org/ek279783/ontologies/2025/8/ontologySD/FailureModeIndicatedBy
+:FailureModeIndicatedBy rdf:type owl:ObjectProperty ;
+                        rdfs:subPropertyOf :IndicatesFailureMode ;
+                        owl:inverseOf :IndicatesFailureMode ;
+                        rdfs:domain :Hazards ;
+                        rdfs:range :EvaluationMetrics .
+
+
+###  http://www.semanticweb.org/ek279783/ontologies/2025/8/ontologySD/FailureModeOfComponent
+:FailureModeOfComponent rdf:type owl:ObjectProperty ;
+                        rdfs:subPropertyOf :ComponentHasFailureMode ;
+                        rdfs:domain :FailureModes ;
+                        rdfs:range :PipelineComponent .
+
+
+###  http://www.semanticweb.org/ek279783/ontologies/2025/8/ontologySD/FailureModeOfGenerator
+:FailureModeOfGenerator rdf:type owl:ObjectProperty ;
+                        owl:inverseOf :GeneratorHasFailureMode ;
+                        rdfs:domain :FailureModes ;
+                        rdfs:range :SyntheticDataGenerationMethods .
+
+
+###  http://www.semanticweb.org/ek279783/ontologies/2025/8/ontologySD/FailureModeOfPipelineComponent
+:FailureModeOfPipelineComponent rdf:type owl:ObjectProperty ;
+                                rdfs:subPropertyOf :HasFailureMode ;
+                                owl:inverseOf :HasFailureMode ;
+                                rdfs:domain :FailureModes ,
+                                            :SyntheticDataFailureModes ;
+                                rdfs:range :PipelineComponent .
+
+
+###  http://www.semanticweb.org/ek279783/ontologies/2025/8/ontologySD/Follows
+:Follows rdf:type owl:ObjectProperty ;
+         rdfs:subPropertyOf :Precedes ;
+         rdfs:domain :PipelineComponent ;
+         rdfs:range :PipelineComponent .
 
 
 ###  http://www.semanticweb.org/ek279783/ontologies/2025/8/ontologySD/GeneratedBy
@@ -498,6 +449,7 @@ xsd:date rdf:type rdfs:Datatype .
 ###  http://www.semanticweb.org/ek279783/ontologies/2025/8/ontologySD/HasMitigation
 :HasMitigation rdf:type owl:ObjectProperty ;
                rdfs:subPropertyOf :DataHazards ;
+               owl:inverseOf :MitigationOf ;
                rdfs:domain :FailureModes ;
                rdfs:range :MitigationStrategies .
 
@@ -576,6 +528,7 @@ xsd:date rdf:type rdfs:Datatype .
 ###  http://www.semanticweb.org/ek279783/ontologies/2025/8/ontologySD/HasStandardRequirment
 :HasStandardRequirment rdf:type owl:ObjectProperty ;
                        rdfs:subPropertyOf :ComplianceControl ;
+                       owl:inverseOf :StandardRequirmentBy ;
                        rdfs:domain :TechnicalControl ;
                        rdfs:range :StandardRequirment .
 
@@ -591,6 +544,7 @@ xsd:date rdf:type rdfs:Datatype .
 :HasTechnicalControl rdf:type owl:ObjectProperty ;
                      rdfs:subPropertyOf :ComplianceControl ,
                                         :De-IdentificationTechniques ;
+                     owl:inverseOf :TechnicalControlBy ;
                      rdfs:domain :DatasetCharacteristicsAssessed ,
                                  :TechnicalControl ;
                      rdfs:range :GeneratedEvidence ,
@@ -607,8 +561,16 @@ xsd:date rdf:type rdfs:Datatype .
 ###  http://www.semanticweb.org/ek279783/ontologies/2025/8/ontologySD/IntegratedBy
 :IntegratedBy rdf:type owl:ObjectProperty ;
               rdfs:subPropertyOf :Compliance ;
+              owl:inverseOf :Integrates ;
               rdfs:domain :HybridMethods ;
               rdfs:range :ComplianceControl .
+
+
+###  http://www.semanticweb.org/ek279783/ontologies/2025/8/ontologySD/Integrates
+:Integrates rdf:type owl:ObjectProperty ;
+            rdfs:subPropertyOf :IntegratedBy ;
+            rdfs:domain :ComplianceControl ;
+            rdfs:range :HybridMethods .
 
 
 ###  http://www.semanticweb.org/ek279783/ontologies/2025/8/ontologySD/IsHazardOf
@@ -673,6 +635,21 @@ xsd:date rdf:type rdfs:Datatype .
                 rdfs:subPropertyOf owl:topObjectProperty .
 
 
+###  http://www.semanticweb.org/ek279783/ontologies/2025/8/ontologySD/MetricUsedBy
+:MetricUsedBy rdf:type owl:ObjectProperty ;
+              rdfs:subPropertyOf :UsesMetric ;
+              owl:inverseOf :UsesMetric ;
+              rdfs:domain :MetricThreshold ;
+              rdfs:range :ImplementedControl-INSAFEDARE .
+
+
+###  http://www.semanticweb.org/ek279783/ontologies/2025/8/ontologySD/MitigationOf
+:MitigationOf rdf:type owl:ObjectProperty ;
+              rdfs:subPropertyOf :HasMitigation ;
+              rdfs:domain :MitigationStrategies ;
+              rdfs:range :FailureModes .
+
+
 ###  http://www.semanticweb.org/ek279783/ontologies/2025/8/ontologySD/PipelineSteps
 :PipelineSteps rdf:type owl:ObjectProperty .
 
@@ -694,6 +671,15 @@ xsd:date rdf:type rdfs:Datatype .
 :PrivacyMetrics rdf:type owl:ObjectProperty .
 
 
+###  http://www.semanticweb.org/ek279783/ontologies/2025/8/ontologySD/ProducedByEvidence
+:ProducedByEvidence rdf:type owl:ObjectProperty ;
+                    rdfs:subPropertyOf :ProducesEvidence ;
+                    rdfs:domain :ComplianceEvidence ,
+                                :Evidence ;
+                    rdfs:range :ControlID ,
+                               :TechnicalControl .
+
+
 ###  http://www.semanticweb.org/ek279783/ontologies/2025/8/ontologySD/ProducesEvidence
 :ProducesEvidence rdf:type owl:ObjectProperty ;
                   rdfs:subPropertyOf :Assurance ,
@@ -711,8 +697,16 @@ xsd:date rdf:type rdfs:Datatype .
 
 ###  http://www.semanticweb.org/ek279783/ontologies/2025/8/ontologySD/RegulatedBy
 :RegulatedBy rdf:type owl:ObjectProperty ;
+             owl:inverseOf :Regulates ;
              rdfs:domain :Assurance ;
              rdfs:range :RegulatoryBody-TechnicalStandards .
+
+
+###  http://www.semanticweb.org/ek279783/ontologies/2025/8/ontologySD/Regulates
+:Regulates rdf:type owl:ObjectProperty ;
+           rdfs:subPropertyOf :RegulatedBy ;
+           rdfs:domain :RegulatoryBody-TechnicalStandards ;
+           rdfs:range :Assurance .
 
 
 ###  http://www.semanticweb.org/ek279783/ontologies/2025/8/ontologySD/RegulatoryObligation
@@ -722,24 +716,70 @@ xsd:date rdf:type rdfs:Datatype .
                       rdfs:range :RegulatoryObligation .
 
 
+###  http://www.semanticweb.org/ek279783/ontologies/2025/8/ontologySD/RequirementVerifiedBy
+:RequirementVerifiedBy rdf:type owl:ObjectProperty ;
+                       rdfs:subPropertyOf :VerifiesRequirement ;
+                       owl:inverseOf :VerifiesRequirement ;
+                       rdfs:domain :ComplianceRequirements ;
+                       rdfs:range :ControlID .
+
+
 ###  http://www.semanticweb.org/ek279783/ontologies/2025/8/ontologySD/Retains
 :Retains rdf:type owl:ObjectProperty ;
          rdfs:subPropertyOf :Compliance ;
          rdfs:range :ComplianceControl .
 
 
+###  http://www.semanticweb.org/ek279783/ontologies/2025/8/ontologySD/RiskContributedToBy
+:RiskContributedToBy rdf:type owl:ObjectProperty ;
+                     rdfs:subPropertyOf :ContributesToRisk ;
+                     rdfs:domain :RiskAssessment ;
+                     rdfs:range :Attribute .
+
+
+###  http://www.semanticweb.org/ek279783/ontologies/2025/8/ontologySD/StandardRequirmentBy
+:StandardRequirmentBy rdf:type owl:ObjectProperty ;
+                      rdfs:subPropertyOf :HasStandardRequirment ;
+                      rdfs:domain :StandardRequirment ;
+                      rdfs:range :TechnicalControl .
+
+
 ###  http://www.semanticweb.org/ek279783/ontologies/2025/8/ontologySD/SupportedBy
 :SupportedBy rdf:type owl:ObjectProperty ;
              rdfs:subPropertyOf :PrivacyGuarantee ;
+             owl:inverseOf :Supports ;
              rdfs:domain :SemanticPrivacyGuarantees ;
              rdfs:range :SemanticPrivacyGuarantessEvidence .
 
 
+###  http://www.semanticweb.org/ek279783/ontologies/2025/8/ontologySD/Supports
+:Supports rdf:type owl:ObjectProperty ;
+          rdfs:subPropertyOf :SupportedBy ;
+          rdfs:domain :SemanticPrivacyGuarantessEvidence ;
+          rdfs:range :SemanticPrivacyGuarantees .
+
+
 ###  http://www.semanticweb.org/ek279783/ontologies/2025/8/ontologySD/SupportsSafetyClaim
 :SupportsSafetyClaim rdf:type owl:ObjectProperty ;
-                     rdfs:subPropertyOf :DataHazards ;
+                     rdfs:subPropertyOf owl:topObjectProperty ;
                      rdfs:domain :MitigationStrategies ;
                      rdfs:range :SafetyClaim .
+
+
+###  http://www.semanticweb.org/ek279783/ontologies/2025/8/ontologySD/TechnicalControlBy
+:TechnicalControlBy rdf:type owl:ObjectProperty ;
+                    rdfs:subPropertyOf :HasTechnicalControl ;
+                    rdfs:domain :GeneratedEvidence ,
+                                :TechnicalControl ;
+                    rdfs:range :DatasetCharacteristicsAssessed ,
+                               :TechnicalControl .
+
+
+###  http://www.semanticweb.org/ek279783/ontologies/2025/8/ontologySD/TechniqueUsedBy
+:TechniqueUsedBy rdf:type owl:ObjectProperty ;
+                 rdfs:subPropertyOf :UsesTechnique ;
+                 rdfs:domain :Techniques ;
+                 rdfs:range :SyntheticDataGenerationMethods .
 
 
 ###  http://www.semanticweb.org/ek279783/ontologies/2025/8/ontologySD/ThreatModelLog
@@ -751,6 +791,23 @@ xsd:date rdf:type rdfs:Datatype .
                     rdfs:subPropertyOf :DataHazards ;
                     rdfs:domain :Evidence ;
                     rdfs:range :MitigationStrategies .
+
+
+###  http://www.semanticweb.org/ek279783/ontologies/2025/8/ontologySD/TypeOfEvidence
+:TypeOfEvidence rdf:type owl:ObjectProperty ;
+                rdfs:subPropertyOf :EvidenceType ;
+                rdfs:domain :GeneratedEvidence ,
+                            :VerificationEvidence ;
+                rdfs:range :DatasetCharacteristic ,
+                           :DatasetCharacteristicsAssessed .
+
+
+###  http://www.semanticweb.org/ek279783/ontologies/2025/8/ontologySD/UsedBy
+:UsedBy rdf:type owl:ObjectProperty ;
+        rdfs:subPropertyOf :UsedFor ;
+        owl:inverseOf :UsedFor ;
+        rdfs:domain :DatasetMethodologies ;
+        rdfs:range :Dataset .
 
 
 ###  http://www.semanticweb.org/ek279783/ontologies/2025/8/ontologySD/UsedFor
@@ -890,6 +947,47 @@ xsd:date rdf:type rdfs:Datatype .
 #################################################################
 #    Classes
 #################################################################
+
+###  http://www.semanticweb.org/ek279783/ontologies/2025/8/ontologySD#AIAsMedicalDevice
+:AIAsMedicalDevice rdf:type owl:Class ;
+                   rdfs:subClassOf :SoftwareAsMedicalDevice ;
+                   rdfs:comment "AI/ML-based SaMD; subject to additional EU AI Act obligations." .
+
+
+###  http://www.semanticweb.org/ek279783/ontologies/2025/8/ontologySD#DigitalHealthMedicalDevice
+:DigitalHealthMedicalDevice rdf:type owl:Class ;
+                            rdfs:subClassOf :MedicalDevice .
+
+
+###  http://www.semanticweb.org/ek279783/ontologies/2025/8/ontologySD#FitnessForPurpose
+:FitnessForPurpose rdf:type owl:Class ;
+                   rdfs:subClassOf :OperationalUse ;
+                   rdfs:comment "Criterion that synthetic data is fit for its intended use, evidenced against defined pass/fail thresholds." .
+
+
+###  http://www.semanticweb.org/ek279783/ontologies/2025/8/ontologySD#GeneralSafetyAndPerformanceRequirement
+:GeneralSafetyAndPerformanceRequirement rdf:type owl:Class ;
+                                        rdfs:subClassOf :ComplianceRequirements ;
+                                        rdfs:comment "MDR Annex I GSPRs that the assurance case must show have been met." .
+
+
+###  http://www.semanticweb.org/ek279783/ontologies/2025/8/ontologySD#GenerationRationale
+:GenerationRationale rdf:type owl:Class ;
+                     rdfs:subClassOf :Justification ;
+                     rdfs:comment "Why and how a synthetic dataset was generated: purpose, justification, method, approval." .
+
+
+###  http://www.semanticweb.org/ek279783/ontologies/2025/8/ontologySD#MDRClassificationRule
+:MDRClassificationRule rdf:type owl:Class ;
+                       rdfs:subClassOf :DeviceClassification ;
+                       rdfs:comment "An MDR Annex VIII rule (e.g. Rule 21) that, with a device class, expresses the classification (e.g. Class III, Rule 21)." .
+
+
+###  http://www.semanticweb.org/ek279783/ontologies/2025/8/ontologySD#SoftwareAsMedicalDevice
+:SoftwareAsMedicalDevice rdf:type owl:Class ;
+                         rdfs:subClassOf :MedicalDevice ;
+                         rdfs:comment "Software intended for a medical purpose, not part of a hardware device (SaMD)." .
+
 
 ###  http://www.semanticweb.org/ek279783/ontologies/2025/8/ontologySD#AssuranceCaseWorkingGroup(ACWG)
 <http://www.semanticweb.org/ek279783/ontologies/2025/8/ontologySD#AssuranceCaseWorkingGroup(ACWG)> rdf:type owl:Class ;
@@ -1529,7 +1627,8 @@ squared error or cross-entropy. In healthcare, Autoencoder based models have dem
 
 ###  http://www.semanticweb.org/ek279783/ontologies/2025/8/ontologySD/DeviceClassification
 :DeviceClassification rdf:type owl:Class ;
-                      rdfs:subClassOf :MedicalDevice .
+                      rdfs:subClassOf :MedicalDevice ;
+                      rdfs:comment "Assignment of a device to an MDR risk class via the classification rules." .
 
 
 ###  http://www.semanticweb.org/ek279783/ontologies/2025/8/ontologySD/DialogueData
@@ -1545,7 +1644,7 @@ squared error or cross-entropy. In healthcare, Autoencoder based models have dem
 
 ###  http://www.semanticweb.org/ek279783/ontologies/2025/8/ontologySD/DisclosureRiskMetrics
 :DisclosureRiskMetrics rdf:type owl:Class ;
-                       rdfs:subClassOf :EvaluationMetrics .
+                       rdfs:subClassOf :PrivacyMetrics .
 
 
 ###  http://www.semanticweb.org/ek279783/ontologies/2025/8/ontologySD/Distinguishability
@@ -2072,7 +2171,8 @@ In healthcare, GANs have proven valuable in generating synthetic patient dataset
 
 ###  http://www.semanticweb.org/ek279783/ontologies/2025/8/ontologySD/MedicalDeviceRiskCategory
 :MedicalDeviceRiskCategory rdf:type owl:Class ;
-                           rdfs:subClassOf :MedicalDevice .
+                           rdfs:subClassOf :DeviceClassification ;
+                           rdfs:comment "The MDR risk class (I, IIa, IIb, III) produced by device classification; not an independent concept." .
 
 
 ###  http://www.semanticweb.org/ek279783/ontologies/2025/8/ontologySD/MedicalDevicesIEC
@@ -3054,6 +3154,17 @@ In healthcare, GANs have proven valuable in generating synthetic patient dataset
 #    Individuals
 #################################################################
 
+###  http://www.semanticweb.org/ek279783/ontologies/2025/8/ontologySD#MDRRule14
+:MDRRule14 rdf:type owl:NamedIndividual ,
+                    :MDRClassificationRule .
+
+
+###  http://www.semanticweb.org/ek279783/ontologies/2025/8/ontologySD#MDRRule21
+:MDRRule21 rdf:type owl:NamedIndividual ,
+                    :MDRClassificationRule ;
+           rdfs:comment "Annex VIII Rule 21 – substances introduced into the body." .
+
+
 ###  http://www.semanticweb.org/ek279783/ontologies/2025/8/ontologySD#3DGaussianSplatting
 <http://www.semanticweb.org/ek279783/ontologies/2025/8/ontologySD#3DGaussianSplatting> rdf:type owl:NamedIndividual ,
                                                                                                 :Techniques ;
@@ -3246,7 +3357,8 @@ In healthcare diagnostics, false positives can lead to unnecessary treatments, w
 ###  http://www.semanticweb.org/ek279783/ontologies/2025/8/ontologySD#GDPREU2016/679Standard
 <http://www.semanticweb.org/ek279783/ontologies/2025/8/ontologySD#GDPREU2016/679Standard> rdf:type owl:NamedIndividual ,
                                                                                                    :GDPR ;
-                                                                                          rdfs:comment "Regulation (EU) 2016/679 of the European Parliament and of the Council of 27 April 2016 on the protection of natural persons with regard to the processing of personal data and on the free movement of such data, and repealing Directive 95/46/EC (General Data Protection Regulation) (Text with EEA relevance)." .
+                                                                                          rdfs:comment "2018-05-25"^^xsd:date ,
+                                                                                                       "Regulation (EU) 2016/679 of the European Parliament and of the Council of 27 April 2016 on the protection of natural persons with regard to the processing of personal data and on the free movement of such data, and repealing Directive 95/46/EC (General Data Protection Regulation) (Text with EEA relevance)." .
 
 
 ###  http://www.semanticweb.org/ek279783/ontologies/2025/8/ontologySD#HighConfidenceInAlgorithms;LackOfAlternatives
@@ -3459,7 +3571,8 @@ presence of a rare diagnosis, or the conjunction of age, sex, and geographical i
 
 ###  http://www.semanticweb.org/ek279783/ontologies/2025/8/ontologySD#ISO14971:2019Standard
 <http://www.semanticweb.org/ek279783/ontologies/2025/8/ontologySD#ISO14971:2019Standard> rdf:type owl:NamedIndividual ,
-                                                                                                  :MedicalDevicesISO .
+                                                                                                  :MedicalDevicesISO ;
+                                                                                         rdfs:comment "2019"^^xsd:date .
 
 
 ###  http://www.semanticweb.org/ek279783/ontologies/2025/8/ontologySD#ISO15189:2022Standard
@@ -3774,7 +3887,9 @@ presence of a rare diagnosis, or the conjunction of age, sex, and geographical i
 
 ###  http://www.semanticweb.org/ek279783/ontologies/2025/8/ontologySD#Regulation2017/745Standard
 <http://www.semanticweb.org/ek279783/ontologies/2025/8/ontologySD#Regulation2017/745Standard> rdf:type owl:NamedIndividual ,
-                                                                                                       :EURegulations .
+                                                                                                       :EURegulations ;
+                                                                                              rdfs:comment "2021-05-26"^^xsd:date ,
+                                                                                                           "MDR 2017/745 (consolidated)." .
 
 
 ###  http://www.semanticweb.org/ek279783/ontologies/2025/8/ontologySD#SevereClinicalErrors;TrustLoss
@@ -8190,7 +8305,9 @@ Environmental factors can critically affect the performance and safety of medica
 
 ###  http://www.semanticweb.org/ek279783/ontologies/2025/8/ontologySD/EUAIActRegulationOnAIStandard
 :EUAIActRegulationOnAIStandard rdf:type owl:NamedIndividual ,
-                                        :EUAIACT .
+                                        :EUAIACT ;
+                               rdfs:comment "2024-08-01"^^xsd:date ,
+                                            "Regulation (EU) 2024/1689" .
 
 
 ###  http://www.semanticweb.org/ek279783/ontologies/2025/8/ontologySD/EarlyDetectionOfTamperedDataJustification
