@@ -1328,10 +1328,6 @@ squared error or cross-entropy. In healthcare, Autoencoder based models have dem
                         rdfs:comment "Represents data based justification within the synthetic-data quality and safety ontology. It specialises Justification." .
 
 
-###  http://www.semanticweb.org/ek279783/ontologies/2025/8/ontologySD/DataCorruption
-:DataCorruption rdf:type owl:Class .
-
-
 ###  http://www.semanticweb.org/ek279783/ontologies/2025/8/ontologySD/DataCorruptionMitigation
 :DataCorruptionMitigation rdf:type owl:Class ;
                           rdfs:subClassOf :DataStorageAndManagementMitigations ;
@@ -2047,7 +2043,7 @@ Despite its advantages, Federated Learning also presents several challenges. One
 ###  http://www.semanticweb.org/ek279783/ontologies/2025/8/ontologySD/FidelityMetrics
 :FidelityMetrics rdf:type owl:Class ;
                  rdfs:subClassOf :EvaluationMetrics ;
-                 rdfs:comment "A category of evaluation metrics that quantify fidelity for generated synthetic data." .
+                 rdfs:comment "A category of fidelity metrics that use statistical tests and measures to assess whether synthetic and real data come from similar underlying distributions. Specialises Fidelity Metrics." .
 
 
 ###  http://www.semanticweb.org/ek279783/ontologies/2025/8/ontologySD/FitnessForPurpose
@@ -2666,7 +2662,8 @@ In healthcare, GANs have proven valuable in generating synthetic patient dataset
 
 ###  http://www.semanticweb.org/ek279783/ontologies/2025/8/ontologySD/PerformanceMetrics
 :PerformanceMetrics rdf:type owl:Class ;
-                    rdfs:subClassOf :EvaluationMetrics .
+                    rdfs:subClassOf :EvaluationMetrics ;
+                    rdfs:comment "A category of evaluation metrics that quantify the performance of models trained or tested on synthetic data (e.g. accuracy, precision, recall, F1 score, AUROC). Specialises Evaluation Metrics." .
 
 
 ###  http://www.semanticweb.org/ek279783/ontologies/2025/8/ontologySD/PeriodicallyMonitoredLogsEvidence
@@ -2979,7 +2976,8 @@ In healthcare, GANs have proven valuable in generating synthetic patient dataset
 
 ###  http://www.semanticweb.org/ek279783/ontologies/2025/8/ontologySD/Robustness
 :Robustness rdf:type owl:Class ;
-            rdfs:subClassOf :ModelBased .
+            rdfs:subClassOf :ModelBased ;
+            rdfs:comment "Model-based assurance area concerning the robustness of models trained on or with synthetic data (stress tests, OOD detection, edge cases)." .
 
 
 ###  http://www.semanticweb.org/ek279783/ontologies/2025/8/ontologySD/RobustnessContext
@@ -3264,8 +3262,8 @@ In healthcare, GANs have proven valuable in generating synthetic patient dataset
 
 ###  http://www.semanticweb.org/ek279783/ontologies/2025/8/ontologySD/StatisticalSimilarity
 :StatisticalSimilarity rdf:type owl:Class ;
-                       rdfs:subClassOf :FidelityMetrics ,
-                                       :StatisticalSimilarity .
+                       rdfs:subClassOf :FidelityMetrics ;
+                       rdfs:comment "A category of fidelity metrics that use statistical tests and distance measures to assess whether synthetic and real data come from similar underlying distributions. It covers univariate tests comparing individual features (e.g. two-sample t-test, Kolmogorov–Smirnov, Anderson–Darling, Kuiper’s and Chi-squared tests) as well as multivariate approaches such as correlation structure, distinguishability, statistical distance measures and visual similarity. Specialises Fidelity Metrics." .
 
 
 ###  http://www.semanticweb.org/ek279783/ontologies/2025/8/ontologySD/StatisticalTools
@@ -3481,7 +3479,8 @@ In healthcare, GANs have proven valuable in generating synthetic patient dataset
 
 ###  http://www.semanticweb.org/ek279783/ontologies/2025/8/ontologySD/UtilityMetrics
 :UtilityMetrics rdf:type owl:Class ;
-                rdfs:subClassOf :EvaluationMetrics .
+                rdfs:subClassOf :EvaluationMetrics ;
+                rdfs:comment "A category of evaluation metrics that quantify utility for generated synthetic data." .
 
 
 ###  http://www.semanticweb.org/ek279783/ontologies/2025/8/ontologySD/ValidationAlignmentEvidence
@@ -3552,12 +3551,6 @@ In healthcare, GANs have proven valuable in generating synthetic patient dataset
 #################################################################
 #    Individuals
 #################################################################
-
-###  http://www.semanticweb.org/ek279783/ontologies/2025/8/ontologySD#TwoSampleTTest
-:TwoSampleTTest rdf:type owl:NamedIndividual ,
-                         :RealismMetrics ,
-                         :StatisticalSimilarity .
-
 
 ###  http://www.semanticweb.org/ek279783/ontologies/2025/8/ontologySD#3DGaussianSplatting
 <http://www.semanticweb.org/ek279783/ontologies/2025/8/ontologySD#3DGaussianSplatting> rdf:type owl:NamedIndividual ,
@@ -5890,13 +5883,15 @@ series data.""" .
                                                :DataTransmissionAndSharing ;
                                       :HasDetectability :HighDetectability ;
                                       :HasHazardMode <http://www.semanticweb.org/ek279783/ontologies/2025/8/ontologySD#CriticalDelays;DroppedConnections> ;
+                                      :HasLikelihood :MediumLikelihood ;
                                       :HasMitigation :NetworkTrafficShaping ,
                                                      :QualityofServiceControls ;
                                       :HasRisk <http://www.semanticweb.org/ek279783/ontologies/2025/8/ontologySD#InsufficientBandwidth;HighDemand> ;
                                       :HasSeverity :MediumToHighSeverity ;
                                       :HasDetectabilityScore 2 ;
                                       :HasLikelihoodScore 6 ;
-                                      :HasSeverityScore 7 .
+                                      :HasSeverityScore 7 ;
+                                      rdfs:comment "Bandwidth and resource allocation issues occur when network capacity or computing resources are insufficient for the volume of healthcare data being transmitted, often due to insufficient bandwidth and high demand. This can cause critical delays and dropped connections, affecting time-sensitive clinical data exchange. Mitigation strategies include Quality of Service controls and network traffic shaping to prioritise critical data and ensure timely delivery. Severity is medium to high because delays can affect care. Likelihood is medium. Detectability is high, as network monitoring tools readily reveal bandwidth saturation." .
 
 
 ###  http://www.semanticweb.org/ek279783/ontologies/2025/8/ontologySD/BaselineComparisonLog
@@ -7624,7 +7619,10 @@ anonymization can occur when these techniques are not correctly applied, which e
                 :HasSeverity :HighSeverity ;
                 :HasDetectabilityScore 8 ;
                 :HasLikelihoodScore 6 ;
-                :HasSeverityScore 8 .
+                :HasSeverityScore 8 ;
+                rdfs:comment """Data corruption refers to instances where data is altered by mistake or becomes unreadable due to software bugs, hardware failures, or transmission errors. This corruption can lead to inaccurate patient records and operational disruptions, posing significant risks to the delivery of healthcare. Several studies show that even minor corruption can have substantial impacts, as it can compromise the reliability of the entire dataset. Data can become corrupted due to software errors, hardware malfunctions, or during transmission, often resulting in inaccurate or lost patient information and operational disruptions. To mitigate these risks, healthcare systems must employ regular backups, error-checking mechanisms like checksums, and redundant storage solutions to preserve data integrity and ensure continuity of operations.
+
+The severity of data corruption is often considered high, as it can directly impact clinical decision-making and patient care. For example, corrupted health records could lead to inappropriate medical treatments, as reported by Nemec et al. in their concluding remarks in terms of impacting patient care, digital transformation in healthcare has improved patient care but also increased the vulnerability of sensitive data to cyberattacks. Data corruption can occur due to various reasons, including software errors, hardware failures, and cyberattacks, making it a moderate to high likelihood issue depending on the specific healthcare IT environment. However, detecting data corruption can be challenging, particularly when subtle errors do not immediately manifest as system failures. Mejía-Granda, Carlos M., et al. mentioned as a consequence of security vulnerabilities; The critical vulnerabilities for health with the greatest impact, presence, number of software products affected, and score are majority caused by (i) poor management of credentials enabling unintended actions and lack of control and (ii) buffer out-of-bounds causing data corruption and improper code execution. Hence, robust validation and regular system audits are essential for early detection""" .
 
 
 ###  http://www.semanticweb.org/ek279783/ontologies/2025/8/ontologySD/DataCorruptionPreventionJustification
@@ -11831,6 +11829,7 @@ l>=3-5 - Adequate protection""" .
                                     :DataTransmissionAndSharing ;
                            :HasDetectability :HighDetectability ;
                            :HasHazardMode <http://www.semanticweb.org/ek279783/ontologies/2025/8/ontologySD#DelayedDecisions;ImpactedCare> ;
+                           :HasLikelihood :MediumLikelihood ;
                            :HasMitigation :OptimizingNetworkInfrastructure ,
                                           :RealTimeDataProcessing ,
                                           :UtilizingEdgeComputing ;
@@ -12823,11 +12822,10 @@ Misinterpretation of data can lead to incorrect clinical decisions, potentially 
                                      :ModelTrainingContext ;
               :HasClinicalConsequence <http://www.semanticweb.org/ek279783/ontologies/2025/8/ontologySD#UnreliablePredictions;PatientHarm> ;
               :HasHazardMode :SubgroupHarm ;
-              :HasModality :TimeSeriesData ;
               :HasDetectabilityScore 8 ;
               :HasLikelihoodScore 6 ;
               :HasSeverityScore 7 ;
-              rdfs:comment "It is measured by the log-cluster metric U and the categorycoverage (CAT) metric." .
+              rdfs:comment "The generator produces only a narrow subset of the possible outputs, repeating similar records instead of capturing the full diversity of the real data. It can be measured, for example, by the log-cluster metric U and the category coverage (CAT) metric." .
 
 
 ###  http://www.semanticweb.org/ek279783/ontologies/2025/8/ontologySD/ModelExplainabilityJustification
@@ -14044,15 +14042,6 @@ In its analytical framework, the ICO observes that PETs contribute to compliance
                                           rdfs:comment "Performance Logs For Edge Case Scenarios Claim: an evidence item (typically a log, record or report) that helps demonstrate stress tests." .
 
 
-###  http://www.semanticweb.org/ek279783/ontologies/2025/8/ontologySD/PerformanceMetrics
-:PerformanceMetrics rdf:type owl:NamedIndividual ,
-                             :PrivacyMetrics ,
-                             :UtilityMetrics ;
-                    :HasModality :TabularData ;
-                    :IndicatesFailureMode :DataLeakage ,
-                                          :PrivacyBreaches .
-
-
 ###  http://www.semanticweb.org/ek279783/ontologies/2025/8/ontologySD/PeriodicFairnessAuditDocumentationLog
 :PeriodicFairnessAuditDocumentationLog rdf:type owl:NamedIndividual ,
                                                 :FairnessMetricsEvidence ;
@@ -14250,7 +14239,8 @@ In its analytical framework, the ICO observes that PETs contribute to compliance
                               :HasSeverity :HighSeverity ;
                               :HasDetectabilityScore 9 ;
                               :HasLikelihoodScore 9 ;
-                              :HasSeverityScore 9 .
+                              :HasSeverityScore 9 ;
+                              rdfs:comment "Phishing and social engineering attacks manipulate staff into disclosing credentials or sensitive information, or into installing malicious software. Contributing causes include lack of user awareness and poor email security. Consequences include compromised patient data and service disruption. Mitigation strategies include anti-phishing technologies, multi-factor authentication and incident response plans. Severity and likelihood are high, as healthcare staff are frequent targets. Detectability is low, because successful attacks often go unnoticed until misuse of credentials or data occurs." .
 
 
 ###  http://www.semanticweb.org/ek279783/ontologies/2025/8/ontologySD/Photographs
@@ -14641,6 +14631,17 @@ The impact of breaches in privacy and security can be very high, leading to loss
               :IndicatesFailureMode :DataLeakage ,
                                     :PrivacyBreaches ;
               rdfs:comment "A metric measuring privacy score, used to evaluate the privacy metrics of synthetic data." .
+
+
+###  http://www.semanticweb.org/ek279783/ontologies/2025/8/ontologySD/PrivacyUtilityPerformanceMetric
+:PrivacyUtilityPerformanceMetric rdf:type owl:NamedIndividual ,
+                                          :PerformanceMetrics ,
+                                          :PrivacyMetrics ,
+                                          :UtilityMetrics ;
+                                 :HasModality :TabularData ;
+                                 :IndicatesFailureMode :DataLeakage ,
+                                                       :PrivacyBreaches ;
+                                 rdfs:comment "Privacy-utility performance metric: assesses tabular synthetic data jointly for privacy protection and utility, measuring how well models trained on synthetic data perform while limiting leakage of information about real individuals." .
 
 
 ###  http://www.semanticweb.org/ek279783/ontologies/2025/8/ontologySD/ProGAN
@@ -15946,12 +15947,14 @@ between two datasets (i.e., mean or variance) and construct a null distribution 
                   rdfs:comment "Robust Validation: a concrete mitigation action that addresses data integrity and validation failures." .
 
 
-###  http://www.semanticweb.org/ek279783/ontologies/2025/8/ontologySD/Robustness
-:Robustness rdf:type owl:NamedIndividual ,
-                     :GeneralisationMetrics ;
-            :HasModality :ImageData ,
-                         :TextData ;
-            :IndicatesFailureMode :OverfittingAndUnderfittingOfModels .
+###  http://www.semanticweb.org/ek279783/ontologies/2025/8/ontologySD/RobustnessAsMetric
+:RobustnessAsMetric rdf:type owl:NamedIndividual ,
+                             :GeneralisationMetrics ,
+                             :Robustness ;
+                    :HasModality :ImageData ,
+                                 :TextData ;
+                    :IndicatesFailureMode :OverfittingAndUnderfittingOfModels ;
+                    rdfs:comment "A generalisation metric assessing whether models trained on synthetic data maintain performance under perturbed, noisy or out-of-distribution inputs." .
 
 
 ###  http://www.semanticweb.org/ek279783/ontologies/2025/8/ontologySD/RobustnessMetricsClaim
@@ -16965,15 +16968,6 @@ the classification model uses a learning rate of 0.001 and a batch size of 64. T
                   :IndicatesFailureMode :DataLeakage ,
                                         :PrivacyBreaches ;
                   rdfs:comment "A metric measuring statistical power, used to evaluate the privacy metrics of synthetic data." .
-
-
-###  http://www.semanticweb.org/ek279783/ontologies/2025/8/ontologySD/StatisticalSimilarity
-:StatisticalSimilarity rdf:type owl:NamedIndividual ,
-                                :FidelityMetrics ,
-                                :RealismMetrics ,
-                                :StatisticalSimilarity ;
-                       :IndicatesFailureMode :InaccurateDataAnalysis ,
-                                             :MisinterpretationAndMisrepresentationOfData .
 
 
 ###  http://www.semanticweb.org/ek279783/ontologies/2025/8/ontologySD/Storage-NetworkFailures
@@ -18399,6 +18393,15 @@ Information, correlation) andthe 2 privacy metrics (Membership inference and ide
                                 rdfs:comment "for continuous columns - timeseries." .
 
 
+###  http://www.semanticweb.org/ek279783/ontologies/2025/8/ontologySD/TwoSampleTTest
+:TwoSampleTTest rdf:type owl:NamedIndividual ,
+                         :RealismMetrics ,
+                         :StatisticalSimilarity ;
+                :IndicatesFailureMode :InaccurateDataAnalysis ,
+                                      :MisinterpretationAndMisrepresentationOfData ;
+                rdfs:comment "The two-sample t-test (Student’s t-test) tests whether the mean of a numerical feature differs significantly between synthetic and real data. Similar means indicate that the synthetic data preserves the central tendency of the real feature. The test assumes approximately normal distributions and is insensitive to differences in variance and distribution shape." .
+
+
 ###  http://www.semanticweb.org/ek279783/ontologies/2025/8/ontologySD/UMAP
 :UMAP rdf:type owl:NamedIndividual ,
                :UtilityMetrics ,
@@ -18655,7 +18658,8 @@ accidental losses.""" .
                 :Techniques ;
        :GeneratorHasFailureMode :AlgorithmicBias ,
                                 :DataMisinterpretation ,
-                                :OverfittingAndUnderfittingOfModels .
+                                :OverfittingAndUnderfittingOfModels ;
+       rdfs:comment "VGAEs (Variational Graph Autoencoders) is a technique applied in synthetic-data generation, augmentation or processing." .
 
 
 ###  http://www.semanticweb.org/ek279783/ontologies/2025/8/ontologySD/ValidationAgainstRealDataLog
@@ -18933,7 +18937,8 @@ accidental losses.""" .
 :VersionControlLog rdf:type owl:NamedIndividual ,
                             :GeneratedEvidence ,
                             :SecureVersionEvidence ;
-                   :Timestamped "Timestamped Input." .
+                   :Timestamped "Timestamped Input." ;
+                   rdfs:comment "Version Control Log: an evidence item (typically a log, record or report) that helps demonstrate secure version." .
 
 
 ###  http://www.semanticweb.org/ek279783/ontologies/2025/8/ontologySD/ViT
@@ -19236,11 +19241,6 @@ gradient signal. WGAN includes comprehensive documentation of its architecture, 
 :DataAugmentation rdfs:comment "A data transformation that enlarges or diversifies a dataset by creating modified or synthetic variants of existing records (e.g. image, text or structured data augmentation). Specialises Data Transformation." .
 
 
-:DataCorruption rdfs:comment """Data corruption refers to instances where data is altered by mistake or becomes unreadable due to software bugs, hardware failures, or transmission errors. This corruption can lead to inaccurate patient records and operational disruptions, posing significant risks to the delivery of healthcare. Several studies show that even minor corruption can have substantial impacts, as it can compromise the reliability of the entire dataset. Data can become corrupted due to software errors, hardware malfunctions, or during transmission, often resulting in inaccurate or lost patient information and operational disruptions. To mitigate these risks, healthcare systems must employ regular backups, error-checking mechanisms like checksums, and redundant storage solutions to preserve data integrity and ensure continuity of operations.
-
-The severity of data corruption is often considered high, as it can directly impact clinical decision-making and patient care. For example, corrupted health records could lead to inappropriate medical treatments, as reported by Nemec et al. in their concluding remarks in terms of impacting patient care, digital transformation in healthcare has improved patient care but also increased the vulnerability of sensitive data to cyberattacks. Data corruption can occur due to various reasons, including software errors, hardware failures, and cyberattacks, making it a moderate to high likelihood issue depending on the specific healthcare IT environment. However, detecting data corruption can be challenging, particularly when subtle errors do not immediately manifest as system failures. Mejía-Granda, Carlos M., et al. mentioned as a consequence of security vulnerabilities; The critical vulnerabilities for health with the greatest impact, presence, number of software products affected, and score are majority caused by (i) poor management of credentials enabling unintended actions and lack of control and (ii) buffer out-of-bounds causing data corruption and improper code execution. Hence, robust validation and regular system audits are essential for early detection""" .
-
-
 :DataHazards rdfs:comment "Hazards arising in the data stage — conditions or events that could lead to harm or data-quality failure." .
 
 
@@ -19263,9 +19263,6 @@ The severity of data corruption is often considered high, as it can directly imp
 
 
 :ImageData rdfs:comment "Image data modality, including graphics, photographs and other visual content. Specialises Unstructured Data." .
-
-
-:PerformanceMetrics rdfs:comment "A category of evaluation metrics that quantify the performance of models trained or tested on synthetic data (e.g. accuracy, precision, recall, F1 score, AUROC). Specialises Evaluation Metrics." .
 
 
 :PostProcessingStage rdfs:comment "The post-processing stage, where synthetic data is filtered, validated, or transformed before release." .
@@ -19292,13 +19289,7 @@ The severity of data corruption is often considered high, as it can directly imp
 :ReleaseStage rdfs:comment "The release stage, where the synthetic dataset is made available to downstream users or systems." .
 
 
-:Robustness rdfs:comment "Model-based assurance area concerning the robustness of models trained on or with synthetic data (stress tests, OOD detection, edge cases)." .
-
-
 :SemanticInvalidity rdfs:comment "Records are statistically plausible but clinically impossible or break relational constraints." .
-
-
-:StatisticalSimilarity rdfs:comment "Represents statistical tests within the synthetic-data quality and safety ontology. It specialises Statistical Similarity." .
 
 
 :SubgroupHarm rdfs:comment "Minority or protected subgroups are under-represented or poorly modelled, propagating bias downstream." .
@@ -19310,7 +19301,7 @@ The severity of data corruption is often considered high, as it can directly imp
 :TextData rdfs:comment "Text-based data is prevalent in healthcare, for example, in healthcare documents, and concerns communication between the patient and healthcare practitioners, communication between the healthcare professionals, and the content generated by the patient. This data serves as input for clinical decisionmaking, training Natural Language Processing (NLP) models, and other models in health informatics. Privacy preservation is an especially important topic when utilizing healthcare text-based data since this data usually contains many identifiable elements. Some examples of synthetic textual data in healthcare are clinical notes, patient-provider communication, and patients’ contents. Clinical notes may contain the patient’s history, examinations, clinical assessments, treatment plans, and progress notes. In the healthcare setting, patient-provider communication is crucial for successful healthcare services. This communication may include consultation notes, recommendations, medication prescriptions, and appointment reminders. The patient also generates content such as describing symptoms, feedback on healthcare services, healthcare diaries, and surveys." .
 
 
-:ThreatModelGeneratedLog rdfs:comment "Threat Model Log is an instance of Object Property, representing threat model log within the synthetic-data quality and safety ontology." .
+:ThreatModelGeneratedLog rdfs:comment "Threat Model Generated Log: a generated evidence item recording the instantiated threat model (attack type, attacker capacity and data availability context) used in identifiability assessment (ISO/IEC 27559 Clauses 6–7)." .
 
 
 :VerificationLogic rdfs:comment "Represents verification logic within the synthetic-data quality and safety ontology. It specialises Compliance Control." .
