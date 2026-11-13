@@ -19721,7 +19721,163 @@ gradient signal. WGAN includes comprehensive documentation of its architecture, 
 
 :VideoData rdfs:comment "Video data modality (e.g. clinical video recordings and image sequences). Specialises Unstructured Data." .
 
+#################################################################
+#    v1.2 additions (competency-question validation, round 2)
+#################################################################
 
+### Reason 1 – dataset quality characteristics, known limitations, lifecycle stage
+
+:DataQualityCharacteristic rdf:type owl:Class ;
+    rdfs:subClassOf :DatasetCharacteristic ;
+    rdfs:comment "A data quality characteristic of a dataset as defined in ISO/IEC 25012 (e.g. accuracy, completeness, consistency, credibility, currentness)." ;
+    rdfs:seeAlso <http://www.semanticweb.org/ek279783/ontologies/2025/8/ontologySD#ISO/IEC25012Standard> .
+
+:AccuracyCharacteristic rdf:type owl:NamedIndividual , :DataQualityCharacteristic ;
+    rdfs:comment "ISO/IEC 25012 accuracy: the degree to which data correctly represent the true value of the intended attribute." .
+:CompletenessCharacteristic rdf:type owl:NamedIndividual , :DataQualityCharacteristic ;
+    rdfs:comment "ISO/IEC 25012 completeness: the degree to which data have values for all expected attributes and records." .
+:ConsistencyCharacteristic rdf:type owl:NamedIndividual , :DataQualityCharacteristic ;
+    rdfs:comment "ISO/IEC 25012 consistency: the degree to which data are free from contradiction and coherent with other data." .
+:CredibilityCharacteristic rdf:type owl:NamedIndividual , :DataQualityCharacteristic ;
+    rdfs:comment "ISO/IEC 25012 credibility: the degree to which data are regarded as true and believable by users." .
+:CurrentnessCharacteristic rdf:type owl:NamedIndividual , :DataQualityCharacteristic ;
+    rdfs:comment "ISO/IEC 25012 currentness: the degree to which data are of the right age for their intended use." .
+
+:HasQualityCharacteristic rdf:type owl:ObjectProperty ;
+    rdfs:subPropertyOf :Dataset ;
+    rdfs:domain :Dataset ;
+    rdfs:range :DataQualityCharacteristic ;
+    rdfs:comment "Links a dataset to a quality characteristic that is relevant to it and assessed for it." .
+
+:MeasuresCharacteristic rdf:type owl:ObjectProperty ;
+    rdfs:subPropertyOf :Assurance ;
+    rdfs:domain :MetricResult ;
+    rdfs:range :DatasetCharacteristic ;
+    rdfs:comment "Links a metric result to the dataset characteristic it measures." .
+
+:KnownLimitation rdf:type owl:Class ;
+    rdfs:subClassOf :Assurance ;
+    rdfs:comment "A documented limitation of a dataset or of a result that restricts how it may be interpreted or used." .
+
+:HasKnownLimitation rdf:type owl:ObjectProperty ;
+    rdfs:subPropertyOf :Assurance ;
+    rdfs:domain [ rdf:type owl:Class ; owl:unionOf ( :Dataset :MetricResult ) ] ;
+    rdfs:range :KnownLimitation ;
+    rdfs:comment "Links a dataset or a metric result to a known limitation." .
+
+:DataLifecycleStage rdf:type owl:Class ;
+    rdfs:subClassOf :Datasets ;
+    rdfs:comment "A stage in the lifecycle of a dataset (collected, generated, validated, released, archived)." .
+
+:LifecycleCollected rdf:type owl:NamedIndividual , :DataLifecycleStage ;
+    rdfs:comment "Lifecycle stage: source data collected and held under access controls." .
+:LifecycleGenerated rdf:type owl:NamedIndividual , :DataLifecycleStage ;
+    rdfs:comment "Lifecycle stage: synthetic data generated but not yet validated." .
+:LifecycleValidated rdf:type owl:NamedIndividual , :DataLifecycleStage ;
+    rdfs:comment "Lifecycle stage: dataset evaluated for privacy, fidelity and utility." .
+:LifecycleReleased rdf:type owl:NamedIndividual , :DataLifecycleStage ;
+    rdfs:comment "Lifecycle stage: dataset released for its approved intended uses." .
+:LifecycleArchived rdf:type owl:NamedIndividual , :DataLifecycleStage ;
+    rdfs:comment "Lifecycle stage: dataset archived or withdrawn from use." .
+
+:HasLifecycleStage rdf:type owl:ObjectProperty ;
+    rdfs:subPropertyOf :Dataset ;
+    rdfs:domain :Dataset ;
+    rdfs:range :DataLifecycleStage ;
+    rdfs:comment "Links a dataset to its current lifecycle stage." .
+
+
+### Reasons 2 and 8 – evidence required by a generation method or by a claim
+
+:RequiresEvidenceOfType rdf:type owl:ObjectProperty ;
+    rdfs:subPropertyOf :Assurance ;
+    rdfs:domain [ rdf:type owl:Class ; owl:unionOf ( :SafetyClaim :SyntheticDataGenerationMethods ) ] ;
+    rdfs:comment "Links a claim or a generation method to an evidence class (used as a punned individual) of which at least one item is required. Evidence is missing when no item of that class supports the claim." .
+
+:CTGAN :RequiresEvidenceOfType :VerifiedResistanceToReIdentificationAttacksEvidence ,
+                               :SyntheticDataEquivalenceForPermittedUseEvidence ,
+                               :DataQualityEvidence .
+
+
+### Reason 3 – medical-device validation activity
+
+:DeviceValidationActivity rdf:type owl:Class ;
+    rdfs:subClassOf :Assurance ;
+    rdfs:comment "An activity that verifies or validates a medical device or its software and may use datasets as input." .
+
+:SoftwareVerificationAndValidationActivity rdf:type owl:Class ;
+    rdfs:subClassOf :DeviceValidationActivity ;
+    rdfs:comment "Software verification and validation of a medical device software system (IEC 62304)." ;
+    rdfs:seeAlso <http://www.semanticweb.org/ek279783/ontologies/2025/8/ontologySD#IEC62304:2006Standard> .
+
+:ClinicalEvaluationActivity rdf:type owl:Class ;
+    rdfs:subClassOf :DeviceValidationActivity ;
+    rdfs:comment "Clinical evaluation or clinical performance evaluation of a medical device (MDR Article 61, Annex XIV)." ;
+    rdfs:seeAlso <http://www.semanticweb.org/ek279783/ontologies/2025/8/ontologySD#Regulation2017/745Standard> .
+
+:ValidatesDevice rdf:type owl:ObjectProperty ;
+    rdfs:subPropertyOf :MedicalDevices ;
+    rdfs:domain :DeviceValidationActivity ;
+    rdfs:range :MedicalDevice ;
+    rdfs:comment "Links a validation activity to the medical device it verifies or validates." .
+
+:UsesDataset rdf:type owl:ObjectProperty ;
+    rdfs:subPropertyOf :Dataset ;
+    rdfs:domain :DeviceValidationActivity ;
+    rdfs:range :Dataset ;
+    rdfs:comment "Links a validation activity to a dataset it uses as input." .
+
+:ActivityForUse rdf:type owl:ObjectProperty ;
+    rdfs:subPropertyOf :Assurance ;
+    rdfs:domain :DeviceValidationActivity ;
+    rdfs:range :OperationalUse ;
+    rdfs:comment "Links a validation activity to the use of the data it represents, so that it can be checked against a claim's intended and prohibited uses." .
+
+
+### Reason 4 – confidence level of an uncertainty (limitations: see HasKnownLimitation)
+
+:HasUncertaintyConfidence rdf:type owl:DatatypeProperty ;
+    rdfs:domain :MetricResult ;
+    rdfs:range xsd:decimal ;
+    rdfs:comment "Confidence level of the interval given by HasUncertainty (e.g. 0.95)." .
+
+
+### Reason 5 – intended use to hazard
+
+:ExposesToHazard rdf:type owl:ObjectProperty ;
+    rdfs:subPropertyOf :Assurance ;
+    rdfs:domain :OperationalUse ;
+    rdfs:range :Hazards ;
+    rdfs:comment "Links an operational use of the data to a hazard that this use exposes patients or data subjects to." .
+
+:ClinicalDecisionMakingForRealPatientsUse :ExposesToHazard :DecisionHarm .
+:DiagnosisOrTreatmentOfIndividualsUse    :ExposesToHazard :DecisionHarm .
+:ReIdentificationOfIndividualsUse        :ExposesToHazard :PrivacyHarm .
+:LinkageToRealPatientRecordsUse          :ExposesToHazard :PrivacyHarm .
+:SubmissionAsRealDataToRegulatorsUse     :ExposesToHazard :GovernanceHarm .
+
+
+### Reason 6 – requirements linked to a use or context
+
+:RequirementAppliesTo rdf:type owl:ObjectProperty ;
+    rdfs:subPropertyOf :ComplianceControl ;
+    rdfs:domain [ rdf:type owl:Class ; owl:unionOf ( :ComplianceRequirements :StandardRequirement :RegulatoryObligation ) ] ;
+    rdfs:range  [ rdf:type owl:Class ; owl:unionOf ( :Context :OperationalUse ) ] ;
+    rdfs:comment "Links a requirement or obligation to the use or context in which it applies." .
+
+
+### Reason 7 – kind of responsibility
+
+:ProducesItem rdf:type owl:ObjectProperty ;
+    rdfs:subPropertyOf :ResponsibleFor ;
+    rdfs:comment "The role produces or performs the item (evidence, control, mitigation or decision)." .
+:ReviewsItem rdf:type owl:ObjectProperty ;
+    rdfs:subPropertyOf :ResponsibleFor ;
+    rdfs:comment "The role reviews or approves the item." .
+:MaintainsItem rdf:type owl:ObjectProperty ;
+    rdfs:subPropertyOf :ResponsibleFor ;
+    rdfs:comment "The role maintains the item over its lifecycle (updates, versioning, retirement)." .
+    
 #################################################################
 #    Rules
 #################################################################
